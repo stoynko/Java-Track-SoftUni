@@ -1,14 +1,13 @@
-package B_Fundamentals.C_Arrays;
+package C_Arrays;
 
-import java.util.*;
+import java.util.Scanner;
 
-public class L04_ReverseArrayOfStrings {
-
-/*Write a program to read an array of strings, reverse it and print its elements.
-The input consists of a sequence of space-separated strings.
-Print the output on a single line (space separated).*/
+public class L04_ReverseAnArrayOfStrings {
 
     public static void main(String[] args) {
+
+        /*Write a program to read an array of strings, reverse it and print its elements. The input consists of a sequence of space-separated strings.
+        Print the output on a single line (space separated).*/
 
         Scanner scanner = new Scanner(System.in);
 
@@ -19,6 +18,7 @@ Print the output on a single line (space separated).*/
             input[index] = input[input.length - 1 - index];
             input[input.length - 1 - index] = temp;
         }
+
         System.out.println(String.join(" ", input));
     }
 }
