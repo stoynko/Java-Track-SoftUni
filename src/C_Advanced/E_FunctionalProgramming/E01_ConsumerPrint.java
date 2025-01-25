@@ -2,7 +2,6 @@ package C_Advanced.E_FunctionalProgramming;
 
 import java.util.*;
 import java.util.function.*;
-import java.util.stream.*;
 
 public class E01_ConsumerPrint {
 
