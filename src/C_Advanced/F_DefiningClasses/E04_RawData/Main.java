@@ -17,42 +17,39 @@ print all cars whose Cargo Type is "flammable" and have Engine Power > 250. The 
 
     public static void main(String[] args) {
 
+
         Scanner scanner = new Scanner(System.in);
+
         int numberOfCars = Integer.parseInt(scanner.nextLine());
         List<Car> cars = new ArrayList<>();
 
         for (int carNum = 1; carNum <= numberOfCars; carNum++) {
+
             String[] inputData = scanner.nextLine().split(" ");
-            Car currentCar = getCar(inputData);
+            String model = inputData[0];
+            int engineSpeed = Integer.parseInt(inputData[1]);
+            int enginePower = Integer.parseInt(inputData[2]);
+            int cargoWeight = Integer.parseInt(inputData[3]);
+            String cargoType = inputData[4];
+            Engine engine = new Engine(engineSpeed, enginePower);
+            Cargo cargo = new Cargo(cargoWeight, cargoType);
+            List<Tires> tires = new ArrayList<>();
+
+            for (int element = 5; element <= 12; element += 2) {
+                Tires currentTire = new Tires(Double.parseDouble(inputData[element]), Integer.parseInt(inputData[element + 1]));
+                tires.add(currentTire);
+            }
+
+            Car currentCar = new Car(model, engine, cargo, tires);
             cars.add(currentCar);
         }
 
         String cargoParameter = scanner.nextLine();
-
         for (Car car : cars) {
             if (car.searchByParameter(cargoParameter)) {
                 System.out.println(car.getModel());
             }
 
         }
-    }
-
-    private static Car getCar(String[] inputData) {
-        String model = inputData[0];
-        int engineSpeed = Integer.parseInt(inputData[1]);
-        int enginePower = Integer.parseInt(inputData[2]);
-        int cargoWeight = Integer.parseInt(inputData[3]);
-        String cargoType = inputData[4];
-        Engine engine = new Engine(engineSpeed, enginePower);
-        Cargo cargo = new Cargo(cargoWeight, cargoType);
-        List<Tires> tires = new ArrayList<>();
-
-        for (int element = 5; element <= 12; element += 2) {
-            Tires currentTire = new Tires(Double.parseDouble(inputData[element]), Integer.parseInt(inputData[element + 1]));
-            tires.add(currentTire);
-        }
-
-        Car currentCar = new Car(model, engine, cargo, tires);
-        return currentCar;
     }
 }
