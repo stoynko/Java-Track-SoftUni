@@ -79,14 +79,8 @@ Constraints:
                 ingredientsStack.push(lastIngredient + 3);
             }
         }
-        boolean suceededCooking = true;
-        for (Map.Entry<String, Integer> pastry : pastries.entrySet()) {
-            if (pastries.containsValue(0)) {
-                suceededCooking = false;
-            }
-        }
 
-        if (suceededCooking) {
+        if (!pastries.containsValue(0)) {
             System.out.println("Great! You succeeded in cooking all the food!");
         } else {
             System.out.println("What a pity! You didn't have enough materials to cook everything.");
@@ -106,7 +100,7 @@ Constraints:
             System.out.println("Ingredients left: none");
         }
 
-        pastries.entrySet().forEach(pastry-> {
-            System.out.printf("%s: %d\n", pastry.getKey(), pastry.getValue());});
+        pastries.forEach((pastry, quantity) -> System.out.printf("%s: %d\n", pastry, quantity));
+
     }
 }
