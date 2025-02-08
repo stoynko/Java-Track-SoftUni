@@ -59,10 +59,10 @@ The output of your program should be printed on the Console, on separate lines, 
         if (defendersQueue.isEmpty() && attackersStack.isEmpty()) {
             System.out.println("But no one made it out alive!");
         } else if (!defendersQueue.isEmpty()) {
-            String remainingDefenders = new ArrayList<>(defendersQueue).reversed().reversed().stream().map(String::valueOf).collect(Collectors.joining(", "));
+            String remainingDefenders = defendersQueue.stream().map(String::valueOf).collect(Collectors.joining(", "));
             System.out.printf("Bee groups left: %s\n", remainingDefenders);
         } else if (!attackersStack.isEmpty()) {
-            String remainingAttackers = new ArrayList<>(attackersStack).reversed().stream().map(String::valueOf).collect(Collectors.joining(", "));
+            String remainingAttackers = attackersStack.reversed().stream().map(String::valueOf).collect(Collectors.joining(", "));
             System.out.printf("Bee-eater groups left: %s\n", String.join(", ", remainingAttackers));
         }
     }
