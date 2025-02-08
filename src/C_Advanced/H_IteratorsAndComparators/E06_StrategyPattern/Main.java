@@ -8,10 +8,10 @@ public class Main {
     (let's say sort a collection) it allows the client to choose the way that most fits his needs.
     A famous implementation of the pattern in Java is the Collections.sort() method that takes a Comparator.
 
-    Create a class C_Advanced.H_IteratorsAndComparators.E06_StrategyPattern.Person that holds name and age. Create 2 Comparators for C_Advanced.H_IteratorsAndComparators.E06_StrategyPattern.Person (classes that implement the Comparator<C_Advanced.H_IteratorsAndComparators.E06_StrategyPattern.Person> interface).
+    Create a class Person that holds name and age. Create 2 Comparators for Person (classes that implement the Comparator interface).
     The first comparator should compare people based on the length of their name as a first parameter,
     if 2 people have a name with the same length, perform a case-insensitive compare based on the first letter of their name instead.
-    The second comparator should compare them based on their age. Create 2 TreeSets of type C_Advanced.H_IteratorsAndComparators.E06_StrategyPattern.Person,
+    The second comparator should compare them based on their age. Create 2 TreeSets of type Person,
     the first should implement the name comparator, and the second should implement the age comparator.
 
     Input:

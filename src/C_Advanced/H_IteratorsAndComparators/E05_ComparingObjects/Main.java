@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Main {
 
-/*There is a Comparable interface, but probably you already know. Your task is simple. Create a Class C_Advanced.H_IteratorsAndComparators.E05_ComparingObjects.C_Advanced.H_IteratorsAndComparators.E06_StrategyPattern.Person.
+/*There is a Comparable interface, but probably you already know. Your task is simple. Create a Person.
 Each person should have a name, age, and town. You should implement the interface - Comparable and try to override the compareTo method.
 When you compare two people, first you should compare their names, after that - their age and last but not least - compare their town.
 

@@ -4,15 +4,15 @@ import java.util.*;
 
 public class Main {
 
-/*Let's play a game. You have a tiny little Frog and a C_Advanced.H_IteratorsAndComparators.E04_Froggy.Lake with numbers. The C_Advanced.H_IteratorsAndComparators.E04_Froggy.Lake and its numbers, you will get by an input from the
-console. Imagine, your Frog belongs to the C_Advanced.H_IteratorsAndComparators.E04_Froggy.Lake. The Frog jumps only when the "END" command is received. When the Frog starts jumping,
+/*Let's play a game. You have a tiny little Frog and a Lake with numbers. The Lake and its numbers, you will get by an input from the
+console. Imagine, your Frog belongs to the Lake. The Frog jumps only when the "END" command is received. When the Frog starts jumping,
 print on the console each number the Frog has stepped over. To calculate the jumps, use the guidelines:
 
 The jumps start from the 0th index. And follows the pattern - first, all even indexes in ascending order(0->2->4->6 and so on)
 and then all odd indexes in ascending order (1->3->5->7 and so on). Consider the 0th index as even.
 
 Long story short:
-    •	Create a Class C_Advanced.H_IteratorsAndComparators.E04_Froggy.Lake, it should implement the interface - Iterable. Inside the C_Advanced.H_IteratorsAndComparators.E04_Froggy.Lake, create a Class - Frog and implement the interface Iterator.
+    •	Create a Class Lake, it should implement the interface - Iterable. Inside the Lake, create a Class - Frog and implement the interface Iterator.
         Keep in mind that you will be given integers only.
 
 Input:
