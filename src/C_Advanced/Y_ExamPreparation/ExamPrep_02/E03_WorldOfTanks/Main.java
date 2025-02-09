@@ -1,4 +1,4 @@
-package C_Advanced.Y_ExamPreparation.ExamPrep_05.E03_WorldOfTanks;
+package C_Advanced.Y_ExamPreparation.ExamPrep_02.E03_WorldOfTanks;
 
 public class Main {
 
