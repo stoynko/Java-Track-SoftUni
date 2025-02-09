@@ -115,6 +115,7 @@ Constraints:
                     bombSite[playerNewPos[0]][playerNewPos[1]] = '*';
                     System.out.println("Terrorists win!");
                     bombSite[playerInitPos[0]][playerInitPos[1]] = 'C';
+                    bombSite[bombPos[0]][bombPos[1]] = 'B';
                     print(bombSite);
                     return;
                 }
