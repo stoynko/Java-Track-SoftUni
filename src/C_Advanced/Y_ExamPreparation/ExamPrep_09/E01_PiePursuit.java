@@ -1,4 +1,4 @@
-package C_Advanced.Y_ExamPreparation.ExamPrep_09.E01;
+package C_Advanced.Y_ExamPreparation.ExamPrep_09;
 
 import java.util.*;
 import java.util.stream.*;
