@@ -9,7 +9,7 @@ public class E01_MedievalAlchemy {
 
         Potion	                Energy Level
     Brew of Immortality	            110
-    Essence of Resilience       100
+    Essence of Resilience           100
     Draught of Wisdom	            90
     Potion of Agility	            80
     Elixir of Strength	            70
