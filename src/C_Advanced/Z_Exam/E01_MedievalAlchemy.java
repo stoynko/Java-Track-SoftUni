@@ -9,7 +9,7 @@ public class E01_MedievalAlchemy {
 
         Potion	                Energy Level
     Brew of Immortality	            110
-    Essence of Resilience	        100
+    Essence of Resilience       100
     Draught of Wisdom	            90
     Potion of Agility	            80
     Elixir of Strength	            70
@@ -33,8 +33,8 @@ Once per day, the alchemist enters a secret room where he carefully stores his s
 Each day, the alchemist combines the last stored substance with the first crystal in line to try to craft a new potion:
     •	The alchemist will not attempt to craft the same potion if it has already been crafted.
         o	In this case, he tries to craft the next possible potion (follow the instructions below).
-    •	If the sum of the substance and crystal energy is equal to one of the required energy levels from the list of potions and it has not been c
-        rafted yet, the potion is successfully crafted and should be memorized.
+    •	If the sum of the substance and crystal energy is equal to one of the required energy levels from the list of potions and it has not been
+        crafted yet, the potion is successfully crafted and should be memorized.
         o	The substance is consumed and disappears from its respective collection.
         o	The crystal is exhausted and disappears from its collection too.
     •	If the sum does not exactly match any of the required energy levels for the potions:
