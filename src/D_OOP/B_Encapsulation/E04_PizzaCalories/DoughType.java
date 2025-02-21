@@ -1,16 +1,13 @@
 package D_OOP.B_Encapsulation.E04_PizzaCalories;
 
-public enum DoughModifiers {
+public enum DoughType {
 
     White(1.5),
-    Wholegrain(1),
-    Crispy(0.9),
-    Chewy(1.1),
-    Homemade(1.0);
+    Wholegrain(1);
 
     private double modifier;
 
-    DoughModifiers(double modifier) {
+    DoughType(double modifier) {
         this.modifier = modifier;
     }
 }

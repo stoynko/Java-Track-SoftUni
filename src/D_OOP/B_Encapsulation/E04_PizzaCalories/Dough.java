@@ -16,15 +16,19 @@ public class Dough {
 
     private void setFlourType(String flourType) {
         try {
-            DoughModifiers.valueOf(flourType);
+            this.flourType = String.valueOf(DoughType.valueOf(flourType));
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid type of dough.");
         }
-        this.flourType = flourType;
     }
 
     private void setBakingTechnique(String bakingTechnique) {
-        this.bakingTechnique = bakingTechnique;
+        try {
+            this.bakingTechnique = String.valueOf(DoughTechnique.valueOf(bakingTechnique));
+            this.flourType = String.valueOf(DoughType.valueOf(flourType));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid type of dough.");
+        }
     }
 
     private void setWeight(double weight) {
