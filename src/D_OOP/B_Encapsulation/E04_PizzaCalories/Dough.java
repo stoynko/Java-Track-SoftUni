@@ -1,0 +1,41 @@
+package D_OOP.B_Encapsulation.E04_PizzaCalories;
+
+public class Dough {
+
+    public static final double BASE_CALORIES = 2;
+
+    private String flourType;
+    private String bakingTechnique;
+    private double weight;
+
+    public Dough(String flourType, String bakingTechnique, double weight) {
+        setFlourType(flourType);
+        setBakingTechnique(bakingTechnique);
+        setWeight(weight);
+    }
+
+    private void setFlourType(String flourType) {
+        try {
+            DoughModifiers.valueOf(flourType);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid type of dough.");
+        }
+        this.flourType = flourType;
+    }
+
+    private void setBakingTechnique(String bakingTechnique) {
+        this.bakingTechnique = bakingTechnique;
+    }
+
+    private void setWeight(double weight) {
+        if (weight < 1 || weight > 200) {
+            throw new IllegalArgumentException("Dough weight should be in the range [1..200].");
+        }
+        this.weight = weight;
+    }
+
+    public double calculateCalories() {
+
+        return 0;
+    }
+}
