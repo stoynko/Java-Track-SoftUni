@@ -4,6 +4,8 @@ import java.util.*;
 
 public class Pizza {
 
+    public static final double BASE_CALORIES = 2;
+
     private String name;
     private Dough dough;
     private List<Topping> toppings;
@@ -11,13 +13,13 @@ public class Pizza {
     public Pizza(String name, int numberOfToppings) {
         setName(name);
         setToppings(numberOfToppings);
+        this.toppings = new ArrayList<>();
     }
 
     private void setToppings(int numberOfToppings) {
         if (numberOfToppings < 0 || numberOfToppings > 10) {
             throw new IllegalArgumentException("Number of toppings should be in range [0..10].");
         }
-        this.toppings = new ArrayList<>(numberOfToppings);
     }
 
     private void setName(String name) {
@@ -40,6 +42,11 @@ public class Pizza {
     }
 
     public double getOverallCalories() {
-        return 0;
+        double caloriesToppings = 0;
+        for (Topping topping : this.toppings) {
+            caloriesToppings += topping.calculateCalories();
+        }
+        return caloriesToppings + dough.calculateCalories();
+
     }
 }

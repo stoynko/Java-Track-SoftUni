@@ -10,4 +10,8 @@ public enum DoughType {
     DoughType(double modifier) {
         this.modifier = modifier;
     }
+
+    public double getModifier() {
+        return modifier;
+    }
 }

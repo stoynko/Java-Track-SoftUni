@@ -12,4 +12,8 @@ public enum ToppingModifiers {
     ToppingModifiers(double modifier) {
         this.modifier = modifier;
     }
+
+    public double getModifier() {
+        return modifier;
+    }
 }

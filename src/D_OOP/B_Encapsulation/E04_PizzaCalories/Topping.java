@@ -2,6 +2,8 @@ package D_OOP.B_Encapsulation.E04_PizzaCalories;
 
 public class Topping {
 
+    public static final double BASE_CALORIES = 2;
+
     private String toppingType;
     private double weight;
 
@@ -27,6 +29,7 @@ public class Topping {
     }
 
     public double calculateCalories() {
-        return 0;
+        double calorie = ToppingModifiers.valueOf(toppingType).getModifier();
+        return BASE_CALORIES * weight * calorie;
     }
 }

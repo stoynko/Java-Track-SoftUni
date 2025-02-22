@@ -39,7 +39,8 @@ public class Dough {
     }
 
     public double calculateCalories() {
-
-        return 0;
+        double calorieFlour = DoughType.valueOf(flourType).getModifier();
+        double calorieTechnique = DoughTechnique.valueOf(bakingTechnique).getModifier();
+        return BASE_CALORIES * weight * calorieFlour * calorieTechnique;
     }
 }
