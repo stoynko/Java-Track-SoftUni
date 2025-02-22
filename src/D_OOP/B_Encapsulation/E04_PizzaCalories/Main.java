@@ -87,42 +87,26 @@ to the second digit after the decimal point. */
         String bakingTechniques = doughInfo[2];
         double doughWeight = Double.parseDouble(doughInfo[3]);
 
-        Pizza pizza = null;
         try {
-            pizza = new Pizza(pizzaName, numberOfToppings);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        Dough dough = null;
-        try {
-            dough = new Dough(flourType, bakingTechniques, doughWeight);
+            Pizza pizza = new Pizza(pizzaName, numberOfToppings);
+            Dough dough = new Dough(flourType, bakingTechniques, doughWeight);
             pizza.setDough(dough);
+
+            String input = scanner.nextLine();
+
+            while (!input.equals("END")) {
+                String[] toppingInfo = input.split(" ");
+                String toppingType = toppingInfo[1];
+                double toppingWeight = Double.parseDouble(toppingInfo[2]);
+                Topping topping = new Topping(toppingType, toppingWeight);
+                pizza.addTopping(topping);
+
+                input = scanner.nextLine();
+            }
+            System.out.printf("%s - %.2f", pizzaName, pizza.getOverallCalories());
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return;
-        }
-
-        String input = scanner.nextLine();
-
-        while (!input.equals("END")) {
-
-            String[] toppingInfo = input.split(" ");
-            String toppingType = toppingInfo[1];
-            double toppingWeight = Double.parseDouble(toppingInfo[2]);
-            Topping topping = null;
-            try {
-                topping = new Topping(toppingType, toppingWeight);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                return;
-            }
-            pizza.addTopping(topping);
-            input = scanner.nextLine();
-        }
-
-        if (pizza != null) {
-            System.out.printf("%s - %.2f\n", pizzaName, pizza.getOverallCalories());
         }
     }
 }
