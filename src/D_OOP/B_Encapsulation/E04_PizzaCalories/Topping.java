@@ -2,7 +2,7 @@ package D_OOP.B_Encapsulation.E04_PizzaCalories;
 
 public class Topping {
 
-    public static final double BASE_CALORIES = 2;
+    private static final double BASE_CALORIES = 2;
 
     private String toppingType;
     private double weight;

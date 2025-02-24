@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Pizza {
 
-    public static final double BASE_CALORIES = 2;
+    private static final double BASE_CALORIES = 2;
 
     private String name;
     private Dough dough;
