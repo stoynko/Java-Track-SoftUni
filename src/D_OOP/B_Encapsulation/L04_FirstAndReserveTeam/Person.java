@@ -65,8 +65,8 @@ public class Person {
     }
 
     public void setAge(int age) {
-        if (age < 40) {
-
+        if (age <= 0) {
+            throw new IllegalArgumentException("Age cannot be zero or negative integer");
         }
         this.age = age;
     }

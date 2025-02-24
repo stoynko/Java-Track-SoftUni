@@ -1,6 +1,5 @@
 package D_OOP.B_Encapsulation.L04_FirstAndReserveTeam;
 import java.util.*;
-import java.util.stream.*;
 
 public class Team {
 
@@ -22,7 +21,7 @@ public class Team {
         return name;
     }
 
-    public void addPlayer (Person person) {
+    public void addPlayer(Person person) {
         if (person.getAge() < 40) {
             this.firstTeam.add(person);
         } else {
@@ -30,11 +29,11 @@ public class Team {
         }
     }
 
-    public List<Person> getFirstTeam () {
-        return this.firstTeam.stream().collect(Collectors.toUnmodifiableList());
+    public List<Person> getFirstTeam() {
+        return Collections.unmodifiableList(this.firstTeam);
     }
 
     public List<Person> getReserveTeam() {
-        return this.reserveTeam.stream().collect(Collectors.toUnmodifiableList());
+        return Collections.unmodifiableList(this.reserveTeam);
     }
 }
