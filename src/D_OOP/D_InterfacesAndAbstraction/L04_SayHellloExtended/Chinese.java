@@ -1,4 +1,4 @@
-package D_OOP.D_InterfacesAndAbstraction.L04_SayHellloExtend;
+package D_OOP.D_InterfacesAndAbstraction.L04_SayHellloExtended;
 
 public class Chinese extends BasePerson {
 
