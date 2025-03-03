@@ -1,6 +1,7 @@
 package D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Implementations;
+import D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Interfaces.*;
 
-public class PrivateImpl extends SoldierImpl {
+public class PrivateImpl extends SoldierImpl implements Private {
 
     private double salary;
 
@@ -9,6 +10,7 @@ public class PrivateImpl extends SoldierImpl {
         this.salary = salary;
     }
 
+    @Override
     public double getSalary() {
         return salary;
     }

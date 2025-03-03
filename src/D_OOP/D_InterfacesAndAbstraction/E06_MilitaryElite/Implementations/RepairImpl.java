@@ -1,6 +1,8 @@
 package D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Implementations;
 
-public class RepairImpl {
+import D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Interfaces.*;
+
+public class RepairImpl implements Repair {
 
     private String partName;
     private int hoursWorked;
@@ -10,10 +12,12 @@ public class RepairImpl {
         this.hoursWorked = hoursWorked;
     }
 
+    @Override
     public String getPartName() {
         return partName;
     }
 
+    @Override
     public int getHoursWorked() {
         return hoursWorked;
     }

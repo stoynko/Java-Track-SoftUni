@@ -1,7 +1,8 @@
 package D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Implementations;
+import D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Interfaces.*;
 import java.util.*;
 
-public class EngineerImpl extends SpecialisedSoldierImpl{
+public class EngineerImpl extends SpecialisedSoldierImpl implements Engineer {
 
     HashSet<RepairImpl> repairs;
 
@@ -10,10 +11,12 @@ public class EngineerImpl extends SpecialisedSoldierImpl{
         this.repairs = new HashSet<>();
     }
 
+    @Override
     public void addRepair(RepairImpl repair) {
         this.repairs.add(repair);
     }
 
+    @Override
     public Collection<RepairImpl> getRepairs() {
         return Collections.unmodifiableCollection(this.repairs);
     }

@@ -3,7 +3,7 @@ package D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Implementations;
 import D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Enums.*;
 import D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Interfaces.*;
 
-public class SpecialisedSoldierImpl extends PrivateImpl implements Soldier {
+public class SpecialisedSoldierImpl extends PrivateImpl implements SpecialisedSoldier {
 
     private Corp corp;
 
@@ -12,8 +12,9 @@ public class SpecialisedSoldierImpl extends PrivateImpl implements Soldier {
         setCorp(corp);
     }
 
-    public String getCorp() {
-        return this.corp.toString();
+    @Override
+    public Corp getCorp() {
+        return this.corp;
     }
 
     public void setCorp(String corp) {
@@ -23,4 +24,6 @@ public class SpecialisedSoldierImpl extends PrivateImpl implements Soldier {
             throw new IllegalArgumentException("Invalid corp!");
         }
     }
+
+
 }
