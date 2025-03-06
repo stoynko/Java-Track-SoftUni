@@ -33,37 +33,51 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        String[] carData = scanner.nextLine().split("\\s+");
-        Vehicle car = new Car(Double.parseDouble(carData[1]), Double.parseDouble(carData[2]));
-        String[] truckData = scanner.nextLine().split("\\s+");
-        Vehicle truck = new Truck(Double.parseDouble(truckData[1]), Double.parseDouble(truckData[2]));
+
+        Map<String, Vehicle> vehicles = getVehicles(scanner);
         int n = Integer.parseInt(scanner.nextLine());
 
         for (int i = 0; i < n; i++) {
-            String[] commandData = scanner.nextLine().split("\\s+");
 
-            switch (commandData[0]) {
+            String[] commandData = scanner.nextLine().split("\\s+");
+            String command = commandData[0];
+            String vehicleType = commandData[1];
+            switch (command) {
 
                 case "Drive":
                     double distance = Double.parseDouble(commandData[2]);
-                    if ("Car".equals(commandData[1])) {
-                        System.out.println(car.drive(distance));
-                    } else if ("Truck".equals(commandData[1])) {
-                        System.out.println(truck.drive(distance));
-                    }
+                    System.out.println(vehicles.get(vehicleType).drive(distance));
                     break;
 
                 case "Refuel":
                     double liters = Double.parseDouble(commandData[2]);
-                    if ("Car".equals(commandData[1])) {
-                        car.refuel(liters);
-                    } else if ("Truck".equals(commandData[1])) {
-                        truck.refuel(liters);
-                    }
+                    vehicles.get(vehicleType).refuel(liters);
                     break;
             }
         }
-        System.out.println(car);
-        System.out.println(truck);
+        vehicles.values().forEach(System.out::println);
+    }
+
+    private static Map<String, Vehicle> getVehicles(Scanner scanner) {
+
+        Map<String, Vehicle> vehicles = new LinkedHashMap<>();
+
+        for (int i = 0; i < 2; i++) {
+            String[] vehicleData = scanner.nextLine().split("\\s+");
+            String vehicleType = vehicleData[0];
+            double fuelQuantity = Double.parseDouble(vehicleData[1]);
+            double fuelConsumption = Double.parseDouble(vehicleData[2]);
+            Vehicle vehicle = null;
+
+            switch (vehicleType) {
+                case "Car": vehicle = new Car(fuelQuantity, fuelConsumption);
+                    break;
+                case "Truck": vehicle = new Truck(fuelQuantity, fuelConsumption);
+                    break;
+            }
+            vehicles.put(vehicleType, vehicle);
+        }
+
+        return vehicles;
     }
 }
