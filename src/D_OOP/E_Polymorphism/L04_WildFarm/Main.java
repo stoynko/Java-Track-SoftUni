@@ -8,6 +8,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+        List<Animal> animalsList = new ArrayList<>();
 
         while (!input.equals("End")) {
 
@@ -25,18 +26,30 @@ public class Main {
             Animal animal = null;
 
             switch (animalType) {
-                case "Mouse": animal = new Mouse(animalName, animalType, animalWeight, food.getQuantity(), livingRegion);
+                case "Mouse": animal = new Mouse(animalName, animalType, animalWeight, livingRegion);
+                    animalsList.add(animal);
                     break;
-                case "Zebra": animal = new Zebra(animalName, animalType, animalWeight, food.getQuantity(), livingRegion);
+                case "Zebra": animal = new Zebra(animalName, animalType, animalWeight, livingRegion);
+                    animalsList.add(animal);
                     break;
-                case "Cat": animal = new Cat(animalName, animalType, animalWeight, food.getQuantity(), livingRegion, breed);
+                case "Cat": animal = new Cat(animalName, animalType, animalWeight, livingRegion, breed);
+                    animalsList.add(animal);
                     break;
-                case "Tiger": animal = new Tiger(animalName, animalType, animalWeight, food.getQuantity(), livingRegion);
+                case "Tiger": animal = new Tiger(animalName, animalType, animalWeight, livingRegion);
+                    animalsList.add(animal);
                     break;
             }
-
-            System.out.println();
+            animal.makeSound();
+            try {
+                animal.eat(food);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
             input = scanner.nextLine();
+        }
+
+        for (Animal animal : animalsList) {
+            System.out.println(animal);
         }
 
     }
@@ -57,7 +70,6 @@ public class Main {
                 food = new Meat(quantity);
                 break;
         }
-        
         return food;
     }
 }

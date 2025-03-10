@@ -2,19 +2,17 @@ package D_OOP.E_Polymorphism.L04_WildFarm;
 
 public class Tiger extends Feline {
 
-    private String livingRegion;
-
-    public Tiger(String animalName, String animalType, Double animalWeight, Integer foodEaten, String livingRegion) {
-        super(animalName, animalType, animalWeight, foodEaten, livingRegion);
+    public Tiger(String animalName, String animalType, Double animalWeight, String livingRegion) {
+        super(animalName, animalType, animalWeight, livingRegion);
     }
 
     @Override
     public void makeSound() {
-
+        System.out.println("ROAAR!!!");
     }
 
     @Override
-    public void eat(Food food) {
-
+    public boolean isEatingThisFood(Food food) {
+        return food instanceof Meat;
     }
 }
