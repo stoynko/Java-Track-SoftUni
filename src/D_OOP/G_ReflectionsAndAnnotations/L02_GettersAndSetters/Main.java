@@ -26,7 +26,7 @@ public class Main {
         }
 
         for (Method setMethod : setMethods) {
-            System.out.printf("%s and will set field of class %s\n", setMethod.getName(), setMethod.getParameterTypes()[0].getTypeName());
+            System.out.printf("%s and will set field of class %s\n", setMethod.getName(), setMethod.getParameterTypes()[0].getSimpleName());
         }
     }
 }
