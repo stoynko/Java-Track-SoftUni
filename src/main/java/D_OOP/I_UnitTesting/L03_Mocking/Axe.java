@@ -1,6 +1,6 @@
-package D_OOP.I_UnitTesting.L01_RPG;
+package D_OOP.I_UnitTesting.L03_Mocking;
 
-import D_OOP.I_UnitTesting.L01_RPG.interfaces.*;
+import D_OOP.I_UnitTesting.L03_Mocking.interfaces.*;
 
 public class Axe implements Weapon {
 

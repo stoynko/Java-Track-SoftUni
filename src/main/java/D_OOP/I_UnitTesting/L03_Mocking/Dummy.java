@@ -1,15 +1,19 @@
-package D_OOP.I_UnitTesting.L01_RPG;
+package D_OOP.I_UnitTesting.L03_Mocking;
 
-import D_OOP.I_UnitTesting.L01_RPG.interfaces.*;
+import D_OOP.I_UnitTesting.L03_Mocking.interfaces.*;
+
+import java.util.*;
 
 public class Dummy implements Target {
 
     private int health;
     private int experience;
+    private List<Weapon> possibleLoot;
 
     public Dummy (int health, int experience) {
         this.health = health;
         this.experience = experience;
+        this.possibleLoot = new ArrayList<>();
     }
 
     @Override
@@ -38,5 +42,14 @@ public class Dummy implements Target {
     @Override
     public boolean isDead() {
         return this.health <= 0;
+    }
+
+    @Override
+    public Weapon dropRandomWeapon() {
+       Random random = new Random();
+       int randomItemIndex = random.nextInt(possibleLoot.size() - 1 );
+       Weapon weaponToDrop = possibleLoot.get(randomItemIndex);
+       possibleLoot.remove(randomItemIndex);
+       return weaponToDrop;
     }
 }

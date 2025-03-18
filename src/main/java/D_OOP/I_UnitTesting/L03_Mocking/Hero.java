@@ -1,12 +1,16 @@
-package D_OOP.I_UnitTesting.L01_RPG;
+package D_OOP.I_UnitTesting.L03_Mocking;
 
-import D_OOP.I_UnitTesting.L01_RPG.interfaces.*;
+import D_OOP.A_WorkingWithAbstraction.E06_GreedyTimes.*;
+import D_OOP.I_UnitTesting.L03_Mocking.interfaces.*;
+
+import java.util.*;
 
 public class Hero {
 
     private String name;
     private int experience;
     private Weapon weapon;
+    private List<Weapon> inventory;
 
     public Hero(String name, Weapon weapon) {
         this.name = name;
@@ -31,6 +35,11 @@ public class Hero {
 
         if (target.isDead()) {
             this.experience += target.giveExperience();
+            this.inventory.add(target.dropRandomWeapon());
         }
+    }
+
+    public Iterable<Weapon> getInventory() {
+        return this.inventory;
     }
 }
