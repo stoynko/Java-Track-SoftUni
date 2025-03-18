@@ -5,21 +5,28 @@ import org.junit.jupiter.api.*;
 
 public class AxeTests {
 
-    @Test
-    public void whenAxeHasTenPointsDurabilityAndAttacksTarget_thenDurabilityPointsDecreaseToNine() {
+    private static final int AXE_ATTACK = 10;
+    private static final int AXE_DURABILITY = 1;
+    private static final int DUMMY_HEALTH = 100;
+    private static final int DUMMY_EXPERIENCE = 1;
 
-        Axe axe = new Axe(2, 10);
-        axe.attack(new Dummy(5, 5));
-        Assertions.assertEquals(9, axe.getDurabilityPoints());
-    }
-    @Test
-    public void whenAxeHasNoDurabilityAndAttacksTarget_thenExpectIllegalArgumentException() {
+    private Axe axe;
+    private Dummy dummy;
 
-        Axe axe = new Axe(2, 0);
-
-        Assertions.assertThrows(IllegalStateException.class, () -> {
-            axe.attack(new Dummy(5, 5));
-        });
+    @BeforeEach
+    public void init() {
+        axe = new Axe(AXE_ATTACK, AXE_DURABILITY);
+        dummy = new Dummy(DUMMY_HEALTH, DUMMY_EXPERIENCE);
     }
 
+    @Test
+    public void WhenAxeIsUsedForAttacks_ThenLosesDurability() {
+        axe.attack(dummy);
+        Assertions.assertEquals(0, axe.getDurabilityPoints());
+    }
+    @Test
+    public void WhenAxeHasNoDurabilityAndIsUsed_thenIllegalArgumentExceptionIsThrown() {
+        axe = new Axe(AXE_ATTACK, 0);
+        Assertions.assertThrows(IllegalStateException.class, () -> axe.attack(new Dummy(5, 5)));
+    }
 }
