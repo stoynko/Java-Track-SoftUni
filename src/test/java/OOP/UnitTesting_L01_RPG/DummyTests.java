@@ -1,4 +1,4 @@
-package OOP_UnitTesting_L01_RPG;
+package OOP.UnitTesting_L01_RPG;
 
 import D_OOP.I_UnitTesting.L01_RPG.*;
 import org.junit.jupiter.api.*;
