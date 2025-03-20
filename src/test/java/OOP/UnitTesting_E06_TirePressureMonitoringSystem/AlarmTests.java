@@ -8,6 +8,10 @@ import java.time.temporal.*;
 
 import static org.mockito.Mockito.when;
 
+/*You are given a small project for a system that monitors the pressure in car tires.
+Your task is to write unit tests for the system. You will need to use mocking to pass dependencies.
+Think about the corner cases of the project. */
+
 public class AlarmTests {
 
     private static final double LOW_PRESSURE_VALUE = 16.0;
