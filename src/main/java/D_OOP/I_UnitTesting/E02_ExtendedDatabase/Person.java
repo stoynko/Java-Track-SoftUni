@@ -1,4 +1,4 @@
-package p02_ExtendedDatabase;
+package D_OOP.I_UnitTesting.E02_ExtendedDatabase;
 
 public class Person {
 
