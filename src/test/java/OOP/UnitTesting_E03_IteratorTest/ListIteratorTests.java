@@ -33,6 +33,11 @@ public class ListIteratorTests {
     @Test
     public void ListIteratorIsCreated() throws OperationNotSupportedException {
         listIterator = new ListIterator(ELEMENTS_FOR_INIT);
+        Assertions.assertEquals(ELEMENTS_FOR_INIT[0], listIterator.print());
+        listIterator.move();
+        Assertions.assertEquals(ELEMENTS_FOR_INIT[1], listIterator.print());
+        listIterator.move();
+        Assertions.assertEquals(ELEMENTS_FOR_INIT[2], listIterator.print());
     }
 
     //3. hasNext method returns true if there are other elements and false if there aren't
