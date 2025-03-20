@@ -37,7 +37,7 @@ public class DatabaseTests {
         Assertions.assertArrayEquals(ELEMENTS_FOR_INIT, databaseElements);
     }
 
-    //3. OperationNotSupported exception is thrown when database with more than 16 elements is created
+    //2. OperationNotSupported exception is thrown when database with more than 16 elements is created
     @Test
     public void constructorThrowsOperationNotSupportedExceptionForMoreThanSixteen() throws OperationNotSupportedException {
         Integer[] largerArray = new Integer[17];
