@@ -46,7 +46,7 @@ public class CustomLinkedList<T> {
         this.count = 0;
     }
 
-    private int getCount() {
+    public int getCount() {
         return count;
     }
 
