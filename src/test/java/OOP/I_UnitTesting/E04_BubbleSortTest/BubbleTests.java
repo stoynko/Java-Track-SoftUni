@@ -1,4 +1,4 @@
-package OOP.UnitTesting_E04_BubbleSortTest;
+package OOP.I_UnitTesting.E04_BubbleSortTest;
 
 import D_OOP.I_UnitTesting.E04_BubbleSortTest.*;
 import org.junit.jupiter.api.*;

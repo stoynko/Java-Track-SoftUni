@@ -1,4 +1,4 @@
-package OOP.UnitTesting_E03_IteratorTest;
+package OOP.I_UnitTesting.E03_IteratorTest;
 
 /*You are given a simple class "ListIterator", it should receive the collection (Strings) which it will iterate, through its constructor.
 You should store the elements in a List and get them initially through its constructor. If there is a null passed to the constructor,

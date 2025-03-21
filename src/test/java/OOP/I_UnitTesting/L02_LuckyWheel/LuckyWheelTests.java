@@ -1,4 +1,4 @@
-package OOP.UnitTesting_L02_LuckyWheel;
+package OOP.I_UnitTesting.L02_LuckyWheel;
 
 import D_OOP.I_UnitTesting.L02_LuckyWheel.*;
 import org.junit.jupiter.api.*;

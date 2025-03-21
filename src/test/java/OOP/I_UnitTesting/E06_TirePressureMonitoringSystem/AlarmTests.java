@@ -1,10 +1,8 @@
-package OOP.UnitTesting_E06_TirePressureMonitoringSystem;
+package OOP.I_UnitTesting.E06_TirePressureMonitoringSystem;
 
 import D_OOP.I_UnitTesting.E06_TirePressureMonitoringSystem.*;
 import org.junit.jupiter.api.*;
 import org.mockito.*;
-
-import java.time.temporal.*;
 
 import static org.mockito.Mockito.when;
 

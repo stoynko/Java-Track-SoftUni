@@ -1,4 +1,4 @@
-package OOP.UnitTesting_E02_ExtendedDatabase;
+package OOP.I_UnitTesting.E02_ExtendedDatabase;
 
 import D_OOP.I_UnitTesting.E02_ExtendedDatabase.*;
 import org.junit.jupiter.api.*;

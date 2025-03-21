@@ -1,4 +1,4 @@
-package OOP.UnitTesting_E05_CustomLinkedList;
+package OOP.I_UnitTesting.E05_CustomLinkedList;
 
 import D_OOP.I_UnitTesting.E05_CustomLinkedList.*;
 import org.junit.jupiter.api.*;
