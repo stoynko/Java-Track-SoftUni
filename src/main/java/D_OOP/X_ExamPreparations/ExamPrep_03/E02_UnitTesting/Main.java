@@ -1,6 +1,4 @@
-package D_OOP.X_ExamPreparations.ExamPrep_03.E03_UnitTesting;
-
-import java.util.Arrays;
+package D_OOP.X_ExamPreparations.ExamPrep_03.E02_UnitTesting;
 
 public class Main {
     public static void main(String[] args) {
