@@ -1,4 +1,6 @@
-package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.models.waiter;
+package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.models.waiter;
+import D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.common.*;
+import D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.models.orders.*;
 
 /*Waiter:
 BaseWaiter is a base class for any type of waiter and should not be instantiated.
@@ -12,9 +14,6 @@ BaseWaiter is a base class for any type of waiter and should not be instantiated
             "Cannot create Waiter with negative efficiency."
     •	takenOrders – TakenOrders
         o	A TakenOrders field type. */
-
-import D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.common.*;
-import D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.models.orders.*;
 
 public abstract class BaseWaiter implements Waiter {
 

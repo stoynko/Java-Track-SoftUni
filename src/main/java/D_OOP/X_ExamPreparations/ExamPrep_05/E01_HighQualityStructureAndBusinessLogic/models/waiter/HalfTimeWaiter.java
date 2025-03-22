@@ -1,4 +1,4 @@
-package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.models.waiter;
+package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.models.waiter;
 
 /* Has 4 initial units of efficiency.
 The constructor should take the following values upon initialization:

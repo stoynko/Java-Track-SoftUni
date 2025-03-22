@@ -1,7 +1,5 @@
-package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.repositories;
-
-import D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.models.client.*;
-
+package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.repositories;
+import D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.models.client.*;
 import java.util.*;
 
 /*The ClientRepository class is a repository for clients.

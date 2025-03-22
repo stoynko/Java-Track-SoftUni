@@ -1,11 +1,13 @@
-package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.models.orders;
+package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.models.orders;
+
+import D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.models.orders.*;
 
 import java.util.*;
 /*The TakenOrdersImpl class holds a collection of orders. It should be instantiated.
 Data:
     •	ordersList – a collection of Strings */
 
-public class TakenOrdersImpl implements TakenOrders{
+public class TakenOrdersImpl implements TakenOrders {
 
     private List<String> ordersList;
 
@@ -15,6 +17,6 @@ public class TakenOrdersImpl implements TakenOrders{
 
     @Override
     public Collection<String> getOrdersList() {
-        return Collections.unmodifiableCollection(this.ordersList);
+        return this.ordersList;
     }
 }

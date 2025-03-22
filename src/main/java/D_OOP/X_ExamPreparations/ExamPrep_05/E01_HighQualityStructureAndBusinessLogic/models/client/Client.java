@@ -1,5 +1,4 @@
-package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.models.client;
-
+package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.models.client;
 
 import java.util.Collection;
 

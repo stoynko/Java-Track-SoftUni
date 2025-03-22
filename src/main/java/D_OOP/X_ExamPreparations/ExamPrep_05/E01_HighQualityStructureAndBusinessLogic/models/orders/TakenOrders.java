@@ -1,4 +1,4 @@
-package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.models.orders;
+package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.models.orders;
 
 import java.util.Collection;
 

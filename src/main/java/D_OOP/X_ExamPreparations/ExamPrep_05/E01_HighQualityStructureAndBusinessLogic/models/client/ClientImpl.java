@@ -1,4 +1,4 @@
-package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.models.client;
+package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.models.client;
 
 /*The ClientImpl class holds information about the client orders that can be ordered. It should be instantiated.
 Data:
@@ -10,7 +10,7 @@ Constructor:
 The constructor should take the following values upon initialization:
     •	String name */
 
-import D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.common.*;
+import D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.common.*;
 
 import java.util.*;
 

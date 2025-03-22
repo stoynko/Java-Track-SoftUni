@@ -1,6 +1,6 @@
-package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.core;
+package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.core;
 
-import D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.common.*;
+import D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.common.*;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,7 +15,6 @@ public class EngineImpl implements Engine {
         this.controller = controller;
         this.scanner = new Scanner(System.in);
     }
-
 
     @Override
     public void run() {
@@ -72,8 +71,9 @@ public class EngineImpl implements Engine {
 
 
     private String addWaiter(String[] data) {
-        //TODO:
-        return null;
+        String waiterType = data[0];
+        String waiterName = data[1];
+        return controller.addWaiter(waiterType, waiterName);
     }
 
     private String addClient(String[] data) {
@@ -83,24 +83,21 @@ public class EngineImpl implements Engine {
     }
 
     private String removeWaiter(String[] data) {
-        //TODO:
-        return null;
+        String waiterName = data[0];
+        return controller.removeWaiter(waiterName);
     }
 
     private String removeClient(String[] data) {
-        //TODO:
-        return null;
+        String clientName = data[0];
+        return controller.removeClient(clientName);
     }
 
     private String startWorking(String[] data) {
-        //TODO:
-        return null;
+        String clientName = data[0];
+        return controller.startWorking(clientName);
     }
 
     private String getStatistics() {
-        //TODO:
-        return null;
+        return controller.getStatistics();
     }
-
-
 }

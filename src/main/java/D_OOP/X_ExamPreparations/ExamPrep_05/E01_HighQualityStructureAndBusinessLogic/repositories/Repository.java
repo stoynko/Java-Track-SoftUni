@@ -1,5 +1,4 @@
-package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructure.repositories;
-
+package D_OOP.X_ExamPreparations.ExamPrep_05.E01_HighQualityStructureAndBusinessLogic.repositories;
 import java.util.Collection;
 
 public interface Repository<T> {
