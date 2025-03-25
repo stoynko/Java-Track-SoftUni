@@ -19,7 +19,6 @@ public class Car {
         return brand;
     }
 
-
     public int getPower() {
         return power;
     }
