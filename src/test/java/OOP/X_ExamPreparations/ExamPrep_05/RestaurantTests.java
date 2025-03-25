@@ -1,6 +1,6 @@
 package OOP.X_ExamPreparations.ExamPrep_05;
 
-import D_OOP.X_ExamPreparations.ExamPrep_05.E02_UnitTesting.*;
+import D_OOP.X_ExamPreparations.ExamPrep_05.E02_BusyWaiters.*;
 import org.junit.jupiter.api.*;
 
 import java.util.*;
