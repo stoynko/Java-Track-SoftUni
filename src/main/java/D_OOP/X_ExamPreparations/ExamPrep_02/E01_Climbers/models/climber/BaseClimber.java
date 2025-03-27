@@ -1,7 +1,10 @@
 package D_OOP.X_ExamPreparations.ExamPrep_02.E01_Climbers.models.climber;
 
 import D_OOP.X_ExamPreparations.ExamPrep_02.E01_Climbers.common.ExceptionMessages;
-import D_OOP.X_ExamPreparations.ExamPrep_02.E01_Climbers.models.roster.*;
+import D_OOP.X_ExamPreparations.ExamPrep_02.E01_Climbers.models.roster.Roster;
+import D_OOP.X_ExamPreparations.ExamPrep_02.E01_Climbers.models.roster.RosterImpl;
+
+import java.util.ArrayList;
 
 public class BaseClimber implements Climber {
 

@@ -15,11 +15,13 @@ public class ControllerImpl implements Controller {
     private ClimberRepository climberRepository;
     private MountainRepository mountainRepository;
     private Climbing climbing;
+    private int climbs;
 
     public ControllerImpl() {
-        this.climberRepository = new ClimberRepository();
-        this.mountainRepository = new MountainRepository();
+        climberRepository = new ClimberRepository();
+        mountainRepository = new MountainRepository();
         this.climbing = new ClimbingImpl();
+        this.climbs = 0;
     }
 
     @Override
@@ -32,17 +34,18 @@ public class ControllerImpl implements Controller {
                 break;
             default: throw new IllegalArgumentException(ExceptionMessages.CLIMBER_INVALID_TYPE);
         }
-        this.climberRepository.add(climber);
+        climberRepository.add(climber);
         return String.format(ConstantMessages.CLIMBER_ADDED, type, climberName);
     }
 
     @Override
     public String addMountain(String mountainName, String... peaks) {
+
         Mountain mountain = new MountainImpl(mountainName);
         for (String peak : peaks) {
             mountain.getPeaksList().add(peak);
         }
-        this.mountainRepository.add(mountain);
+        mountainRepository.add(mountain);
         return String.format(ConstantMessages.MOUNTAIN_ADDED, mountainName);
     }
 
@@ -52,31 +55,34 @@ public class ControllerImpl implements Controller {
         Climber climber = climberRepository.byName(climberName);
 
         if (climber != null) {
-            this.climberRepository.remove(climber);
+            climberRepository.remove(climber);
         } else {
             throw new IllegalArgumentException(String.format(ExceptionMessages.CLIMBER_DOES_NOT_EXIST, climberName));
         }
+
         return String.format(String.format(ConstantMessages.CLIMBER_REMOVE, climberName));
     }
 
     @Override
     public String startClimbing(String mountainName) {
 
-        if (this.climberRepository.getCollection().isEmpty()) {
+        if (climberRepository.getCollection().isEmpty()) {
             throw new IllegalArgumentException(ExceptionMessages.THERE_ARE_NO_CLIMBERS);
         }
-        Mountain mountain = this.mountainRepository.byName(mountainName);
+        Mountain mountain = mountainRepository.byName(mountainName);
         Collection<Climber> climbersList = climberRepository.getCollection();
         climbing.conqueringPeaks(mountain, climbersList);
-        int disqualifiedClimbers = climbersList.stream().filter(c -> !c.canClimb()).collect(Collectors.toList()).size();
+        climbersList = climbersList.stream().filter(Climber::canClimb).collect(Collectors.toList());
+        int disqualifiedClimbers = climberRepository.getCollection().size() - climbersList.size();
+        this.climbs++;
         return String.format(ConstantMessages.PEAK_CLIMBING, mountainName, disqualifiedClimbers);
     }
 
     @Override
     public String getStatistics() {
-        int mountainsClimbed = this.mountainRepository.getCollection().size();
+        int mountainsClimbed = mountainRepository.getCollection().size();
         StringBuilder output = new StringBuilder();
-        output.append(String.format(ConstantMessages.FINAL_MOUNTAIN_COUNT, mountainsClimbed)).append(System.lineSeparator());
+        output.append(String.format(ConstantMessages.FINAL_MOUNTAIN_COUNT, this.climbs)).append(System.lineSeparator());
         output.append(ConstantMessages.FINAL_CLIMBERS_STATISTICS).append(System.lineSeparator());
         for (Climber climber : climberRepository.getCollection()) {
             output.append(String.format(ConstantMessages.FINAL_CLIMBER_NAME, climber.getName())).append(System.lineSeparator());

@@ -28,7 +28,6 @@ public class EngineImpl implements Engine{
             } catch (NullPointerException | IllegalArgumentException | IOException e) {
                 result = e.getMessage();
             }
-
             System.out.println(result);
         }
     }
@@ -36,7 +35,6 @@ public class EngineImpl implements Engine{
     private String processInput() throws IOException {
         String input = this.scanner.nextLine();
         String[] tokens = input.split("\\s+");
-
         Command command = Command.valueOf(tokens[0]);
         String result = null;
         String[] data = Arrays.stream(tokens).skip(1).toArray(String[]::new);
@@ -61,7 +59,6 @@ public class EngineImpl implements Engine{
                 result = Command.Exit.name();
                 break;
         }
-
         return result;
     }
 

@@ -4,7 +4,6 @@ import D_OOP.X_ExamPreparations.ExamPrep_02.E01_Climbers.common.ExceptionMessage
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class MountainImpl implements Mountain {
 
