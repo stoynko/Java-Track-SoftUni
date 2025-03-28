@@ -1,4 +1,4 @@
-package D_OOP.X_ExamPreparations.ExamPrep_03.E02_UnitTesting;
+package D_OOP.X_ExamPreparations.ExamPrep_03.E02_Garage;
 
 import java.util.*;
 import java.util.stream.Collectors;

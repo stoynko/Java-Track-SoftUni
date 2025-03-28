@@ -3,7 +3,7 @@ package D_OOP.X_ExamPreparations.ExamPrep_06.E01_HarpoonDiving;
 import D_OOP.X_ExamPreparations.ExamPrep_06.E01_HarpoonDiving.core.*;
 
 public class Main {
-    
+
 /*You are given 4 interfaces and must implement their functionalities in the correct classes.
 There are 4 types of entities in the application: Diver, Diving, DivingSite, SeaCatch. There are also 2 repositories: a DiverRepository and a DivingSiteRepository.
 

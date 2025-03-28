@@ -1,4 +1,4 @@
-package D_OOP.X_ExamPreparations.ExamPrep_03.E02_UnitTesting;
+package D_OOP.X_ExamPreparations.ExamPrep_03.E02_Garage;
 
 public class Main {
     public static void main(String[] args) {

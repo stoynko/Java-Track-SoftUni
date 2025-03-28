@@ -1,6 +1,6 @@
 package OOP.X_ExamPreparations.ExamPrep_03;
 
-import D_OOP.X_ExamPreparations.ExamPrep_03.E02_UnitTesting.*;
+import D_OOP.X_ExamPreparations.ExamPrep_03.E02_Garage.*;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
