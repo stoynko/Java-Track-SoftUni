@@ -151,7 +151,7 @@ These are the input commands:
     •	StartClimbing {mountainName}
     •	GetStatistics
     •	Exit
-Output: Print the output from each command when issued. If an exception is thrown during any of the commands' execution, print the exception message. */*/
+Output: Print the output from each command when issued. If an exception is thrown during any of the commands' execution, print the exception message. */
 
     public static void main(String[] args) {
 
