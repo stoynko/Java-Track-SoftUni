@@ -1,6 +1,6 @@
 package D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Implementations;
-
 import D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Interfaces.*;
+import java.util.*;
 
 public class SoldierImpl implements Soldier {
 

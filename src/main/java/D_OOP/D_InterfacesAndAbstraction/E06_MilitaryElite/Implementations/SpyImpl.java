@@ -1,5 +1,4 @@
 package D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Implementations;
-
 import D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Interfaces.*;
 
 public class SpyImpl extends SoldierImpl implements Spy {
@@ -12,12 +11,15 @@ public class SpyImpl extends SoldierImpl implements Spy {
     }
 
     @Override
-    public String toString() {
-        return String.format("Name: %s %s Id: %d\n", getFirstName(), getLastName(), getId() + "Code Number: %s\n", this.codeNumber);
+    public String getCodeNumber() {
+        return this.codeNumber;
     }
 
     @Override
-    public String getCodeNumber() {
-        return this.codeNumber;
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append(String.format("Name: %s %s Id: %d", getFirstName(), getLastName(), getId())).append(System.lineSeparator());
+        output.append(String.format("Code Number: %s", this.codeNumber));
+        return output.toString().trim();
     }
 }

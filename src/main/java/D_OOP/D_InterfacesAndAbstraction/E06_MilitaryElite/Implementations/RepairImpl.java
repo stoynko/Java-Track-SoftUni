@@ -1,7 +1,5 @@
 package D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Implementations;
-
 import D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Interfaces.*;
-
 public class RepairImpl implements Repair {
 
     private String partName;
@@ -28,5 +26,10 @@ public class RepairImpl implements Repair {
 
     public void setHoursWorked(int hoursWorked) {
         this.hoursWorked = hoursWorked;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Part Name: %s Hours Worked: %d", this.partName, this.hoursWorked);
     }
 }

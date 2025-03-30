@@ -1,12 +1,13 @@
 package D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Implementations;
+import D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Enums.MissionState;
 import D_OOP.D_InterfacesAndAbstraction.E06_MilitaryElite.Interfaces.*;
 
 public class MissionImpl implements Mission {
 
     private String codeName;
-    private String state;
+    MissionState state;
 
-    public MissionImpl(String codeName, String state) {
+    public MissionImpl(String codeName, MissionState state) {
         this.codeName = codeName;
         this.state = state;
     }
@@ -16,7 +17,7 @@ public class MissionImpl implements Mission {
     }
 
     public void setState(String state) {
-        this.state = state;
+        this.state = MissionState.valueOf(state);
     }
 
     @Override
@@ -26,6 +27,11 @@ public class MissionImpl implements Mission {
 
     @Override
     public String getState() {
-        return this.state;
+        return this.state.toString();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Code Name: %s State: %s", this.codeName, this.state);
     }
 }
