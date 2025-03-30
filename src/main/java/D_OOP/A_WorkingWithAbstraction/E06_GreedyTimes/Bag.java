@@ -62,12 +62,12 @@ public class Bag {
                 if (getAmount(ItemType.GEM) + item.getQuantity() > getAmount(ItemType.GOLD)) {
                     return false;
                 }
-            break;
+                break;
             case CASH:
                 if (getAmount(ItemType.CASH) + item.getQuantity() > getAmount(ItemType.GEM)) {
                     return false;
                 }
-            break;
+                break;
         }
         return true;
     }
@@ -83,37 +83,43 @@ public class Bag {
     @Override
     public String toString() {
 
+        long totalGoldAmount = getAmount(ItemType.GOLD);
+        long totalGemAmount = getAmount(ItemType.GEM);
+        long totalCashAmount = getAmount(ItemType.CASH);
         StringBuilder output = new StringBuilder();
-
         List<Item> gems = this.itemsList.stream().filter(item -> item.getItemType().equals(ItemType.GEM))
-                                                        .sorted(Comparator.comparing(Item::getItemName).reversed()
-                                                        .thenComparing(Item::getQuantity, Comparator.reverseOrder()))
-                                                        .collect(Collectors.toList());
+                                                 .sorted(Comparator.comparing(Item::getItemName).reversed()
+                                                 .thenComparing(Item::getQuantity))
+                                                 .collect(Collectors.toList());
         List<Item> cash = this.itemsList.stream().filter(item -> item.getItemType().equals(ItemType.CASH))
-                                                        .sorted(Comparator.comparing(Item::getItemName).reversed()
-                                                        .thenComparing(Item::getQuantity, Comparator.reverseOrder()))
-                                                        .collect(Collectors.toList());
+                                                 .sorted(Comparator.comparing(Item::getItemName).reversed()
+                                                 .thenComparing(Item::getQuantity))
+                                                 .collect(Collectors.toList());
 
-        long goldAmount = getAmount(ItemType.GOLD);
-        if (goldAmount > 0) {
-            output.append(String.format("<Gold> $%d\n", goldAmount));
-            output.append(String.format("##Gold - %d\n", goldAmount));
+        if (totalGoldAmount > 0) {
+            output.append(String.format("<Gold> $%d", totalGoldAmount));
+            output.append(System.lineSeparator());
+            output.append(String.format("##Gold - %d", totalGoldAmount));
         }
-        
-        if (!gems.isEmpty()) {
-            output.append(String.format("<Gem> $%d\n", getAmount(ItemType.GEM)));
+
+        if (totalGemAmount > 0 && !gems.isEmpty()) {
+            output.append(System.lineSeparator());
+            output.append(String.format("<Gem> $%d", totalGemAmount));
             for (Item gem : gems) {
-                output.append(String.format("##%s - %d\n", gem.getItemName(), gem.getQuantity()));
+                output.append(System.lineSeparator());
+                output.append(String.format("##%s - %d", gem.getItemName(), gem.getQuantity()));
             }
         }
 
-        if (!cash.isEmpty()) {
-            output.append(String.format("<Cash> $%d\n", getAmount(ItemType.CASH)));
+        if (totalCashAmount > 0 && !cash.isEmpty()) {
+            output.append(System.lineSeparator());
+            output.append(String.format("<Cash> $%d", totalCashAmount));
+
             for (Item currency : cash) {
-                output.append(String.format("##%s - %d\n", currency.getItemName(), currency.getQuantity()));
+                output.append(System.lineSeparator());
+                output.append(String.format("##%s - %d", currency.getItemName(), currency.getQuantity()));
             }
         }
         return output.toString();
     }
 }
-
