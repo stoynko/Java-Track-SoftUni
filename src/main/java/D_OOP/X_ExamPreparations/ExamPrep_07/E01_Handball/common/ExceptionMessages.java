@@ -9,6 +9,5 @@ public class ExceptionMessages {
     public static final String INVALID_EQUIPMENT_TYPE = "Invalid equipment type.";
     public static final String INVALID_TEAM_TYPE = "Invalid team type.";
     public static final String NO_EQUIPMENT_FOUND = "There isn't an equipment of type %s.";
-
 }
 

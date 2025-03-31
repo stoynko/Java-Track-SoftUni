@@ -6,9 +6,6 @@ public interface Controller {
     String equipmentRequirement(String gameplayName, String equipmentType);
     String addTeam(String gameplayName, String teamType, String teamName, String country, int advantage);
     String playInGameplay(String gameplayName);
-    String percentAdvantage(String gameplayName);
+    public String percentAdvantage(String gameplayName);
     String getStatistics();
-
-
-
 }

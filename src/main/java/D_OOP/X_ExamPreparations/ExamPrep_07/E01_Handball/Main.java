@@ -4,7 +4,7 @@ import D_OOP.X_ExamPreparations.ExamPrep_07.E01_Handball.core.*;
 
 public class Main {
 
-/*You are given 3 interfaces and must implement their functionalities in the correct classes The application has 3 types of entities: Gameplay, Team, Equipment. There should also be Repository.
+/*/*You are given 3 interfaces and must implement their functionalities in the correct classes The application has 3 types of entities: Gameplay, Team, Equipment. There should also be Repository.
 
 Equipment: BaseEquipment is a base class of any type of equipment, and it should not be able to be instantiated.
 Data:
@@ -197,10 +197,7 @@ Input: Below, you can see the format in which each command will be given in the 
     • PlayInGameplay {gameplayName}
     • PercentAdvantage {gameplayName}
     • GetStatistics
-    • Exit
-
-Output:
-Print the output from each command when issued. Print the exception message if an exception is thrown during any of the commands' execution. */
+    • Exit */
 
     public static void main(String[] args) {
         Engine engine = new EngineImpl();
