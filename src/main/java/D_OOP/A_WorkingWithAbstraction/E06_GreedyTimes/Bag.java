@@ -86,7 +86,13 @@ public class Bag {
         long totalGoldAmount = getAmount(ItemType.GOLD);
         long totalGemAmount = getAmount(ItemType.GEM);
         long totalCashAmount = getAmount(ItemType.CASH);
+
         StringBuilder output = new StringBuilder();
+
+        List<Item> gold = this.itemsList.stream().filter(item -> item.getItemType().equals(ItemType.GOLD))
+                                                 .sorted(Comparator.comparing(Item::getItemName).reversed()
+                                                 .thenComparing(Item::getQuantity))
+                                                 .collect(Collectors.toList());
         List<Item> gems = this.itemsList.stream().filter(item -> item.getItemType().equals(ItemType.GEM))
                                                  .sorted(Comparator.comparing(Item::getItemName).reversed()
                                                  .thenComparing(Item::getQuantity))
@@ -96,13 +102,13 @@ public class Bag {
                                                  .thenComparing(Item::getQuantity))
                                                  .collect(Collectors.toList());
 
-        if (totalGoldAmount > 0) {
+        if (totalGoldAmount >= 0 && !gold.isEmpty()) {
             output.append(String.format("<Gold> $%d", totalGoldAmount));
             output.append(System.lineSeparator());
             output.append(String.format("##Gold - %d", totalGoldAmount));
         }
 
-        if (totalGemAmount > 0 && !gems.isEmpty()) {
+        if (totalGemAmount >= 0 && !gems.isEmpty()) {
             output.append(System.lineSeparator());
             output.append(String.format("<Gem> $%d", totalGemAmount));
             for (Item gem : gems) {
@@ -111,7 +117,7 @@ public class Bag {
             }
         }
 
-        if (totalCashAmount > 0 && !cash.isEmpty()) {
+        if (totalCashAmount >= 0 && !cash.isEmpty()) {
             output.append(System.lineSeparator());
             output.append(String.format("<Cash> $%d", totalCashAmount));
 
