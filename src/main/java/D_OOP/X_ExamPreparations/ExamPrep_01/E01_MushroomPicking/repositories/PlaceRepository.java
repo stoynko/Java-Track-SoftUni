@@ -1,15 +1,17 @@
 package D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.repositories;
 
-import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.places.*;
+import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.places.Place;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
 
 public class PlaceRepository implements Repository<Place> {
 
     private Collection<Place> places;
 
-    public PlaceRepository() {
-        this.places = new ArrayList<>();
+    @Override
+    public Collection<Place> getCollection() {
+        return Collections.unmodifiableCollection(this.places);
     }
 
     @Override
@@ -26,15 +28,4 @@ public class PlaceRepository implements Repository<Place> {
     public Place byName(String name) {
         return this.places.stream().filter(place -> place.getName().equals(name)).findFirst().orElse(null);
     }
-
-    @Override
-    public Collection<Place> getCollection() {
-        return Collections.unmodifiableCollection(this.places);
-    }
-
-
-
-
-
-
 }

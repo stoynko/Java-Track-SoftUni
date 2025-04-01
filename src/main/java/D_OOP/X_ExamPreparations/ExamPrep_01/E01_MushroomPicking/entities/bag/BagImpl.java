@@ -1,10 +1,11 @@
 package D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.bag;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class BagImpl implements Bag {
 
-    Collection<String> mushrooms;
+    private Collection<String> mushrooms;
 
     public BagImpl() {
         this.mushrooms = new ArrayList<>();

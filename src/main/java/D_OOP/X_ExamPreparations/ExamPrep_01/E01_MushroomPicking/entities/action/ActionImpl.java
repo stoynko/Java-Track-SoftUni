@@ -1,9 +1,9 @@
 package D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.action;
 
-import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.pickers.*;
-import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.places.*;
+import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.pickers.Picker;
+import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.places.Place;
 
-import java.util.*;
+import java.util.Iterator;
 
 public class ActionImpl implements Action {
 
@@ -12,9 +12,8 @@ public class ActionImpl implements Action {
 
     @Override
     public void startPicking(Place place) {
-
         for (Picker picker : place.getPickers()) {
-            Iterator <String> mushroomIterator = place.getMushrooms().iterator();
+            Iterator<String> mushroomIterator = place.getMushrooms().iterator();
             while (picker.getVitality() > 0 && mushroomIterator.hasNext()) {
                 String mushroom = mushroomIterator.next();
                 picker.getBag().getMushrooms().add(mushroom);
@@ -25,6 +24,5 @@ public class ActionImpl implements Action {
                 mushroomIterator.remove();
             }
         }
-
     }
 }

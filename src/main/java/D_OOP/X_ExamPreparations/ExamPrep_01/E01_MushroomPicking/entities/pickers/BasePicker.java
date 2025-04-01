@@ -1,7 +1,8 @@
 package D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.pickers;
 
-import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.common.*;
-import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.bag.*;
+import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.common.ExceptionMessages;
+import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.bag.Bag;
+import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.bag.BagImpl;
 
 public class BasePicker implements Picker {
 
@@ -16,10 +17,9 @@ public class BasePicker implements Picker {
     }
 
     public void setName(String name) {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException(ExceptionMessages.PICKER_NAME_NULL_OR_EMPTY);
-        }
-        this.name = name;
+       if (name == null || name.isBlank()) {
+           throw new IllegalArgumentException(ExceptionMessages.PICKER_NAME_NULL_OR_EMPTY);
+       }
     }
 
     public void setVitality(int vitality) {

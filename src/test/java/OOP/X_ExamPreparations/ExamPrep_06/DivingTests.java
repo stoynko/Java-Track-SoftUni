@@ -57,7 +57,7 @@ public class DivingTests {
     }
 
     @Test
-    public void GetCountMethodReturnsCorrectName() {
+    public void GetNameMethodReturnsCorrectName() {
         Assertions.assertEquals(NAME_VALID, diving.getName());
     }
 

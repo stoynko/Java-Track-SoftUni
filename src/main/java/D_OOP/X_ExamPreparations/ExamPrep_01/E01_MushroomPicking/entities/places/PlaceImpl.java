@@ -1,9 +1,10 @@
 package D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.places;
 
-import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.common.*;
-import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.pickers.*;
+import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.common.ExceptionMessages;
+import D_OOP.X_ExamPreparations.ExamPrep_01.E01_MushroomPicking.entities.pickers.Picker;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class PlaceImpl implements Place {
 
@@ -12,7 +13,7 @@ public class PlaceImpl implements Place {
     private Collection<Picker> pickers;
 
     public PlaceImpl(String name) {
-        setName(name);
+        this.name = name;
         this.mushrooms = new ArrayList<>();
         this.pickers = new ArrayList<>();
     }
