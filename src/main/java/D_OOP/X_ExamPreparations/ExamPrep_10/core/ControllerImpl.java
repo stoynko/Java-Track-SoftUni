@@ -29,7 +29,7 @@ public class ControllerImpl implements Controller {
     @Override
     public String addDelicacy(String type, String name, double price) {
         if (this.delicacyRepository.getAll().stream().anyMatch(d -> d.getName().equals(name))) {
-            throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST, name));
+            throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST, type, name));
         }
 
         Delicacy delicacy = null;
@@ -47,7 +47,7 @@ public class ControllerImpl implements Controller {
     public String addCocktail(String type, String name, int portion, String brand) {
 
         if (this.cocktailRepository.getAll().stream().anyMatch(c -> c.getName().equals(name))) {
-            throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST, name));
+            throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST, type, name));
         }
 
         Cocktail cocktail = null;
