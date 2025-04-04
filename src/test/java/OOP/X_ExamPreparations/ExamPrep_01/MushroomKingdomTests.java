@@ -1,6 +1,6 @@
 package OOP.X_ExamPreparations.ExamPrep_01;
 
-import D_OOP.X_ExamPreparations.ExamPrep_01.E02_MushroomKingdom.*;
+import D_OOP.Y_ExamPreparations.ExamPrep_01.E02_MushroomKingdom.*;
 import org.junit.jupiter.api.*;
 
 import java.util.*;

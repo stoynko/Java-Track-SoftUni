@@ -1,7 +1,7 @@
 package OOP.X_ExamPreparations.ExamPrep_06;
 
 
-import D_OOP.X_ExamPreparations.ExamPrep_06.E02_ScubaDive.*;
+import D_OOP.Y_ExamPreparations.ExamPrep_06.E02_ScubaDive.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

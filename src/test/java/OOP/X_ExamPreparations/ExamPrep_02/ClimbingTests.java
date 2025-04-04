@@ -3,8 +3,8 @@ package OOP.X_ExamPreparations.ExamPrep_02;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import D_OOP.X_ExamPreparations.ExamPrep_02.E02_StuntClimb.Climbing;
-import D_OOP.X_ExamPreparations.ExamPrep_02.E02_StuntClimb.RockClimber;
+import D_OOP.Y_ExamPreparations.ExamPrep_02.E02_StuntClimb.Climbing;
+import D_OOP.Y_ExamPreparations.ExamPrep_02.E02_StuntClimb.RockClimber;
 
 public class ClimbingTests {
 

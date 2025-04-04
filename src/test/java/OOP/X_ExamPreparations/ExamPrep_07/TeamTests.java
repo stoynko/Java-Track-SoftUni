@@ -1,6 +1,6 @@
 package OOP.X_ExamPreparations.ExamPrep_07;
 
-import D_OOP.X_ExamPreparations.ExamPrep_07.E02_HandballTeams.*;
+import D_OOP.Y_ExamPreparations.ExamPrep_07.E02_HandballTeams.*;
 import org.junit.jupiter.api.*;
 import java.util.*;
 

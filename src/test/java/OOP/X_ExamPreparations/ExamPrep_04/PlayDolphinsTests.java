@@ -1,6 +1,6 @@
 package OOP.X_ExamPreparations.ExamPrep_04;
 
-import D_OOP.X_ExamPreparations.ExamPrep_04.E02_DolphinsPlay.*;
+import D_OOP.Y_ExamPreparations.ExamPrep_04.E02_DolphinsPlay.*;
 import org.junit.jupiter.api.*;
 
 import java.util.*;

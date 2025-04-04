@@ -1,6 +1,6 @@
 package OOP.X_ExamPreparations.ExamPrep_09;
 
-import D_OOP.X_ExamPreparations.ExamPrep_09.E02_MagicGameTesting.*;
+import D_OOP.Y_ExamPreparations.ExamPrep_09.E02_MagicGameTesting.*;
 import org.junit.jupiter.api.*;
 import java.util.*;
 

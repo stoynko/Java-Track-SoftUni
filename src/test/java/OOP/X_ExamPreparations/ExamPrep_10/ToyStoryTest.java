@@ -1,6 +1,6 @@
 package OOP.X_ExamPreparations.ExamPrep_10;
 
-import D_OOP.X_ExamPreparations.ExamPrep_10.E02_ToyStore.*;
+import D_OOP.Y_ExamPreparations.ExamPrep_10.E02_ToyStore.*;
 import org.junit.jupiter.api.*;
 
 import javax.naming.*;
