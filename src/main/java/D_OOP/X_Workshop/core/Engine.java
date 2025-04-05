@@ -18,7 +18,7 @@ public class Engine implements Runnable {
     public Engine() {
         this.scanner = new Scanner(System.in);
         // TODO: Make sure these fields are initialized
-        // this.sessionManager = new UserSessionManager();
+         this.sessionManager = new UserSessionManager();
         // this.userService = new UserServiceImp(...);
         // this.walletService = new WalletServiceImpl(...);
     }
