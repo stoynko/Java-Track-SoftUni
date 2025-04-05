@@ -1,0 +1,8 @@
+package D_Java_OOP.Y_ExamPreparations.ExamPrep_07.E01_Handball.entities.team;
+
+public interface Team {
+    void setName(String name);
+    void play();
+    String getName();
+    int getAdvantage();
+}
