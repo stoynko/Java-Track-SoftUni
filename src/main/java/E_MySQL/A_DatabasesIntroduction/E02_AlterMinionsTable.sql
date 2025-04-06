@@ -3,8 +3,8 @@ Add new constraint that makes town_id foreign key and references to id column of
 Submit your create table query in Judge as MySQL run skeleton, run queries & check DB*/
 
 ALTER TABLE `minions`
-ADD COLUMN `town_id` INT;
+    ADD COLUMN `town_id` INT;
 
 ALTER TABLE `minions`
-ADD CONSTRAINT fk_town_id
-FOREIGN KEY (town_id) REFERENCES towns(id);
+    ADD CONSTRAINT fk_town_id
+    FOREIGN KEY (town_id) REFERENCES towns(id);
