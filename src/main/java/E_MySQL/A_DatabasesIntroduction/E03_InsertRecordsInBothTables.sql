@@ -1,4 +1,4 @@
-/* Populate both tables with sample records. Use only insert SQL queries. */
+--  Populate both tables with sample records. Use only insert SQL queries.
 
 INSERT INTO `towns` (id, name) VALUES
     (1, 'Sofia'),

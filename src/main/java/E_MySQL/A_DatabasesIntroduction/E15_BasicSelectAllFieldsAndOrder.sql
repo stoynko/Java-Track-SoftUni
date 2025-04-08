@@ -1,7 +1,7 @@
-/* Modify queries from previous problem by sorting:
-    •	towns - alphabetically by name
-    •	departments - alphabetically by name
-    •	employees - descending by salary
+-- Modify queries from previous problem by sorting:
+--    •	towns - alphabetically by name
+--    •	departments - alphabetically by name
+--    •	employees - descending by salary
 
 Submit your query statements as Prepare DB & Run queries. */
 

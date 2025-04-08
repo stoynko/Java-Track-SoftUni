@@ -1,14 +1,14 @@
-/* Using SQL query create table users with columns:
+-- Using SQL query create table users with columns:
 
-•	id – unique number for every user. There will be no more than 263-1 users. (Auto incremented)
-•	username – unique identifier of the user will be no more than 30 characters (non Unicode). (Required)
-•	password – password will be no longer than 26 characters (non Unicode). (Required)
-•	profile_picture – image with size up to 900 KB.
-•	last_login_time
-•	is_deleted – shows if the user deleted his/her profile. Possible states are true or false.
+-- •	id – unique number for every user. There will be no more than 263-1 users. (Auto incremented)
+-- •	username – unique identifier of the user will be no more than 30 characters (non Unicode). (Required)
+-- •	password – password will be no longer than 26 characters (non Unicode). (Required)
+-- •	profile_picture – image with size up to 900 KB.
+-- •	last_login_time
+-- •	is_deleted – shows if the user deleted his/her profile. Possible states are true or false.
 
-Make id primary key. Populate the table with 5 records. Submit your CREATE and INSERT statements.
-Submit your CREATE and INSERT statements as Run queries & check DB. */
+-- Make id primary key. Populate the table with 5 records. Submit your CREATE and INSERT statements.
+-- Submit your CREATE and INSERT statements as Run queries & check DB.
 
 CREATE TABLE `users` (
 id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,

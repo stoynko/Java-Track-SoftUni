@@ -1,7 +1,7 @@
-/* Modify queries from previous problem to show only some of the columns. For table:
-    •	towns – name
-    •	departments – name
-    •	employees – first_name, last_name, job_title, salary
+-- Modify queries from previous problem to show only some of the columns. For table:
+--    •	towns – name
+--    •	departments – name
+--    •	employees – first_name, last_name, job_title, salary
 
 Keep the ordering from the previous problem. Submit your query statements as Prepare DB & Run queries. */
 

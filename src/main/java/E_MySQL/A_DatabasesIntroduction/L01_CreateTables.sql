@@ -1,3 +1,15 @@
+-- Table "employees":
+-- •	id – INT, primary key, AUTO_INCREMENT;
+-- •	first_name – VARCHAR, NOT NULL;
+-- •	last_name – VARCHAR, NOT NULL;
+-- Create the "categories" and "products" tables analogically:
+-- Table "categories":
+-- •	id – INT, primary key, AUTO_INCREMENT;
+-- •	name – VARCHAR, NOT NULL;
+-- Table "products":
+-- •	id –  INT, primary key, AUTO_INCREMENT;
+-- •	name – VARCHAR, NOT NULL;
+-- •	category_id – INT, NOT NULL – it is not a foreign key for now.
 
 CREATE TABLE `employees` (
     id INT AUTO_INCREMENT PRIMARY KEY,

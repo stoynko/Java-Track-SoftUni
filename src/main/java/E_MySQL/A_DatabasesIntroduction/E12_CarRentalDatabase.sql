@@ -1,16 +1,16 @@
-/* Using SQL queries create car_rental database with the following entities:
+-- Using SQL queries create car_rental database with the following entities:
 
-    •	categories (id, category, daily_rate, weekly_rate, monthly_rate, weekend_rate)
-    •	cars (id, plate_number, make, model, car_year, category_id, doors, picture, car_condition, available)
-    •	employees (id, first_name, last_name, title, notes)
-    •	customers (id, driver_licence_number, full_name, address, city, zip_code, notes)
-    •	rental_orders (id, employee_id, customer_id, car_id, car_condition, tank_level, kilometrage_start, kilometrage_end,
-        total_kilometrage, start_date, end_date, total_days, rate_applied, tax_rate, order_status, notes)
+--    •	categories (id, category, daily_rate, weekly_rate, monthly_rate, weekend_rate)
+--    •	cars (id, plate_number, make, model, car_year, category_id, doors, picture, car_condition, available)
+--    •	employees (id, first_name, last_name, title, notes)
+--    •	customers (id, driver_licence_number, full_name, address, city, zip_code, notes)
+--    •	rental_orders (id, employee_id, customer_id, car_id, car_condition, tank_level, kilometrage_start, kilometrage_end,
+--        total_kilometrage, start_date, end_date, total_days, rate_applied, tax_rate, order_status, notes)
 
-Set most appropriate data types for each column. Set primary key to each table. Populate each table with 3 records.
-Make sure the columns that are present in 2 tables would be of the same data type.
-Consider which fields are always required and which are optional.
-Submit your CREATE TABLE and INSERT statements as Run queries & check DB. */
+--Set most appropriate data types for each column. Set primary key to each table. Populate each table with 3 records.
+--Make sure the columns that are present in 2 tables would be of the same data type.
+--Consider which fields are always required and which are optional.
+--Submit your CREATE TABLE and INSERT statements as Run queries & check DB.
 
 CREATE TABLE `categories` (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

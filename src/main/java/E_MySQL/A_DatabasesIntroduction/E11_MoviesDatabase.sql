@@ -1,15 +1,16 @@
-/*Using SQL queries create Movies database with the following entities:
-    •	directors (id, director_name, notes)
-        o	director_name cannot be null
-    •	genres (id, genre_name, notes)
-        o	genre_name cannot be null
-    •	categories (id, category_name, notes)
-        o	category_name cannot be null
-    •	movies (id, title, director_id, copyright_year, length, genre_id, category_id, rating, notes)
-        o	title cannot be null
-Set most appropriate data types for each column. Set primary key to each table. Populate each table with 5 records.
-Make sure the columns that are present in 2 tables would be of the same data type. Consider which fields are always required and which are optional.
-Submit your CREATE TABLE and INSERT statements as Run queries & check DB. */
+-- Using SQL queries create Movies database with the following entities:
+--    •	directors (id, director_name, notes)
+--        o	director_name cannot be null
+--    •	genres (id, genre_name, notes)
+--        o	genre_name cannot be null
+--    •	categories (id, category_name, notes)
+--        o	category_name cannot be null
+--   •	movies (id, title, director_id, copyright_year, length, genre_id, category_id, rating, notes)
+--        o	title cannot be null
+
+--Set most appropriate data types for each column. Set primary key to each table. Populate each table with 5 records.
+--Make sure the columns that are present in 2 tables would be of the same data type. Consider which fields are always required and which are optional.
+--Submit your CREATE TABLE and INSERT statements as Run queries & check DB. */
 
 CREATE TABLE `directors`(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

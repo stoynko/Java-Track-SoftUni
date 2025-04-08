@@ -1,16 +1,15 @@
-/*Now create bigger database called soft_uni. You will use database in the future tasks. It should hold information about:
+-- Now create bigger database called soft_uni. You will use database in the future tasks. It should hold information about:
 
-    • towns (id, name)
-    • addresses (id, address_text, town_id)
-    • departments (id, name)
+--    • towns (id, name)
+--    • addresses (id, address_text, town_id)
+--    • departments (id, name)
+--    • employees (id, first_name, middle_name, last_name, job_title, department_id, hire_date, salary, address_id)
+-- Id columns are auto incremented starting from 1 and increased by 1 (1, 2, 3, 4…).
+-- Make sure you use appropriate data types for each column. Add primary and foreign keys as constraints for each table.
+-- Use only SQL queries. Consider which fields are always required and which are optional.
+-- Do not submit creation of database only the insert statements.
 
-    • employees (id, first_name, middle_name, last_name, job_title, department_id, hire_date, salary, address_id)
-Id columns are auto incremented starting from 1 and increased by 1 (1, 2, 3, 4…).
-Make sure you use appropriate data types for each column. Add primary and foreign keys as constraints for each table.
-Use only SQL queries. Consider which fields are always required and which are optional.
-Do not submit creation of database only the insert statements.
-
-Use the SoftUni database and insert some data using SQL queries. */
+-- Use the SoftUni database and insert some data using SQL queries.
 
 
 INSERT INTO `towns` (name) VALUES
