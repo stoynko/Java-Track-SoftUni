@@ -8,8 +8,8 @@
 -- Submit your queries with the MySQL prepare DB & run queries strategy.
 
 SELECT prdt.category_id,
-       ROUND(AVG(prdt.price), 2),
-       MIN(prdt.price),
-       MAX(prdt.price)
+       ROUND(AVG(prdt.price), 2) AS 'Average Price',
+        MIN(prdt.price) AS 'Cheapest Product',
+        MAX(prdt.price) AS 'Most Expensive Product'
 FROM products AS prdt
 GROUP BY prdt.category_id
