@@ -1,7 +1,7 @@
 package D_Java_OOP.X_Workshop.common;
 
 public final class LogMessages {
-    public static final String SUCCESSFULLY_REGISTERED = "[LOG] New user \"%s\" registered successfully and logged in.";
+    public static final String SUCCESSFULLY_REGISTERED = "[LOG] New user \"%s\" registered successfully.";
     public static final String SUCCESSFULLY_LOGGED_IN = "[LOG] User %s successfully logged in.";
     public static final String SUCCESSFULLY_LOGGED_OUT = "[LOG] User %s successfully logged out.";
     public static final String ZERO_WALLETS = "[LOG] No wallets found. You may create one.";

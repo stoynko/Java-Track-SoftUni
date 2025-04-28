@@ -2,6 +2,7 @@ package D_Java_OOP.X_Workshop.core;
 
 import D_Java_OOP.X_Workshop.services.WalletService;
 import D_Java_OOP.X_Workshop.services.UserService;
+import D_Java_OOP.X_Workshop.services.imp.*;
 
 import java.util.Arrays;
 import java.util.Currency;
@@ -11,16 +12,15 @@ import java.util.UUID;
 public class Engine implements Runnable {
 
     private Scanner scanner;
-    private SessionManager sessionManager;
+    private UserSessionManager sessionManager;
     private UserService userService;
     private WalletService walletService;
 
     public Engine() {
         this.scanner = new Scanner(System.in);
-        // TODO: Make sure these fields are initialized
          this.sessionManager = new UserSessionManager();
-        // this.userService = new UserServiceImp(...);
-        // this.walletService = new WalletServiceImpl(...);
+         this.userService = new UserServiceImpl(this.sessionManager);
+         this.walletService = new WalletServiceImpl(this.sessionManager);
     }
 
     @Override

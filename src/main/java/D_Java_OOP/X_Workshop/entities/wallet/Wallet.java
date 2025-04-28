@@ -5,7 +5,7 @@ import D_Java_OOP.X_Workshop.common.*;
 import java.math.*;
 import java.util.*;
 
-public class Wallet {
+public abstract class Wallet {
 
     private UUID id;
     private UUID ownerId;
@@ -14,12 +14,12 @@ public class Wallet {
     private BigDecimal balance;
     private WalletStatus status;
 
-    public Wallet(UUID id, UUID ownerId, String ownerUsername, Currency currency, BigDecimal balance) {
-        this.id = id;
+    public Wallet(UUID ownerId, String ownerUsername, Currency currency, BigDecimal initialBalance) {
+        this.id = UUID.randomUUID();
         this.ownerId = ownerId;
         this.ownerUsername = ownerUsername;
         this.currency = currency;
-        this.balance = balance;
+        this.balance = initialBalance;
         this.status = WalletStatus.ACTIVE;
     }
 
@@ -106,11 +106,11 @@ public class Wallet {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        output.append(String.format("Wallet %s%s:", this.id, this.getClass().getSimpleName())).append(System.lineSeparator());
-        output.append(String.format("Owner: %s", this.ownerUsername)).append(System.lineSeparator());
-        output.append(String.format("Currency: %s", this.currency)).append(System.lineSeparator());
-        output.append(String.format("Balance: %.2f", this.balance)).append(System.lineSeparator());
-        output.append(String.format("Status: %s", this.status)).append(System.lineSeparator());
+        output.append("Wallet [%s][%s]:".formatted(this.id, this.getClass().getSimpleName())).append(System.lineSeparator());
+        output.append("Owner: ").append(this.ownerUsername).append(System.lineSeparator());
+        output.append("Currency: ").append(this.currency).append(System.lineSeparator());
+        output.append("Balance: ").append(this.balance).append(System.lineSeparator());
+        output.append("Status: ").append(this.status).append(System.lineSeparator());
         return output.toString().trim();
     }
 }

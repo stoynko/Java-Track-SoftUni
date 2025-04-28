@@ -10,8 +10,8 @@ public class DisposableWallet extends Wallet {
     public static final BigDecimal DISPOSABLE_WALLET_INITIAL_BALANCE = BigDecimal.ZERO;
     private int withdrawalsDone;
 
-    public DisposableWallet(UUID id, UUID ownerId, String ownerUsername, Currency currency) {
-        super(id, ownerId, ownerUsername, currency, DISPOSABLE_WALLET_INITIAL_BALANCE);
+    public DisposableWallet(UUID ownerId, String ownerUsername, Currency currency) {
+        super(ownerId, ownerUsername, currency, DISPOSABLE_WALLET_INITIAL_BALANCE);
         this.withdrawalsDone = DISPOSABLE_WALLET_PERFORMED_WITHDRAWALS;
     }
 
@@ -26,14 +26,9 @@ public class DisposableWallet extends Wallet {
 
     @Override
     public String toString() {
-        StringBuilder output = new StringBuilder();
-        output.append(String.format("Wallet %s%s:", super.getId(), this.getClass().getSimpleName())).append(System.lineSeparator());
-        output.append(String.format("Owner: %s", super.getOwnerUsername())).append(System.lineSeparator());
-        output.append(String.format("Currency: %s", super.getCurrency())).append(System.lineSeparator());
-        output.append(String.format("Balance: %.2f", super.getBalance())).append(System.lineSeparator());
-        output.append(String.format("Status: %s", super.getStatus())).append(System.lineSeparator());
-        output.append(String.format("Max withdrawals: %d", DISPOSABLE_WALLET_WITHDRAW_LIMIT)).append(System.lineSeparator());
-        output.append(String.format("Current withdrawals: %d", withdrawalsDone)).append(System.lineSeparator());
+        StringBuilder output = new StringBuilder(super.toString());
+        output.append("Max withdrawals: ").append(DISPOSABLE_WALLET_WITHDRAW_LIMIT).append(System.lineSeparator());
+        output.append("Current withdrawals: ").append(withdrawalsDone).append(System.lineSeparator());
         return output.toString().trim();
     }
 }

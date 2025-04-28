@@ -1,33 +1,63 @@
 package D_Java_OOP.X_Workshop.services.imp;
 
+import D_Java_OOP.X_Workshop.common.*;
+import D_Java_OOP.X_Workshop.core.*;
 import D_Java_OOP.X_Workshop.entities.user.User;
+import D_Java_OOP.X_Workshop.repositories.*;
 import D_Java_OOP.X_Workshop.services.UserService;
 
-import java.util.List;
+import java.util.*;
 
-// TODO:
-// 1. Implement all methods
-// 2. Make sure this service implementation has dependency a SessionManager
-// so you can determine which is the currently logged in user.
 public class UserServiceImpl implements UserService {
+
+    private UserSessionManager sessionManager;
+    private UserRepository userRepository;
+
+    public UserServiceImpl(UserSessionManager sessionManager) {
+        this.sessionManager = sessionManager;
+        this.userRepository = new UserRepository();
+    }
 
     @Override
     public String login(String username, String password) {
-        return "";
+
+        if (sessionManager.hasActiveSession()) {
+            String currentLoggedUsername = sessionManager.getActiveSession().getUsername();
+            throw new IllegalStateException(SystemErrors.USER_ALREADY_LOGGED_IN.formatted(currentLoggedUsername));
+        }
+        User user = userRepository.getAll().stream()
+                .filter(u -> u.getUsername().equals(username) && u.getPassword().equals(password))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(SystemErrors.INCORRECT_LOGIN_CREDENTIALS));
+
+        sessionManager.setActiveSession(user);
+        return LogMessages.SUCCESSFULLY_LOGGED_IN.formatted(user.getUsername());
     }
 
     @Override
     public String register(String username, String password) {
-        return "";
+        if (userRepository.getAll().stream().anyMatch(u -> u.getUsername().equals(username))) {
+            throw new IllegalArgumentException(SystemErrors.SUCH_USERNAME_ALREADY_EXIST.formatted(username));
+        }
+        User user = new User(username, password);
+        userRepository.save(user.getId(), user);
+        return LogMessages.SUCCESSFULLY_REGISTERED.formatted(username);
     }
 
     @Override
     public String logout() {
-        return "";
+        String currentLoggedUsername;
+        if (sessionManager.hasActiveSession()) {
+            currentLoggedUsername = sessionManager.getActiveSession().getUsername();
+            sessionManager.terminateActiveSession();
+        } else {
+            throw new IllegalStateException(SystemErrors.NO_ACTIVE_USER_SESSION_FOUND);
+        }
+        return LogMessages.SUCCESSFULLY_LOGGED_OUT.formatted(currentLoggedUsername);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return List.of();
+        return Collections.unmodifiableList(userRepository.getAll());
     }
 }
