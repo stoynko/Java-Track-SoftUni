@@ -8,6 +8,7 @@ public final class SystemErrors {
     public static final String SUCH_USERNAME_ALREADY_EXIST = "Error: Username %s is already in use.";
     public static final String NO_ACTIVE_USER_SESSION_FOUND = "Error: No active user session found. Please log in first.";
     public static final String INSUFFICIENT_FUNDS_IN_WALLET = "Error: Insufficient funds in wallet.";
+    public static final String TRANSACTION_INITIATED_WITH_INVALID_AMOUNT = "Error: Invalid amount. Please insert amount up to 30 000";
     public static final String NO_OPERATIONS_ALLOWED_FOR_NON_ACTIVE_WALLET = "Error: This wallet is non-active and cannot process transactions. No operations allowed for this wallet.";
     public static final String WITHDRAWAL_LIMIT_REACHED_FOR_DISPOSABLE_WALLET = "Error: Withdrawal limit reached. This disposable wallet is now inactive and cannot process further transactions.";
     public static final String SAVINGS_PERIOD_NOT_CONCLUDED_YET = "Error: Withdrawals are not permitted until the savings period has concluded. %d seconds left.";

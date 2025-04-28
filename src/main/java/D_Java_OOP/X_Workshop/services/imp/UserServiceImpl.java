@@ -11,8 +11,6 @@ import java.util.List;
 // so you can determine which is the currently logged in user.
 public class UserServiceImpl implements UserService {
 
-
-
     @Override
     public String login(String username, String password) {
         return "";
