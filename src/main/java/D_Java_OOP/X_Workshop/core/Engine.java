@@ -25,9 +25,21 @@ public class Engine implements Runnable {
 
     @Override
     public void run() {
-
+        System.out.println();
+        System.out.println("------------------------");
         System.out.println("Welcome to Smart Wallet!");
-
+        System.out.println("------------------------");
+        System.out.println("Possible commands:");
+        System.out.println("1. Register | username | password |");
+        System.out.println("2. Login | username | password |");
+        System.out.println("3. Logout");
+        System.out.println("4. NewWallet | currency | type");
+        System.out.println("5. Deposit | id | amount");
+        System.out.println("6. MyWallets");
+        System.out.println("7. ChangeWalletStatus | id | status");
+        System.out.println("8. Transfer | walletId | recipientUsername | amount");
+        System.out.println("9. Exit");
+        System.out.println("------------------------");
         while (true) {
             String result;
             try {

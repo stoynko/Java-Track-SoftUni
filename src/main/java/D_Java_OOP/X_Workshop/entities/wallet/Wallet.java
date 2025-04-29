@@ -3,6 +3,7 @@ package D_Java_OOP.X_Workshop.entities.wallet;
 import D_Java_OOP.X_Workshop.common.*;
 
 import java.math.*;
+import java.text.*;
 import java.util.*;
 
 public abstract class Wallet {
@@ -13,6 +14,7 @@ public abstract class Wallet {
     private Currency currency;
     private BigDecimal balance;
     private WalletStatus status;
+    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     public Wallet(UUID ownerId, String ownerUsername, Currency currency, BigDecimal initialBalance) {
         this.id = UUID.randomUUID();
@@ -109,7 +111,7 @@ public abstract class Wallet {
         output.append("Wallet [%s][%s]:".formatted(this.id, this.getClass().getSimpleName())).append(System.lineSeparator());
         output.append("Owner: ").append(this.ownerUsername).append(System.lineSeparator());
         output.append("Currency: ").append(this.currency).append(System.lineSeparator());
-        output.append("Balance: ").append(this.balance).append(System.lineSeparator());
+        output.append("Balance: ").append(decimalFormat.format(this.balance)).append(System.lineSeparator());
         output.append("Status: ").append(this.status).append(System.lineSeparator());
         return output.toString().trim();
     }
