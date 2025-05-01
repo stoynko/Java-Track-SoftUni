@@ -7,5 +7,5 @@ public final class LogMessages {
     public static final String ZERO_WALLETS = "[LOG] No wallets found. You may create one.";
     public static final String SUCCESSFULLY_DEPOSITED_AMOUNT = "[LOG] Deposit successful! Your new balance is: %s %s.";
     public static final String SUCCESSFULLY_CHANGED_WALLET_STATUS = "[LOG] Wallet status successfully changed to %s.";
-    public static final String SUCCESSFUL_FUNDS_TRANSFER = "[LOG] %s transferred %.2f to %s.\n[LOG] Left balance in this wallet %.2f";
+    public static final String SUCCESSFUL_FUNDS_TRANSFER = "[LOG] %s transferred %.2f to %s.\n[LOG] Remaining balance in this wallet %.2f";
 }

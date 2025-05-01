@@ -27,8 +27,8 @@ public abstract class Wallet {
 
     public void deposit(double amount) {
 
-        if (amount <= 0) {
-            throw new IllegalStateException(SystemErrors.TRANSACTION_INITIATED_WITH_INVALID_AMOUNT);
+        if (!isAmountValid(amount)) {
+            throw new IllegalStateException(SystemErrors.TRANSACTION_INITIATED_WITH_INVALID_AMOUNT.formatted(this.currency));
         }
 
         if (status == WalletStatus.INACTIVE) {
@@ -40,8 +40,8 @@ public abstract class Wallet {
     }
 
     public void withdraw(double amount) {
-        if (amount <= 0) {
-            throw new IllegalStateException(SystemErrors.TRANSACTION_INITIATED_WITH_INVALID_AMOUNT);
+        if (!isAmountValid(amount)) {
+            throw new IllegalStateException(SystemErrors.TRANSACTION_INITIATED_WITH_INVALID_AMOUNT.formatted(this.currency));
         }
 
         if (status == WalletStatus.INACTIVE) {
@@ -55,6 +55,10 @@ public abstract class Wallet {
         }
 
         balance = balance.subtract(bigDecimalAmount);
+    }
+
+    public boolean isAmountValid(double amount) {
+        return amount > 0 && amount < 30_000;
     }
 
     public UUID getId() {

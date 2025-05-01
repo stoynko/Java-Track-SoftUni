@@ -32,7 +32,7 @@ public class SavingsWallet extends Wallet {
 
     @Override
     public String toString() {
-        StringBuilder output = new StringBuilder(super.toString());
+        StringBuilder output = new StringBuilder(super.toString()).append(System.lineSeparator());
         output.append("Saving period ends within: ").append(getSecondsLeftOfPeriod()).append(" seconds").append(System.lineSeparator());
         return output.toString().trim();
     }
