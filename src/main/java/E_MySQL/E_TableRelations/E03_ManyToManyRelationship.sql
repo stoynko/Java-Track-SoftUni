@@ -1,29 +1,46 @@
---Create three tables as follows. Use appropriate data types.
---
---exams:
---exam_id	   name
---  101	    Spring MVC
---  102	      Neo4j
---  103	    Oracle 11g
---
---students:
---student_id	 name
---    1  	     Mila
---    2	         Toni
---    3 	     Ron
---
---students_exams
---student_id	exam_id
---    1	          101
---    1	          102
---    2	          101
---    3	          103
---    2	          102
---    2	          103
-
---Insert the data from the example above.
---•	Add primary and foreign keys.
---•	Have in mind that the table student_exams should have a composite primary key.
+/*Create three tables as follows. Use appropriate data types.
+    ┌────────────────────────┐
+    │          Exams         │
+    ├─────────┬──────────────┤
+    │ exam_id │ name         │
+    ├─────────┼──────────────┤
+    │ 101     │ Spring MVC   │
+    ├─────────┼──────────────┤
+    │ 102     │ Neo4j        │
+    ├─────────┼──────────────┤
+    │ 103     │ Oracle 11g   │
+    └─────────┴──────────────┘
+    ┌───────────────────┐
+    │      Students     │
+    ├────────────┬──────┤
+    │ student_id │ name │
+    ├────────────┼──────┤
+    │ 1          │ Mila │
+    ├────────────┼──────┤
+    │ 2          │ Toni │
+    ├────────────┼──────┤
+    │ 3          │ Ron  │
+    └────────────┴──────┘
+    ┌──────────────────────┐
+    │    Students_exam     │
+    ├────────────┬─────────┤
+    │ student_id │ exam_id │
+    ├────────────┼─────────┤
+    │ 1          │ 101     │
+    ├────────────┼─────────┤
+    │ 1          │ 102     │
+    ├────────────┼─────────┤
+    │ 2          │ 101     │
+    ├────────────┼─────────┤
+    │ 3          │ 103     │
+    ├────────────┼─────────┤
+    │ 2          │ 102     │
+    ├────────────┼─────────┤
+    │ 2          │ 103     │
+    └────────────┴─────────┘
+Insert the data from the example above.
+•	Add primary and foreign keys.
+•	Have in mind that the table student_exams should have a composite primary key.*/
 
 CREATE TABLE students (
     student_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

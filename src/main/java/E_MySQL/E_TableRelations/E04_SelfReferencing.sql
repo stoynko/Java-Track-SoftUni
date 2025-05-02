@@ -1,17 +1,24 @@
--- Create a single table as follows. Use appropriate data types.
---
--- teachers:
--- teacher_id	name	manager_id
---    101	    John
---    102	    Maya	   106
---    103	    Silvia	   106
---    104	    Ted	       105
---    105	    Mark	   101
---    106	    Greta	   101
---
--- Insert the data from the example above.
--- •	Add primary and foreign keys.
--- •	The foreign key should be between manager_id and teacher_id.
+/*Create a single table as follows. Use appropriate data types.
+    ┌─────────────────────────────────┐
+    │             Students            │
+    ├───────────┬────────┬────────────┤
+    │ teacher_id│ name   │ manager_id │
+    ├───────────┼────────┼────────────┤
+    │ 101       │ John   │            │
+    ├───────────┼────────┼────────────┤
+    │ 102       │ Maya   │ 106        │
+    ├───────────┼────────┼────────────┤
+    │ 103       │ Silvia │ 106        │
+    ├───────────┼────────┼────────────┤
+    │ 104       │ Ted    │ 105        │
+    ├───────────┼────────┼────────────┤
+    │ 105       │ Mark   │ 101        │
+    ├───────────┼────────┼────────────┤
+    │ 106       │ Greta  │ 101        │
+    └───────────┴────────┴────────────┘
+Insert the data from the example above.
+    • Add primary and foreign keys.
+    • The foreign key should be between manager_id and teacher_id. */
 
 CREATE TABLE teachers (
     teacher_id INT NOT NULL PRIMARY KEY,
