@@ -3,7 +3,7 @@ The system tracks restaurants, their offerings, customer orders, and the connect
 You have been tasked to create the tables in the database by the following models:
 
    ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-   │                                        Restaurants                                           │
+   │                                         Restaurants                                          │
    ├───────────────┬────────────────────────────────────────────────┬─────────────────────────────┤
    │ Column Name   │                   Data Type                    │         Constraints         │
    │───────────────│────────────────────────────────────────────────│─────────────────────────────│
@@ -81,9 +81,9 @@ You have been tasked to create the tables in the database by the following model
    └───────────────┴────────────────────────────────────────────────────────────────────────────┴──────────────────────────────┘
 
    ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-   │                                                        Orders_offerings                                                   │
+   │                                                     Orders_offerings                                                      │
    ├───────────────┬────────────────────────────────────────────────────────────────────────────┬──────────────────────────────┤
-   │ Column Name   │ Data Type                                                                  │ Constraints                  │
+   │  Column Name  │                                Data Type                                   │         Constraints          │
    ├───────────────┼────────────────────────────────────────────────────────────────────────────┼──────────────────────────────┤
    │ order_id      │ Integer, from 1 to 2,147,483,647.                                          │ Relationship with table      │
    │               │                                                                            │ orders.                      │

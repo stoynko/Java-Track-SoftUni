@@ -56,10 +56,10 @@ Your task is to create a database called summer_olympics. Then you will have to 
     │               │                                                 │ AUTO_INCREMENT                       │
     ├───────────────┼─────────────────────────────────────────────────┼──────────────────────────────────────┤
     │ first_name    │ A string containing a maximum of 40 characters. │ NULL is NOT permitted.               │
-    │               │ Unicode is NOT needed.                          │                                      │                                      │
+    │               │ Unicode is NOT needed.                          │                                      │
     ├───────────────┼─────────────────────────────────────────────────┼──────────────────────────────────────┤
     │ last_name     │ A string containing a maximum of 40 characters. │ NULL is NOT permitted.               │
-    │               │ Unicode is NOT needed.                          │                                      │                                      │
+    │               │ Unicode is NOT needed.                          │                                      │
     ├───────────────┼─────────────────────────────────────────────────┼──────────────────────────────────────┤
     │ age           │ Integer, from 1 to 2,147,483,647.               │ NULL is NOT permitted.               │
     ├───────────────┼─────────────────────────────────────────────────┼──────────────────────────────────────┤
@@ -94,3 +94,54 @@ Your task is to create a database called summer_olympics. Then you will have to 
     │               │                                  │ NULL is NOT permitted                │
     └───────────────┴──────────────────────────────────┴──────────────────────────────────────┘
  */
+
+CREATE TABLE countries(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(40) CHARACTER SET ASCII NOT NULL UNIQUE
+);
+
+CREATE TABLE sports(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) CHARACTER SET ASCII NOT NULL UNIQUE
+);
+
+CREATE TABLE disciplines(
+    id iNT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(40) CHARACTER SET ASCII NOT NULL UNIQUE,
+    sport_id INT NOT NULL,
+    CONSTRAINT fk_disciplines_sport_id_sports_id
+        FOREIGN KEY (sport_id)
+            REFERENCES sports(id)
+);
+
+CREATE TABLE athletes(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(40) CHARACTER SET ASCII NOT NULL,
+    last_name VARCHAR(40) CHARACTER SET ASCII NOT NULL,
+    age INT NOT NULL,
+    country_id INT NOT NULL,
+    CONSTRAINT fk_athletes_country_id_countries_id
+        FOREIGN KEY (country_id)
+            REFERENCES countries(id)
+);
+
+CREATE TABLE medals (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(10) CHARACTER SET ASCII NOT NULL UNIQUE
+);
+
+CREATE TABLE disciplines_athletes_medals (
+    discipline_id INT NOT NULL,
+    athlete_id INT NOT NULL,
+    medal_id INT NOT NULL,
+    PRIMARY KEY (discipline_id, medal_id),
+    CONSTRAINT fk_discipline_id_disciplines_id
+        FOREIGN KEY (discipline_id)
+            REFERENCES disciplines(id),
+    CONSTRAINT fk_athlete_id_athletes_id
+        FOREIGN KEY (athlete_id)
+            REFERENCES athletes(id),
+    CONSTRAINT fk_medal_id_medals_id
+        FOREIGN KEY (medal_id)
+            REFERENCES medals(id),
+);
