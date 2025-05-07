@@ -276,8 +276,7 @@ INSERT INTO flights (flight_code, departure_country, destination_country, airpla
     ('QM-740', 12, 1, 12, 0, '2023-04-15 17:41:45'), ('QX-657', 30, 21, 6, 1, '2023-05-08 21:23:14'),
     ('UC-831', 2, 5, 13, 1, '2022-12-08 08:07:32'), ('LF-479', 4, 11, 7, 0, '2023-09-04 07:48:49');
 
-INSERT INTO flights_passengers (flight_id, passenger_id)
-VALUES
+INSERT INTO flights_passengers (flight_id, passenger_id) VALUES
     (1, 46), (1, 80), (1, 100), (2, 3), (2, 32), (2, 59), (2, 88), (3, 28), (3, 38), (3, 59),
     (3, 76), (3, 81), (3, 92), (4, 2), (4, 17), (4, 40), (4, 41), (4, 53), (4, 53), (4, 56),
     (4, 57), (4, 64), (4, 80), (4, 88), (5, 10), (5, 15), (5, 46), (5, 50), (6, 11), (6, 25),
