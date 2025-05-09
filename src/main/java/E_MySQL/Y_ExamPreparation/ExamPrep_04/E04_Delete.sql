@@ -1,0 +1,1 @@
+/* Delete all waiters, who don't have any orders. */
