@@ -3,19 +3,19 @@
 
 
 CREATE OR REPLACE VIEW v_employees_hired_after_2000 AS
-SELECT emp.first_name,
-       emp.last_name
-FROM employees AS emp
-WHERE YEAR(emp.hire_date) > 2000;
+SELECT first_name,
+       last_name
+FROM employees
+WHERE YEAR(hire_date) > 2000;
 
 SELECT * FROM v_employees_hired_after_2000;
 
 -- Variation 02
 
 CREATE OR REPLACE VIEW v_employees_hired_after_2000 AS
-SELECT emp.first_name,
-       emp.last_name
-FROM employees AS emp
-WHERE emp.hire_date > '2000-01-01 00:00:00';
+SELECT first_name,
+       last_name
+FROM employees
+WHERE hire_date > '2000-01-01 00:00:00';
 
 SELECT * FROM v_employees_hired_after_2000;

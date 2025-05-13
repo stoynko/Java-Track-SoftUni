@@ -3,13 +3,13 @@
 -- id's must be auto increment. Submit yours create table queries in Judge together for both tables
 -- (one after another separated by ";") as Run queries & check DB.
 
-CREATE TABLE `minions`(
+CREATE TABLE minions(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
     age INT
 );
 
-CREATE TABLE `towns`(
+CREATE TABLE towns(
     town_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100)
 );

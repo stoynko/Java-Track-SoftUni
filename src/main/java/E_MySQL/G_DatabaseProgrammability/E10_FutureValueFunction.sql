@@ -17,5 +17,5 @@ CREATE FUNCTION ufn_calculate_future_value(
 
     DETERMINISTIC
     BEGIN
-        RETURN sum * (POWER(1 + yearly_interest, years));
+        RETURN p_sum * (POWER(1 + p_yearly_interest, p_years));
     END

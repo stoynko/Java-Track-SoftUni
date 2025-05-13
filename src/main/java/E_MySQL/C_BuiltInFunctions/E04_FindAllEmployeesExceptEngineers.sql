@@ -5,4 +5,4 @@ SELECT
     emp.first_name,
     emp.last_name
 FROM employees AS emp
-WHERE emp.job_title NOT LIKE '%engineer%'
+WHERE emp.job_title NOT LIKE '%engineer%';

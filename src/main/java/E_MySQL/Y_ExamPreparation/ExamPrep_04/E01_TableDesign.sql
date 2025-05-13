@@ -113,9 +113,7 @@
   ├─────────────┼───────────────────────────────────┼───────────────────────────────────┤
   │ product_id  │ Integer, from 1 to 2,147,483,647. │ Relationship with table products. │
   └─────────────┴───────────────────────────────────┴───────────────────────────────────┘
-
-
-  */
+*/
 
 CREATE TABLE products(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -147,23 +145,40 @@ CREATE TABLE waiters (
     email VARCHAR(50) CHARACTER SET ASCII NOT NULL,
     phone VARCHAR(50) CHARACTER SET ASCII NOT NULL,
     salary DECIMAL(10, 2)
-
 );
 
 CREATE TABLE orders(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     table_id INT NOT NULL,
     waiter_id INT NOT NULL,
-    order_time TIMESTAMP NOT NULL,
-    payed_status BOOL
+    order_time TIME NOT NULL,
+    payed_status BOOL,
+    CONSTRAINT fk_table_id_tables
+        FOREIGN KEY (table_id)
+            REFERENCES tables(id),
+    CONSTRAINT fk_waiter_id_waiters
+        FOREIGN KEY (waiter_id)
+            REFERENCES waiters(id)
 );
 
 CREATE TABLE orders_clients(
     order_id INT,
-    client_id INT
+    client_id INT,
+    CONSTRAINT fk_order_id_orders
+        FOREIGN KEY (order_id)
+            REFERENCES orders(id),
+    CONSTRAINT fk_client_id_table_orders
+        FOREIGN KEY (client_id)
+            REFERENCES clients(id)
 );
 
 CREATE TABLE orders_products(
     order_id INT,
-    product_id INT
+    product_id INT,
+    CONSTRAINT fk_orders_products_id_orders
+        FOREIGN KEY (order_id)
+            REFERENCES orders(id),
+    CONSTRAINT fk_product_id_products
+        FOREIGN KEY (product_id)
+            REFERENCES products(id)
 );

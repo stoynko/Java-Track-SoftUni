@@ -5,8 +5,7 @@
 -- Return the first 3 rows sorted by employee_id in descending order.
 
 SELECT e.employee_id,
-       e.first_name,
-       ep.project_id
+       e.first_name
 FROM employees as e
          LEFT JOIN employees_projects as ep
              ON e.employee_id = ep.employee_id

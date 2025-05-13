@@ -10,7 +10,7 @@
 -- Make id primary key. Populate the table with 5 records. Submit your CREATE and INSERT statements.
 -- Submit your CREATE and INSERT statements as Run queries & check DB.
 
-CREATE TABLE `users` (
+CREATE TABLE users (
 id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 username VARCHAR(30) NOT NULL,
 password VARCHAR(26),

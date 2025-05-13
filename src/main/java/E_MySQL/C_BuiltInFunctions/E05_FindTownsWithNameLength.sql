@@ -4,4 +4,4 @@
 SELECT town.name
 FROM towns AS town
 WHERE CHAR_LENGTH(town.name) IN (5, 6)
-ORDER BY town.name
+ORDER BY town.name;

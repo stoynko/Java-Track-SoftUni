@@ -2,5 +2,5 @@
 -- Then select only salary column from the employees table.
 -- Submit your query statements as Prepare DB & Run queries.
 
-UPDATE `employees` SET `salary` = `salary` * 1.1;
-SELECT `salary` FROM `employees`;
+UPDATE employees SET salary = salary * 1.1;
+SELECT salary FROM employees;

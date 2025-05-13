@@ -8,4 +8,4 @@ SELECT
     emp.hire_date
 FROM employees AS emp
 ORDER BY emp.hire_date DESC
-    LIMIT 7
+    LIMIT 7;

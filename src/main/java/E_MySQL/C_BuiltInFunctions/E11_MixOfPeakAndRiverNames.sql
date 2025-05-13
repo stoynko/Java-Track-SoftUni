@@ -4,7 +4,7 @@
 
 SELECT pk.peak_name,
        rvr.river_name,
-       LOWER(CONCAT(pk.peak_name, SUBSTRING(rvr.river_name, 2))) AS `mix`
+       LOWER(CONCAT(pk.peak_name, SUBSTRING(rvr.river_name, 2))) AS mix
 FROM peaks AS pk, rivers as rvr
 WHERE RIGHT(pk.peak_name, 1) = LEFT (rvr.river_name, 1)
-ORDER BY `mix`;
+ORDER BY mix;

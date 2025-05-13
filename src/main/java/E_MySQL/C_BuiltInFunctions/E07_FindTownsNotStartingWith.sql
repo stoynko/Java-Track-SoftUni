@@ -2,5 +2,5 @@
 -- Order them alphabetically by name. Submit your query statements as Prepare DB & run queries.
 
 SELECT * FROM towns
-WHERE LEFT(towns.name, 1) NOT IN ('R', 'B', 'D')
-ORDER BY towns.name;
+WHERE LEFT(name, 1) NOT IN ('R', 'B', 'D')
+ORDER BY name;

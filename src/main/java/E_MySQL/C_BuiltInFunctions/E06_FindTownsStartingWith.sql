@@ -2,5 +2,5 @@
 -- Order them alphabetically by town name. Submit your query statements as Prepare DB & run queries.
 
 SELECT * FROM towns
-WHERE LEFT(towns.name, 1) IN ('M', 'K', 'B', 'E')
-ORDER BY towns.name;
+WHERE LEFT(name, 1) IN ('M', 'K', 'B', 'E')
+ORDER BY name;

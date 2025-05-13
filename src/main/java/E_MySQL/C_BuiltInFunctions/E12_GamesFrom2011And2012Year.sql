@@ -2,7 +2,7 @@
 -- Display the start date in the format "YYYY-MM-DD". Submit your query statements as Prepare DB & run queries.
 
 SELECT game.name,
-       DATE_FORMAT(game.start, '%Y-%m-%d') AS `start`
+       DATE_FORMAT(game.start, '%Y-%m-%d') AS start
 FROM games AS game
 WHERE YEAR(start) IN (2011, 2012)
 ORDER BY start, game.name
