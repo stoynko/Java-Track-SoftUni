@@ -39,5 +39,6 @@ separated by a coma and a space. */
         } else {
             System.out.println("No town names were affected.");
         }
+        connection.close();
     }
 }

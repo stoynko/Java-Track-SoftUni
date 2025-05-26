@@ -48,6 +48,7 @@ Print appropriate messages after each operation – see the examples. */
         sqlQuery = "INSERT INTO minions_villains (minion_id, villain_id) VALUES (?, ?)";
         int output = executeInsertion(connection, sqlQuery, "minions_villains", String.valueOf(minionID), String.valueOf(villainID));
         System.out.printf("Successfully added %s to be minion of %s.\n", minionName, villainName);
+        connection.close();
     }
 
     private static List<String> processInputData(Scanner scanner) {
