@@ -18,7 +18,7 @@ public class L01_AccessingDatabase {
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/soft_uni", props);
 
         PreparedStatement statement =
-                connection.prepareStatement("SELECT * FROM employees WHERE salary > ?");
+                connection.prepareStatement("SELECT w* FROM employees WHERE salary > ?");
 
         String salaryInput = scanner.nextLine();
         statement.setDouble(1, Double.parseDouble(salaryInput));

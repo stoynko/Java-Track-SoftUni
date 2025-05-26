@@ -40,6 +40,6 @@ public class L02_RetrieveInformationAboutUsers {
                 System.out.printf("%s has played %d games\n", fullName, gamesPlayed);
             } while (resultSet.next());
         }
-        connection.close();
+//        connection.close();
     }
 }
