@@ -3,6 +3,7 @@ package F_SpringData.B_ORMFundamentals.orm.context;
 import F_SpringData.B_ORMFundamentals.common.*;
 import F_SpringData.B_ORMFundamentals.orm.core.*;
 
+import java.lang.annotation.*;
 import java.lang.reflect.*;
 import java.sql.*;
 import java.time.*;
@@ -14,6 +15,37 @@ public class EntityManager<E> implements DBcontext<E> {
 
     public EntityManager(Connection connection) {
         this.connection = connection;
+    }
+
+    @Override
+    public void createTable(Class<E> entity) throws SQLException {
+        String tableName = getTableName(entity);
+        String columnDefinitions = getColumnDefinitions(entity);
+        String createTableSQL = String.format(SQLCommands.CREATE_TABLE_STATEMENT, tableName, columnDefinitions);
+        connection.createStatement().executeUpdate(createTableSQL);
+    }
+
+    private String getColumnDefinitions(Class<E> entity) {
+        List<String> output = new ArrayList<>();
+        Arrays.stream(entity.getDeclaredFields()).forEach(field -> {
+            if (Arrays.stream(field.getDeclaredAnnotations()).anyMatch(annotation -> annotation.annotationType() == Column.class)) {
+                String parameter = getFieldParam(field);
+                String columnName = field.getAnnotation(Column.class).name();
+                output.add(String.format("%s %s", columnName, parameter));
+           }
+        });
+        return String.join(",", output);
+    }
+
+    private String getFieldParam(Field field) {
+        if (field.getType() == Integer.class || field.getType() == int.class) {
+            return "INT";
+        } else if (field.getType() == String.class) {
+            return "VARCHAR(255)";
+        } else if (field.getType() == LocalDate.class) {
+            return "DATE";
+        }
+        throw new IllegalArgumentException(String.format(ExceptionMessages.UNSUPPORTED_TYPE, field.getType()));
     }
 
     @Override
