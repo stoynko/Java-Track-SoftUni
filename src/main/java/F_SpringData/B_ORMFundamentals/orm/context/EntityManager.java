@@ -50,13 +50,11 @@ public class EntityManager<E> implements DBcontext<E> {
         return updatedEntries == 1;
     }
 
-    //Iterable<E> find(Class<E> table) – returns collection of all entity objects of type E
     @Override
     public Iterable<E> find(Class<E> table) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return find(table, null);
     }
 
-    //Iterable<E> find(Class<E> table, String where) – returns collection of all entity objects of type T matching the criteria given in "where"
     @Override
     public Iterable<E> find(Class<E> table, String where) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String tableName = getTableName(table);
@@ -65,19 +63,17 @@ public class EntityManager<E> implements DBcontext<E> {
                 where == null ? "" : where);
         ResultSet resultSet = connection.prepareStatement(selectSingleSQL).executeQuery();
         List<E> resultList = new ArrayList<>();
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             resultList.add(mapEntity(table, resultSet));
         }
         return resultList;
     }
 
-    //E findFirst(Class<E> table) – returns the first entity object of type E
     @Override
     public E findFirst(Class<E> table) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return findFirst(table, null);
     }
 
-    //E findFirst(Class<E> table, String where) – returns the first entity object of type E matching the criteria given in "where" */
     @Override
     public E findFirst(Class<E> table, String where) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String withLimit = where == null ? "LIMIT 1" : where + " LIMIT 1";
