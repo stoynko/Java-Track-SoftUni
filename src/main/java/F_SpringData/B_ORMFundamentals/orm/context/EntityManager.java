@@ -3,11 +3,11 @@ package F_SpringData.B_ORMFundamentals.orm.context;
 import F_SpringData.B_ORMFundamentals.common.*;
 import F_SpringData.B_ORMFundamentals.orm.core.*;
 
-import java.lang.annotation.*;
 import java.lang.reflect.*;
 import java.sql.*;
 import java.time.*;
 import java.util.*;
+import java.util.stream.*;
 
 public class EntityManager<E> implements DBcontext<E> {
 
@@ -19,25 +19,77 @@ public class EntityManager<E> implements DBcontext<E> {
 
     @Override
     public void createTable(Class<E> entity) throws SQLException {
+        if (!tableExists(entity)) {
+            String tableName = getTableName(entity);
+            String columnDefinitions = getColumnDefinitions(entity);
+            String createTableSQL = String.format(SQLCommands.CREATE_TABLE_STATEMENT, tableName, columnDefinitions);
+            connection.createStatement().executeUpdate(createTableSQL);
+        }
+    }
+
+    @Override
+    public void alterTable(Class<E> entity) throws SQLException {
         String tableName = getTableName(entity);
-        String columnDefinitions = getColumnDefinitions(entity);
-        String createTableSQL = String.format(SQLCommands.CREATE_TABLE_STATEMENT, tableName, columnDefinitions);
-        connection.createStatement().executeUpdate(createTableSQL);
+        String newFieldDefinitions = getNewFieldDefinitions(entity);
+        String sqlAlter = String.format(SQLCommands.ALTER_TABLE_STATEMENT, tableName, newFieldDefinitions);
+        connection.prepareStatement(sqlAlter).executeUpdate();
+    }
+
+    private String getNewFieldDefinitions(Class<E> entity) throws SQLException {
+        List<String> existingColumns = getExistingColumns(entity);
+        List<String> declaredFields = Arrays.stream(entity.getDeclaredFields()).map(Field::getName).toList();
+
+
+
+
+        return null;
+    }
+
+    private List<String> getExistingColumns(Class<E> entity) throws SQLException {
+        PreparedStatement getColumnsStatement = connection.prepareStatement(String.format(SQLCommands.SELECT_COLUMNS_FROM_SCHEMA, connection.getCatalog(), getTableName(entity)));
+        ResultSet resultSet = getColumnsStatement.executeQuery();
+        int i = 1;
+        List<String> existingColumns = new ArrayList<>();
+        while (resultSet.next()) {
+            existingColumns.add(resultSet.getString(i++));
+        }
+        return existingColumns;
+    }
+
+    private boolean tableExists(Class<E> entity) throws SQLException {
+        String tableName = entity.getAnnotation(Entity.class).name().toLowerCase();
+        PreparedStatement checkStatement = connection.prepareStatement(String.format(SQLCommands.SELECT_INFORMATION_SCHEMA,
+                connection.getCatalog(),
+                tableName));
+        ResultSet resultSet = checkStatement.executeQuery();
+        if (resultSet.next()) {
+            throw new IllegalStateException(String.format(ExceptionMessages.TABLE_EXISTS, tableName));
+        }
+        return false;
     }
 
     private String getColumnDefinitions(Class<E> entity) {
-        List<String> output = new ArrayList<>();
+        List<String> columnDefinitions = new ArrayList<>();
         Arrays.stream(entity.getDeclaredFields()).forEach(field -> {
             if (Arrays.stream(field.getDeclaredAnnotations()).anyMatch(annotation -> annotation.annotationType() == Column.class)) {
-                String parameter = getFieldParam(field);
+                String sqlType = getSqlTypeForField(field);
                 String columnName = field.getAnnotation(Column.class).name();
-                output.add(String.format("%s %s", columnName, parameter));
-           }
+                columnDefinitions.add(String.format("%s %s", columnName, sqlType));
+           } else if (Arrays.stream(field.getDeclaredAnnotations()).anyMatch(annotation -> annotation.annotationType() == Id.class)) {
+                StringBuilder columnDefinition = new StringBuilder("id ");
+                String sqlType = getSqlTypeForField(field);
+                String addParam = "";
+                if (sqlType.equals("INT")) {
+                    addParam = " AUTO_INCREMENT";
+                }
+                columnDefinition.append(sqlType + " PRIMARY KEY" + addParam);
+                columnDefinitions.add(columnDefinition.toString());
+            }
         });
-        return String.join(",", output);
+        return String.join(",", columnDefinitions);
     }
 
-    private String getFieldParam(Field field) {
+    private String getSqlTypeForField(Field field) {
         if (field.getType() == Integer.class || field.getType() == int.class) {
             return "INT";
         } else if (field.getType() == String.class) {
@@ -58,6 +110,7 @@ public class EntityManager<E> implements DBcontext<E> {
     }
 
     private boolean insertData(E entity) throws IllegalAccessException, SQLException {
+
         String tableName = getTableName(entity.getClass());
         List<String> columnNames = getEntityColumns(entity);
         List<String> columnValues = getEntityValues(entity);

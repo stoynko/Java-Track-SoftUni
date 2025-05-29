@@ -12,6 +12,7 @@ import java.sql.*;
 public interface DBcontext<E> {
 
     void createTable(Class<E> entity) throws SQLException;
+    void alterTable(Class<E> entity) throws SQLException;
     boolean persist(E entity) throws IllegalAccessException, SQLException;
     Iterable<E> find(Class<E> table) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
     Iterable<E> find(Class<E> table, String where) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
