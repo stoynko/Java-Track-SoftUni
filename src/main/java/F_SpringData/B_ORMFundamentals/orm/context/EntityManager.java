@@ -21,9 +21,33 @@ public class EntityManager<E> implements DBcontext<E> {
         int entityID = getIDValue(entity);
         if (entityID == 0) {
             return insertData(entity);
-
         }
-        return false;
+        return updateData(entity, entityID);
+    }
+
+    private boolean insertData(E entity) throws IllegalAccessException, SQLException {
+        String tableName = getTableName(entity.getClass());
+        List<String> columnNames = getEntityColumns(entity);
+        List<String> columnValues = getEntityValues(entity);
+        String insertSQL = String.format(SQLCommands.INSERT_STATEMENT, tableName, String.join(", ", columnNames), String.join(", ", columnValues));
+        int updatedEntries = connection.prepareStatement(insertSQL).executeUpdate();
+        return updatedEntries == 1;
+    }
+
+    private boolean updateData(E entity, int entityID) throws IllegalAccessException, SQLException {
+        String tableName = getTableName(entity.getClass());
+        List<String> columnNames = getEntityColumns(entity);
+        List<String> columnValues = getEntityValues(entity);
+
+        List<String> updatedDataPerColumn = new ArrayList<>();
+        for (int i = 0; i < columnNames.size(); i++) {
+            String formatted = String.format("%s=%s", columnNames.get(i), columnValues.get(i));
+            updatedDataPerColumn.add(formatted);
+        }
+
+        String updateSQL = String.format(SQLCommands.UPDATE_STATEMENT, tableName, String.join(",", updatedDataPerColumn), entityID);
+        int updatedEntries = connection.prepareStatement(updateSQL).executeUpdate();
+        return updatedEntries == 1;
     }
 
     //Iterable<E> find(Class<E> table) – returns collection of all entity objects of type E
@@ -36,13 +60,13 @@ public class EntityManager<E> implements DBcontext<E> {
     @Override
     public Iterable<E> find(Class<E> table, String where) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String tableName = getTableName(table);
-        String selectSingleSQL = String.format("SELECT * FROM %s %s",
+        String selectSingleSQL = String.format(SQLCommands.SELECT_SINGLE_STATEMENT,
                 tableName,
                 where == null ? "" : where);
-        ResultSet result = connection.prepareStatement(selectSingleSQL).executeQuery();
+        ResultSet resultSet = connection.prepareStatement(selectSingleSQL).executeQuery();
         List<E> resultList = new ArrayList<>();
-        while(result.next()) {
-            resultList.add(mapEntity(table, result));
+        while(resultSet.next()) {
+            resultList.add(mapEntity(table, resultSet));
         }
         return resultList;
     }
@@ -50,7 +74,6 @@ public class EntityManager<E> implements DBcontext<E> {
     //E findFirst(Class<E> table) – returns the first entity object of type E
     @Override
     public E findFirst(Class<E> table) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-
         return findFirst(table, null);
     }
 
@@ -108,15 +131,6 @@ public class EntityManager<E> implements DBcontext<E> {
         Field idField = idFields.get(0);
         idField.setAccessible(true);
         return (int) idField.get(entity);
-    }
-
-    private boolean insertData(E entity) throws IllegalAccessException, SQLException {
-        String tableName = getTableName(entity.getClass());
-        List<String> columnNames = getEntityColumns(entity);
-        List<String> columnValues = getEntityValues(entity);
-        String insertSQL = String.format(SQLCommands.INSERT_STATEMENT, tableName, String.join(", ", columnNames), String.join(", ", columnValues));
-        int updatedEntries = connection.prepareStatement(insertSQL).executeUpdate();
-        return updatedEntries == 1;
     }
 
     private List<String> getEntityValues(E entity) throws IllegalAccessException {
