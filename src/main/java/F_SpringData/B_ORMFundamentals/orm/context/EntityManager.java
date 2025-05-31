@@ -7,7 +7,6 @@ import java.lang.reflect.*;
 import java.sql.*;
 import java.time.*;
 import java.util.*;
-import java.util.stream.*;
 
 public class EntityManager<E> implements DBcontext<E> {
 
@@ -30,28 +29,49 @@ public class EntityManager<E> implements DBcontext<E> {
     @Override
     public void alterTable(Class<E> entity) throws SQLException {
         String tableName = getTableName(entity);
-        String newFieldDefinitions = getNewFieldDefinitions(entity);
-        String sqlAlter = String.format(SQLCommands.ALTER_TABLE_STATEMENT, tableName, newFieldDefinitions);
+        List<String> newFields = getNewFieldDefinitions(entity);
+        String sqlAlter = getSqlAlterCommand(tableName, newFields);
         connection.prepareStatement(sqlAlter).executeUpdate();
     }
 
-    private String getNewFieldDefinitions(Class<E> entity) throws SQLException {
+    private String getSqlAlterCommand(String tableName, List<String> newFields) {
+        StringBuilder sqlCommand = new StringBuilder();
+        sqlCommand.append(String.format(SQLCommands.ALTER_TABLE_STATEMENT, tableName)).append(System.lineSeparator());
+        Iterator<String> iterator = newFields.iterator();
+        while (iterator.hasNext()) {
+            String columnDefinition = iterator.next();
+            sqlCommand.append(String.format(SQLCommands.ALTER_TABLE_INSERT_COLUMN, columnDefinition));
+            if (iterator.hasNext()) {
+                sqlCommand.append(",").append(System.lineSeparator());
+            }
+        }
+        return sqlCommand.toString();
+    }
+
+    private List<String> getNewFieldDefinitions(Class<E> entity) throws SQLException {
         List<String> existingColumns = getExistingColumns(entity);
-        List<String> declaredFields = Arrays.stream(entity.getDeclaredFields()).map(Field::getName).toList();
+        List<String> newFields = new ArrayList<>();
+        Arrays.stream(entity.getDeclaredFields()).filter(field -> Arrays.stream(field.getDeclaredAnnotations())
+                .anyMatch(annotation -> annotation.annotationType().equals(Column.class)))
+                .forEach(field ->
+                {
+                   String fieldName = field.getAnnotation(Column.class).name();
+                   String fieldType = getSqlTypeForField(field);
+                   if (!existingColumns.contains(fieldName)) {
+                       newFields.add(fieldName + " " + fieldType);
+                   }
+                });
 
-
-
-
-        return null;
+        return newFields;
     }
 
     private List<String> getExistingColumns(Class<E> entity) throws SQLException {
         PreparedStatement getColumnsStatement = connection.prepareStatement(String.format(SQLCommands.SELECT_COLUMNS_FROM_SCHEMA, connection.getCatalog(), getTableName(entity)));
         ResultSet resultSet = getColumnsStatement.executeQuery();
-        int i = 1;
+        int i = 0;
         List<String> existingColumns = new ArrayList<>();
         while (resultSet.next()) {
-            existingColumns.add(resultSet.getString(i++));
+            existingColumns.add(resultSet.getString("COLUMN_NAME"));
         }
         return existingColumns;
     }

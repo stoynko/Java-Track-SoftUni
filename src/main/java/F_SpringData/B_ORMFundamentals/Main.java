@@ -10,7 +10,6 @@ import java.time.*;
 
 import static F_SpringData.B_ORMFundamentals.orm.config.Connector.getConnection;
 
-
 public class Main {
 
     public static void main(String[] args) throws SQLException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, InstantiationException {
@@ -18,7 +17,7 @@ public class Main {
         Connector.createConnection("root", "", "orm_basics");
         Connection connection = getConnection();
         EntityManager<User> entityManager = new EntityManager<>(connection);
-        entityManager.createTable(User.class);
+        entityManager.alterTable(User.class);
         User user1 = new User("Ivan", "pass", 20, LocalDate.now());
         User user2 = new User("Georgi", "pass", 35, LocalDate.of(2019, 10, 15));
         entityManager.persist(user1);
