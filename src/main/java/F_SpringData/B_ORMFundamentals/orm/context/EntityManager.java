@@ -18,12 +18,14 @@ public class EntityManager<E> implements DBcontext<E> {
 
     @Override
     public void createTable(Class<E> entity) throws SQLException {
-        if (!tableExists(entity)) {
-            String tableName = getTableName(entity);
-            String columnDefinitions = getColumnDefinitions(entity);
-            String createTableSQL = String.format(SQLCommands.CREATE_TABLE_STATEMENT, tableName, columnDefinitions);
-            connection.createStatement().executeUpdate(createTableSQL);
-        }
+            try {
+                String tableName = getTableName(entity);
+                String columnDefinitions = getColumnDefinitions(entity);
+                String createTableSQL = String.format(SQLCommands.CREATE_TABLE_STATEMENT, tableName, columnDefinitions);
+                connection.createStatement().executeUpdate(createTableSQL);
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
     }
 
     @Override
@@ -83,7 +85,7 @@ public class EntityManager<E> implements DBcontext<E> {
                 tableName));
         ResultSet resultSet = checkStatement.executeQuery();
         if (resultSet.next()) {
-            throw new IllegalStateException(String.format(ExceptionMessages.TABLE_EXISTS, tableName));
+            System.out.println(String.format(ExceptionMessages.TABLE_EXISTS, tableName));
         }
         return false;
     }
@@ -247,7 +249,7 @@ public class EntityManager<E> implements DBcontext<E> {
         for (Field field : entity.getClass().getDeclaredFields()) {
             if (field.isAnnotationPresent(Column.class)) {
                 field.setAccessible(true);
-                entityValues.add("'" + field.get(entity).toString() + "'");
+                entityValues.add("'" + field.get(entity) + "'");
             }
         }
         return entityValues;

@@ -18,13 +18,22 @@ public class Main {
         Connection connection = getConnection();
         EntityManager<User> entityManager = new EntityManager<>(connection);
         entityManager.createTable(User.class);
-        User user1 = new User("Ivan", "pass", 20, LocalDate.now());
-        User user2 = new User("Georgi", "pass", 35, LocalDate.of(2019, 10, 15));
+        User user1 = new User("vanko01", "Ivan", "Ivanov", "pass", 20, LocalDate.now(), 1.05);
+        User user2 = new User("maria92", "Maria", "Petrova", "secure123", 25, LocalDate.now(), 2.50);
+        User user3 = new User("george87", "Georgi", "Dimitrov", "qwerty", 30, LocalDate.now(), 3.75);
+        User user4 = new User("nika76", "Nikolay", "Stoyanov", "letmein", 22, LocalDate.now(), 4.20);
+        User user5 = new User("tanya15", "Tanya", "Hristova", "1234abcd", 28, LocalDate.now(), 0.95);
         entityManager.persist(user1);
+        entityManager.persist(user2);
+        entityManager.persist(user3);
+        entityManager.persist(user4);
+        entityManager.persist(user5);
         User firstUser = entityManager.findFirst(User.class);
         firstUser.setUsername("Test Name");
         entityManager.persist(firstUser);
         Iterable users = entityManager.find(User.class);
-        System.out.println();
+        for (Object user : users) {
+            System.out.println(user);
+        }
     }
 }

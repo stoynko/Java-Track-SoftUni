@@ -25,9 +25,6 @@ public class User {
     @Column(name = "age")
     private int age;
 
-    @Column(name = "under_age")
-    private Boolean underAge;
-
     @Column(name = "registration_date")
     private LocalDate registrationDate;
 
@@ -36,11 +33,14 @@ public class User {
 
     public User() {}
 
-    public User(String userName, String password, int age, LocalDate registrationDate) {
-        this.username = userName;
+    public User(String username, String firstName, String lastName, String password, int age, LocalDate registrationDate, Double downloadRatio) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
         this.age = age;
         this.registrationDate = registrationDate;
+        this.downloadRatio = downloadRatio;
     }
 
     public int getId() {
@@ -99,19 +99,26 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Boolean getUnderAge() {
-        return underAge;
-    }
-
-    public void setUnderAge(Boolean underAge) {
-        this.underAge = underAge;
-    }
-
     public Double getDownloadRatio() {
         return downloadRatio;
     }
 
     public void setDownloadRatio(Double downloadRatio) {
         this.downloadRatio = downloadRatio;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                    "  Username   : %s\n" +
+                    "  First Name : %s\n" +
+                    "  Last Name  : %s\n" +
+                    "  Age        : %d\n" +
+                    "  Created On : %s\n" +
+                    "  DL Ratio   : %.2f\n" +
+                    "──────────────────",
+                username, firstName, lastName, age,
+                registrationDate, downloadRatio
+        );
     }
 }
