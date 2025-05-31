@@ -112,10 +112,14 @@ public class EntityManager<E> implements DBcontext<E> {
     private String getSqlTypeForField(Field field) {
         if (field.getType() == Integer.class || field.getType() == int.class) {
             return "INT";
+        } else if (field.getType() == Double.class) {
+            return "DECIMAL(19, 2)";
         } else if (field.getType() == String.class) {
             return "VARCHAR(255)";
         } else if (field.getType() == LocalDate.class) {
             return "DATE";
+        } else if (field.getType() == Boolean.class) {
+            return "BOOLEAN";
         }
         throw new IllegalArgumentException(String.format(ExceptionMessages.UNSUPPORTED_TYPE, field.getType()));
     }
@@ -215,11 +219,15 @@ public class EntityManager<E> implements DBcontext<E> {
     private Object mapValue(Field field, String column, ResultSet dbResult) throws SQLException {
         if (field.getType() == int.class || field.getType() == Integer.class) {
             return dbResult.getInt(column);
+        } else if (field.getType() == Double.class) {
+            return dbResult.getDouble(column);
         } else if (field.getType() == String.class) {
             return dbResult.getString(column);
         } else if (field.getType() == LocalDate.class) {
             String date = dbResult.getString(column);
             return LocalDate.parse(date);
+        } else if (field.getType() == Boolean.class) {
+            return dbResult.getBoolean(column);
         }
         throw new IllegalArgumentException(String.format(ExceptionMessages.UNSUPPORTED_TYPE, field.getType()));
     }
