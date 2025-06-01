@@ -36,6 +36,14 @@ public class EntityManager<E> implements DBcontext<E> {
         connection.prepareStatement(sqlAlter).executeUpdate();
     }
 
+    @Override
+    public int delete(Class<E> entity, int id) throws SQLException {
+        String tableName = getTableName(entity);
+        String sqlWhere = String.format("id = %d", id);
+        String sqlDelete = String.format(SQLCommands.DELETE_FROM_TABLE, tableName, sqlWhere);
+        return connection.createStatement().executeUpdate(sqlDelete);
+    }
+
     private String getSqlAlterCommand(String tableName, List<String> newFields) {
         StringBuilder sqlCommand = new StringBuilder();
         sqlCommand.append(String.format(SQLCommands.ALTER_TABLE_STATEMENT, tableName)).append(System.lineSeparator());

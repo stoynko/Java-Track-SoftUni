@@ -14,15 +14,17 @@ public class Main {
 
     public static void main(String[] args) throws SQLException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, InstantiationException {
 
-        Connector.createConnection("root", "", "orm_test");
+        Connector.createConnection("root", "", "orm_basics");
         Connection connection = getConnection();
         EntityManager<User> entityManager = new EntityManager<>(connection);
-        entityManager.createTable(User.class);
-        User user1 = new User("vanko01", "Ivan", "Ivanov", "pass", 20, LocalDate.now(), 1.05);
-        User user2 = new User("maria92", "Maria", "Petrova", "secure123", 25, LocalDate.now(), 2.50);
-        User user3 = new User("george87", "Georgi", "Dimitrov", "qwerty", 30, LocalDate.now(), 3.75);
-        User user4 = new User("nika76", "Nikolay", "Stoyanov", "letmein", 22, LocalDate.now(), 4.20);
-        User user5 = new User("tanya15", "Tanya", "Hristova", "1234abcd", 28, LocalDate.now(), 0.95);
+        //entityManager.createTable(User.class);
+        User user1 = new User("vanko01", "Ivan", "Ivanov", "pass", 20, LocalDate.now());
+        User user2 = new User("maria92", "Maria", "Petrova", "secure123", 25, LocalDate.now());
+        User user3 = new User("george87", "Georgi", "Dimitrov", "qwerty", 30, LocalDate.now());
+        User user4 = new User("nika76", "Nikolay", "Stoyanov", "letmein", 22, LocalDate.now());
+        User user5 = new User("tanya15", "Tanya", "Hristova", "1234abcd", 28, LocalDate.now());
+
+        entityManager.delete(User.class, 5);
         entityManager.persist(user1);
         entityManager.persist(user2);
         entityManager.persist(user3);

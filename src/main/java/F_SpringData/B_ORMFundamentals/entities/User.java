@@ -28,19 +28,15 @@ public class User {
     @Column(name = "registration_date")
     private LocalDate registrationDate;
 
-    @Column(name = "download_ratio")
-    private Double downloadRatio;
-
     public User() {}
 
-    public User(String username, String firstName, String lastName, String password, int age, LocalDate registrationDate, Double downloadRatio) {
+    public User(String username, String firstName, String lastName, String password, int age, LocalDate registrationDate) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.age = age;
         this.registrationDate = registrationDate;
-        this.downloadRatio = downloadRatio;
     }
 
     public int getId() {
@@ -99,26 +95,18 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Double getDownloadRatio() {
-        return downloadRatio;
-    }
-
-    public void setDownloadRatio(Double downloadRatio) {
-        this.downloadRatio = downloadRatio;
-    }
 
     @Override
     public String toString() {
         return String.format(
-                    "  Username   : %s\n" +
-                    "  First Name : %s\n" +
-                    "  Last Name  : %s\n" +
-                    "  Age        : %d\n" +
-                    "  Created On : %s\n" +
-                    "  DL Ratio   : %.2f\n" +
+                    "Username   : %s\n" +
+                    "First Name : %s\n" +
+                    "Last Name  : %s\n" +
+                    "Age        : %d\n" +
+                    "Created On : %s\n" +
                     "──────────────────",
                 username, firstName, lastName, age,
-                registrationDate, downloadRatio
+                registrationDate
         );
     }
 }
