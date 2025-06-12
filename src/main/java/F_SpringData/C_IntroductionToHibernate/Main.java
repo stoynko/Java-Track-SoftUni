@@ -6,6 +6,7 @@ import java.io.*;
 import java.math.*;
 import java.util.*;
 
+
 public class Main {
 
     private static final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
@@ -41,12 +42,13 @@ public class Main {
         //findTheLatestProjects(entityManager);
 
         // E10_IncreaseSalaries
-        increaseSalaries(entityManager);
+        //increaseSalaries(entityManager);
 
-        //E11_FindEmployeesByFirstName
-        findEmployeeByFirstName(entityManager);
+        // E11_FindEmployeesByFirstName
+        //findEmployeeByFirstName(entityManager);
 
-
+        //E12_EmployeesMaximumSalaries
+        //getMaxSalaryPerDepartment(entityManager);
 
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -132,7 +134,7 @@ public class Main {
     /* E08_GetEmployeesWithProject - Get an employee by his/her id. Print only his/her first name, last name, job title and projects (only their names).
        The projects should be ordered by name (ascending). The output should be printed in the format given in the example. */
 
-    private static void getEmployeeWithProject(EntityManager entityManager) {
+    private static void getEmployeeWithProject(EntityManager entityManager) throws IOException {
         Employee employee = entityManager.find(Employee.class, Integer.parseInt(READER.readLine()));
 
         if (employee.getProjects().isEmpty()) {
@@ -174,6 +176,19 @@ public class Main {
 
     private static void findEmployeeByFirstName(EntityManager entityManager) throws IOException {
         String userInput = READER.readLine();
-        entityManager.createQuery("FROM Employee WHERE firstName LIKE(userInput)")
+        entityManager.createQuery("FROM Employee WHERE firstName LIKE :pattern", Employee.class)
+                .setParameter("pattern", "%" + userInput + "%").getResultStream().forEach(employee -> {
+                    System.out.printf("%s %s - %s - ($%.2f)\n", employee.getFirstName(), employee.getLastName(),
+                            employee.getJobTitle(), employee.getSalary());
+                });
+    }
+
+    /* Write a program that finds the max salary for each department. Filter the departments, which max salaries are not in the range between 30000 and 70000. */
+
+    private static void getMaxSalaryPerDepartment(EntityManager entityManager) {
+        List<Object[]> resultList = entityManager.createQuery("SELECT d.name, MAX(e.salary) " +
+                "FROM Department d JOIN d.employees e " +
+                "GROUP BY d.name HAVING MAX(e.salary) NOT BETWEEN 30000 AND 70000").getResultList();
+        resultList.forEach(o -> System.out.printf("%s %s\n", o[0], o[1]));
     }
 }
