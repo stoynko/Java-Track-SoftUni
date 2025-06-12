@@ -50,6 +50,9 @@ public class Main {
         //E12_EmployeesMaximumSalaries
         //getMaxSalaryPerDepartment(entityManager);
 
+        //E13_RemoveTowns
+        //deleteTownByName(entityManager);
+
         entityManager.getTransaction().commit();
         entityManager.close();
     }
@@ -91,11 +94,11 @@ public class Main {
         entityManager.createQuery("FROM Employee WHERE department.name = :departmentName ORDER BY salary, id", Employee.class)
                 .setParameter("departmentName", departmentParameter)
                 .getResultStream().forEach(employee ->
-                        System.out.printf("%s %s from %s - $%.2f\n",
-                                employee.getFirstName(),
-                                employee.getLastName(),
-                                departmentParameter,
-                                employee.getSalary())
+                    System.out.printf("%s %s from %s - $%.2f\n",
+                            employee.getFirstName(),
+                            employee.getLastName(),
+                            departmentParameter,
+                            employee.getSalary())
                 );
     }
 
@@ -121,14 +124,14 @@ public class Main {
 
     private static void getAddressWithEmployeeCount(EntityManager entityManager) {
         List<Address> resultList = entityManager.createQuery("FROM Address ORDER BY SIZE (employees) DESC", Address.class)
-                .setMaxResults(10)
-                .getResultList();
+                                                .setMaxResults(10)
+                                                .getResultList();
 
         resultList.forEach(address -> System.out.printf(address.getEmployees().size() > 1 ? "%s, %s - %d employees\n" :
-                        "%s, %s - %d employee\n",
-                address.getText(),
-                address.getTown().getName(),
-                address.getEmployees().size()));
+                                                                                                    "%s, %s - %d employee\n",
+                                                                                                    address.getText(),
+                                                                                                    address.getTown().getName(),
+                                                                                                    address.getEmployees().size()));
     }
 
     /* E08_GetEmployeesWithProject - Get an employee by his/her id. Print only his/her first name, last name, job title and projects (only their names).
@@ -163,7 +166,7 @@ public class Main {
 
     private static void increaseSalaries(EntityManager entityManager) {
         entityManager.createQuery("FROM Employee " +
-                        "WHERE department.name IN('Engineering', 'Tool Design', 'Marketing', 'Information Services')", Employee.class)
+                                     "WHERE department.name IN('Engineering', 'Tool Design', 'Marketing', 'Information Services')", Employee.class)
                 .getResultStream().forEach(employee -> {
                     employee.setSalary(employee.getSalary().multiply(BigDecimal.valueOf(1.12)));
                     entityManager.persist(employee);
@@ -179,7 +182,7 @@ public class Main {
         entityManager.createQuery("FROM Employee WHERE firstName LIKE :pattern", Employee.class)
                 .setParameter("pattern", "%" + userInput + "%").getResultStream().forEach(employee -> {
                     System.out.printf("%s %s - %s - ($%.2f)\n", employee.getFirstName(), employee.getLastName(),
-                            employee.getJobTitle(), employee.getSalary());
+                                                              employee.getJobTitle(), employee.getSalary());
                 });
     }
 
@@ -188,7 +191,36 @@ public class Main {
     private static void getMaxSalaryPerDepartment(EntityManager entityManager) {
         List<Object[]> resultList = entityManager.createQuery("SELECT d.name, MAX(e.salary) " +
                 "FROM Department d JOIN d.employees e " +
-                "GROUP BY d.name HAVING MAX(e.salary) NOT BETWEEN 30000 AND 70000").getResultList();
+                "GROUP BY d.name HAVING MAX(e.salary) NOT BETWEEN 30000 AND 70000", Object[].class).getResultList();
         resultList.forEach(o -> System.out.printf("%s %s\n", o[0], o[1]));
+    }
+
+    /* Write a program that deletes a town, which name is given as an input. The program should delete all addresses that are in the given town.
+    Print on the console the number of addresses that were deleted. */
+
+    private static void deleteTownByName(EntityManager entityManager) throws IOException {
+        String userInput = READER.readLine();
+        Town town = entityManager.createQuery("FROM Town WHERE name = :townName", Town.class)
+                                 .setParameter("townName", userInput)
+                                 .getSingleResult();
+
+        entityManager.createQuery("FROM Employee WHERE address.town.id = :townId", Employee.class)
+                .setParameter("townId", town.getId())
+                .getResultStream().forEach(employee -> {
+                    employee.setAddress(null);
+                    entityManager.merge(employee);
+                });
+
+        List<Address> addressList = entityManager.createQuery("FROM Address WHERE town.id = :townId", Address.class)
+                                                 .setParameter("townId", town.getId()).getResultList();
+
+        int deletedAddresses = addressList.size();
+        addressList.forEach(entityManager::remove);
+
+        entityManager.remove(town);
+
+        System.out.printf(deletedAddresses == 1
+                ? "%d address in %s deleted%n"
+                : "%d addresses in %s deleted%n", deletedAddresses, town.getName());
     }
 }
