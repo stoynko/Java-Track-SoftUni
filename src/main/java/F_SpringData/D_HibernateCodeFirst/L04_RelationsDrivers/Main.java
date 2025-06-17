@@ -11,13 +11,13 @@ public class Main {
     •	Has a full_name - String
     •	Has many to many relations with Cars
 Trucks:
-	•	Has an id – BigInteger
-	•	Has a fuel_type – String
-	•	Has a model – String
-	•	Has a price – BigDecimal(19,2)
-	•	Has a type – String
-	•	Has a load_capacity – double
-	•	Has a many-to-many relationship with Drivers
+	•   Has an id – BigInteger
+	•   Has a fuel_type – String
+	•   Has a model – String
+	•   Has a price – BigDecimal(19,2)
+	•   Has a type – String
+	•   Has a load_capacity – double
+	•   Has a many-to-many relationship with Drivers
 
 A truck can be operated by several drivers, depending on schedules or licenses. */
 
