@@ -7,6 +7,18 @@
     <groupId>oknyots</groupId>
     <artifactId>Java-Track-SoftUni</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+
+        <module>04_Java_OOP/04_Java_OOP</module>
+        <module>06_Spring_Data/01_Database_Access_With_JDBC</module>
+        <module>06_Spring_Data/02_ORM_Fundamentals</module>
+        <module>06_Spring_Data/04_Hibernate_Code_First/E01_Gringotts_Database</module>
+        <module>06_Spring_Data/04_Hibernate_Code_First/E02_Sales_Database</module>
+        <module>06_Spring_Data/04_Hibernate_Code_First/E03_University_System</module>
+        <module>06_Spring_Data/04_Hibernate_Code_First/E04_Hospital_Databases</module>
+        <module>06_Spring_Data/04_Hibernate_Code_First/E02_Sales_Database</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>23</maven.compiler.source>

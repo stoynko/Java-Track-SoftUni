@@ -14,7 +14,19 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/06_Spring/untitled/pom.xml" />
+        <option value="$PROJECT_DIR$/06_Spring/01_Database_Access_With_JDBC/pom.xml" />
+        <option value="$PROJECT_DIR$/06_Spring/02_ORM_Fundamentals/pom.xml" />
+        <option value="$PROJECT_DIR$/06_Spring_Data/04_Hibernate_Code_First/03_University_System/pom.xml" />
+        <option value="$PROJECT_DIR$/06_Spring_Data/04_Hibernate_Code_First/01_Gringotts_Database/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/Java_OOP/pom.xml" />
+        <option value="$PROJECT_DIR$/_06_Spring_Data/_04_Hibernate_Code_First/pom.xml" />
+        <option value="$PROJECT_DIR$/_06_Spring_Data/_04_Hospital_Database/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="openjdk-23" project-jdk-type="JavaSDK">
