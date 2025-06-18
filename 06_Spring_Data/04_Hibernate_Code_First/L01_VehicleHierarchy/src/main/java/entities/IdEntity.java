@@ -1,4 +1,4 @@
-package main.java.F_SpringData.D_HibernateCodeFirst.L01_VehicleHierarchy.entities;
+package entities;
 
 import jakarta.persistence.*;
 

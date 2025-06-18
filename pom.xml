@@ -9,15 +9,17 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-
         <module>04_Java_OOP/04_Java_OOP</module>
         <module>06_Spring_Data/01_Database_Access_With_JDBC</module>
         <module>06_Spring_Data/02_ORM_Fundamentals</module>
+        <module>06_Spring_Data/03_Introduction_To_Hibernate</module>
         <module>06_Spring_Data/04_Hibernate_Code_First/E01_Gringotts_Database</module>
         <module>06_Spring_Data/04_Hibernate_Code_First/E02_Sales_Database</module>
         <module>06_Spring_Data/04_Hibernate_Code_First/E03_University_System</module>
         <module>06_Spring_Data/04_Hibernate_Code_First/E04_Hospital_Databases</module>
         <module>06_Spring_Data/04_Hibernate_Code_First/E02_Sales_Database</module>
+        <module>06_Spring_Data/04_Hibernate_Code_First/L01_VehicleHierarchy</module>
+        <module>06_Spring_Data/05_Spring_Data_Introduction/L01_Database_Models</module>
     </modules>
 
     <properties>
@@ -25,57 +27,4 @@
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.12.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>5.16.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.12.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
-        <dependency>
-            <groupId>org.hibernate.orm</groupId>
-            <artifactId>hibernate-community-dialects</artifactId>
-            <version>7.0.0.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate.orm</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>7.0.0.Final</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api -->
-        <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-            <version>3.2.0</version>
-        </dependency>
-    </dependencies>
 </project>

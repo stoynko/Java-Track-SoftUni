@@ -1,5 +1,3 @@
-package main.java.F_SpringData.D_HibernateCodeFirst.L01_VehicleHierarchy;
-
 import entities.*;
 import jakarta.persistence.*;
 
@@ -28,7 +26,7 @@ Plane - Extends from the Vehicle class.
 
     public static void main(String[] args) {
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("vehicle-jpa");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("vehicle_hierarchy-jpa");
         EntityManager entityManager = factory.createEntityManager();
 
         entityManager.getTransaction().begin();
@@ -55,5 +53,6 @@ Plane - Extends from the Vehicle class.
         entityManager.persist(plane);
 
         entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

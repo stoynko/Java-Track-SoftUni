@@ -7,6 +7,8 @@
     <file url="file://$PROJECT_DIR$/06_Spring_Data/01_Database_Access_With_JDBC/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/06_Spring_Data/02_ORM_Fundamentals/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/06_Spring_Data/02_ORM_Fundamentals/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06_Spring_Data/03_Introduction_To_Hibernate/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06_Spring_Data/03_Introduction_To_Hibernate/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/06_Spring_Data/04_Hibernate_Code_First/E01_Gringotts_Database/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/06_Spring_Data/04_Hibernate_Code_First/E01_Gringotts_Database/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/06_Spring_Data/04_Hibernate_Code_First/E02_Sales_Database/src/main/java" charset="UTF-8" />
@@ -15,6 +17,13 @@
     <file url="file://$PROJECT_DIR$/06_Spring_Data/04_Hibernate_Code_First/E03_University_System/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/06_Spring_Data/04_Hibernate_Code_First/E04_Hospital_Databases/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/06_Spring_Data/04_Hibernate_Code_First/E04_Hospital_Databases/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06_Spring_Data/04_Hibernate_Code_First/E05_Bills_Payment_System/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06_Spring_Data/04_Hibernate_Code_First/E05_Bills_Payment_System/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06_Spring_Data/04_Hibernate_Code_First/L01_VehicleHierarchy/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06_Spring_Data/04_Hibernate_Code_First/L01_VehicleHierarchy/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06_Spring_Data/05_Spring_Data_Introduction/L01_Database_Models/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06_Spring_Data/L01_Vehicle_Hierarchy/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06_Spring_Data/L01_Vehicle_Hierarchy/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Java_OOP/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Java_OOP/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/_04_Java_OOP/src/main/java" charset="UTF-8" />

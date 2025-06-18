@@ -36,3 +36,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/06_Spring_Data/05_Spring_Data_Introduction/L01_Database_Models/.gitattributes
+/06_Spring_Data/05_Spring_Data_Introduction/L01_Database_Models/.gitignore
