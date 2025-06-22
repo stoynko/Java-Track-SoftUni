@@ -1,4 +1,4 @@
-package oknoyts.bookshop_system.entities.enums;
+package oknoyts.bookshop_system.enums;
 
 public enum EditionType {
 

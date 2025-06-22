@@ -6,7 +6,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "authors")
-public class Author extends BasicId {
+public class Author extends BaseId {
 
     @Column(name = "first_name")
     private String firstName;
@@ -15,10 +15,10 @@ public class Author extends BasicId {
     private String lastName;
 
     @OneToMany(mappedBy = "author", targetEntity = Book.class)
-    private List<Book> publishedBooks;
+    private Set<Book> publishedBooks;
 
     public Author() {
-        this.publishedBooks = new ArrayList<>();
+        this.publishedBooks = new HashSet<>();
     }
 
     public void setFirstName(String firstName) {
@@ -29,7 +29,7 @@ public class Author extends BasicId {
         this.lastName = lastName;
     }
 
-    public void setPublishedBooks(List<Book> publishedBooks) {
+    public void setPublishedBooks(Set<Book> publishedBooks) {
         this.publishedBooks = publishedBooks;
     }
 
@@ -41,7 +41,7 @@ public class Author extends BasicId {
         return lastName;
     }
 
-    public List<Book> getPublishedBooks() {
+    public Set<Book> getPublishedBooks() {
         return publishedBooks;
     }
 }

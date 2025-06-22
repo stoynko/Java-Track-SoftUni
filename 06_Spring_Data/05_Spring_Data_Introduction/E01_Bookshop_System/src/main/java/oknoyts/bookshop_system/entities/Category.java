@@ -6,15 +6,12 @@ import java.util.*;
 
 @Entity
 @Table(name = "categories")
-public class Category extends BasicId{
+public class Category extends BaseId {
 
-    @Basic
+    @Column(unique = true, nullable = false)
     private String name;
 
-    @ManyToMany()
-    @JoinTable( name = "books_categories",
-            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "cateogry_id", referencedColumnName = "id"))
+    @ManyToMany
     private List<Book> books;
 
     public Category() {
