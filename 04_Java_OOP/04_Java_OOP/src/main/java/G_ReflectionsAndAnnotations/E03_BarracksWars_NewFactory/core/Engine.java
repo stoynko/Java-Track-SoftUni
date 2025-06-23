@@ -43,7 +43,6 @@ public class Engine implements Runnable {
 		}
 	}
 
-	// TODO: refactor for problem 4
 	private String interpretCommand(String[] data, String commandName) throws ExecutionControl.NotImplementedException {
 		String result;
 		switch (commandName) {

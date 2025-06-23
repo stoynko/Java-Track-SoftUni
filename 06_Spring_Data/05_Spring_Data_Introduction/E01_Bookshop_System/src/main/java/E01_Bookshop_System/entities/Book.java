@@ -1,5 +1,6 @@
 package E01_Bookshop_System.entities;
 
+import E01_Bookshop_System.entities.enums.*;
 import jakarta.persistence.*;
 
 import java.math.*;
@@ -28,7 +29,7 @@ public class Book extends BaseId {
 
     @Column(name = "edition_type", nullable = true)
     @Enumerated(value = EnumType.STRING)
-    private EnumType editionType;
+    private EditionType editionType;
 
     @Basic
     private BigDecimal price;
@@ -41,10 +42,21 @@ public class Book extends BaseId {
 
     @Column(name = "age_restriction", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private EnumType ageGroup;
+    private AgeRestrictionType ageGroup;
 
     public Book() {
         this.category = new HashSet<>();
+    }
+
+    public Book(String title, Author author, Set<Category> categories, EditionType editionType, BigDecimal price, int copies, LocalDate releaseDate, AgeRestrictionType ageGroup) {
+        this.title = title;
+        this.author = author;
+        this.category = categories;
+        this.editionType = editionType;
+        this.price = price;
+        this.copies = copies;
+        this.releaseDate = releaseDate;
+        this.ageGroup = ageGroup;
     }
 
     public void setTitle(String title) {
@@ -63,7 +75,7 @@ public class Book extends BaseId {
         this.description = description;
     }
 
-    public void setEditionType(EnumType editionType) {
+    public void setEditionType(EditionType editionType) {
         this.editionType = editionType;
     }
 
@@ -79,7 +91,7 @@ public class Book extends BaseId {
         this.releaseDate = releaseDate;
     }
 
-    public void setAgeGroup(EnumType ageGroup) {
+    public void setAgeGroup(AgeRestrictionType ageGroup) {
         this.ageGroup = ageGroup;
     }
 
@@ -99,7 +111,7 @@ public class Book extends BaseId {
         return description;
     }
 
-    public EnumType getEditionType() {
+    public EditionType getEditionType() {
         return editionType;
     }
 
@@ -115,7 +127,7 @@ public class Book extends BaseId {
         return releaseDate;
     }
 
-    public EnumType getAgeGroup() {
+    public AgeRestrictionType getAgeGroup() {
         return ageGroup;
     }
 }

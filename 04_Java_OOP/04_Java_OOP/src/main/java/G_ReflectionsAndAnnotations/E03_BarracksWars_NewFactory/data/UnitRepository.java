@@ -39,7 +39,6 @@ public class UnitRepository implements Repository {
 	}
 
 	public void removeUnit(String unitType) throws ExecutionControl.NotImplementedException {
-		// TODO: implement for problem 4
 		throw new ExecutionControl.NotImplementedException("message");
 	}
 }
