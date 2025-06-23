@@ -63,6 +63,7 @@ public class ConsoleRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         seedData();
         //booksService.printAllBooksAfter(LocalDate.of(2000, 12, 31));
+        authorsService.printDistinctAuthorsByBooksReleasedBefore(LocalDate.of(1990, 01, 01));
     }
 
     private void seedData() throws IOException {

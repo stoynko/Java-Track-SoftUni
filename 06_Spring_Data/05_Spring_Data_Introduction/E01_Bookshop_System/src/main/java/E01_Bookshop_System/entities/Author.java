@@ -14,7 +14,7 @@ public class Author extends BaseId {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @OneToMany(mappedBy = "author", targetEntity = Book.class)
+    @OneToMany(mappedBy = "author", targetEntity = Book.class, fetch = FetchType.EAGER)
     private Set<Book> publishedBooks;
 
     public Author() {
