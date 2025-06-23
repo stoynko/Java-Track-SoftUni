@@ -9,13 +9,16 @@ public class ConsoleRunner implements CommandLineRunner {
 
     private BookServiceImpl bookService;
     private final CategoryServiceImpl categoryService;
+    private final AuthorServiceImpl authorsService;
 
-    public ConsoleRunner(CategoryServiceImpl categoryService) {
+    public ConsoleRunner(CategoryServiceImpl categoryService, AuthorServiceImpl authorsService) {
         this.categoryService = categoryService;
+        this.authorsService = authorsService;
     }
 
     @Override
     public void run(String... args) throws Exception {
         this.categoryService.seedCategories();
+        authorsService.seedAuthors();
     }
 }

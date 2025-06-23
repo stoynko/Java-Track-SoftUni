@@ -13,7 +13,7 @@ import java.util.*;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private static final String CATEGORIES_STRING_PATH = "06_Spring_Data/05_Spring_Data_Introduction/E01_Bookshop_System/src/main/resources/files/categories.txt";
+    private static final String CATEGORIES_FILE_PATH = "06_Spring_Data/05_Spring_Data_Introduction/E01_Bookshop_System/src/main/resources/files/categories.txt";
     private final CategoryRepository categoryRepository;
 
     @Autowired
@@ -23,17 +23,14 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void seedCategories() throws IOException {
-
         Set<Category> categories  = new HashSet<>();
-
-        Files.readAllLines(Path.of(CATEGORIES_STRING_PATH)).forEach(line -> {
+        Files.readAllLines(Path.of(CATEGORIES_FILE_PATH)).forEach(line -> {
             String formattedLine = line.trim();
-            if (!categories.contains(formattedLine) && !formattedLine.isBlank()) {
+            if (!formattedLine.isBlank()) {
                 Category category = new Category(formattedLine);
                 categories.add(category);
             }
         });
         this.categoryRepository.saveAll(categories);
-        System.out.printf("Categories imported: %d\n", this.categoryRepository.count());
     }
 }

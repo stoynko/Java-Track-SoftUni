@@ -21,6 +21,11 @@ public class Author extends BaseId {
         this.publishedBooks = new HashSet<>();
     }
 
+    public Author(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
