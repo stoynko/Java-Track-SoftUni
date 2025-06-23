@@ -18,6 +18,19 @@ public class Category extends BaseId {
         this.books = new ArrayList<>();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Category)) return false;
+        Category other = (Category) o;
+        return getId() != null && getId().equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
     public Category(String name) {
         this.name = name;
     }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
+import java.util.concurrent.*;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -24,8 +25,18 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Set<Category> getRandomCategories() {
-        //TODO
-        return null;
+
+        Set<Category> randomCategories = new HashSet<>();
+        int randomCategoriesCount = ThreadLocalRandom.current().nextInt(1, 4);
+
+        while (randomCategories.size() != randomCategoriesCount) {
+            long randomId = ThreadLocalRandom.current().nextLong(1, this.categoriesRepository.count() + 1);
+            Category category = this.categoriesRepository.findById(randomId).get();
+                if (!randomCategories.contains(category)) {
+                    randomCategories.add(category);
+                }
+        }
+        return randomCategories;
     }
 
     @Override

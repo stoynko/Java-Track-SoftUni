@@ -3,12 +3,14 @@ package E01_Bookshop_System.services.implementations;
 import E01_Bookshop_System.entities.*;
 import E01_Bookshop_System.repositories.*;
 import E01_Bookshop_System.services.*;
+import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
+import java.util.concurrent.*;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -39,9 +41,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author getRandomAuthor() {
-        Random random = new Random();
-        long randomNumber = random.nextLong(authorsRepository.count() + 1);
-        //TODO
-        return null;
+        long randomId = ThreadLocalRandom.current().nextLong(1, this.authorsRepository.count() + 1);
+        return this.authorsRepository.findById(randomId).get();
     }
 }

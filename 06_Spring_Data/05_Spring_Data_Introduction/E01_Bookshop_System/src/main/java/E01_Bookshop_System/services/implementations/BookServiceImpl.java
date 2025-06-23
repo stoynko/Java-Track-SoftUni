@@ -52,7 +52,10 @@ public class BookServiceImpl implements BookService {
             Author author = authorsService.getRandomAuthor();
             Set<Category> categories = categoriesService.getRandomCategories();
             Book book = new Book(title, author, categories, editionType, price, copies, releaseDate, ageGroup);
-            booksRepository.saveAndFlush(book);
+
+            if (!this.booksRepository.existsByTitle(title)) {
+                booksRepository.saveAndFlush(book);
+            }
         }
     }
 }

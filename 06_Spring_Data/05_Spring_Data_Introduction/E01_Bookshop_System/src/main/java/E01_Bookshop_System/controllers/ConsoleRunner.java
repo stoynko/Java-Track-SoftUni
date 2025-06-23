@@ -23,8 +23,6 @@ public class ConsoleRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         seedData();
-
-
     }
 
     private void seedData() throws IOException {
