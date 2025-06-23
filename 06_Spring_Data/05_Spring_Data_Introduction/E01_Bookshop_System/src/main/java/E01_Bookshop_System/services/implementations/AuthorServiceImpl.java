@@ -56,6 +56,5 @@ public class AuthorServiceImpl implements AuthorService {
                         .stream()
                         .anyMatch(book -> book.getReleaseDate().isBefore(date)))
                 .forEach(author -> System.out.printf("%s %s\n", author.getFirstName(), author.getLastName()));
-
     }
 }

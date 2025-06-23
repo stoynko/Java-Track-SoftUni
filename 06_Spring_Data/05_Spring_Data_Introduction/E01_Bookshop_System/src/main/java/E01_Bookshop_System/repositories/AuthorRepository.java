@@ -9,6 +9,4 @@ import java.util.*;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
-
-    Set<Author> findAuthorsByPublishedBooksBefore(LocalDate date);
 }
