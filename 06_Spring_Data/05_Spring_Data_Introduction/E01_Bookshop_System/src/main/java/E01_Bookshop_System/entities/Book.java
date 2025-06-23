@@ -1,7 +1,6 @@
-package oknoyts.bookshop_system.entities;
+package E01_Bookshop_System.entities;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 
 import java.math.*;
 import java.time.*;
@@ -76,7 +75,7 @@ public class Book extends BaseId {
         this.copies = copies;
     }
 
-    public void setReleaseDate(LocalDateTime releaseDate) {
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -112,7 +111,7 @@ public class Book extends BaseId {
         return copies;
     }
 
-    public LocalDateTime getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 

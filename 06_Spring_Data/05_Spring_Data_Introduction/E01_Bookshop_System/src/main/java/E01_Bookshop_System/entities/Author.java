@@ -1,4 +1,4 @@
-package oknoyts.bookshop_system.entities;
+package E01_Bookshop_System.entities;
 
 import jakarta.persistence.*;
 

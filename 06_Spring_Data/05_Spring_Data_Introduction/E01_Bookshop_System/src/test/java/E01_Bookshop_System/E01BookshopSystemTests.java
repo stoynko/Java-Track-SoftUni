@@ -1,13 +1,13 @@
-package oknoyts.bookshop_system;
+package E01_Bookshop_System;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BookshopSystemApplicationTests {
+class E01BookshopSystemTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }

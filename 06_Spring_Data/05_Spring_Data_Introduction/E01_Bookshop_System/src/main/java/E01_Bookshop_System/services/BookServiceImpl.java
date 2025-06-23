@@ -1,7 +1,6 @@
-package oknoyts.bookshop_system.services;
+package E01_Bookshop_System.services;
 
-import oknoyts.bookshop_system.entities.*;
-import oknoyts.bookshop_system.repositories.*;
+import E01_Bookshop_System.repositories.*;
 import org.springframework.stereotype.*;
 
 @Service
