@@ -47,7 +47,7 @@ public class BookServiceImpl implements BookService {
             int copies = Integer.parseInt(dataInput[2]);
             BigDecimal price = BigDecimal.valueOf(Double.parseDouble(dataInput[3]));
             AgeRestrictionType ageGroup = AgeRestrictionType.values()[Integer.parseInt(dataInput[4])];
-            String title = Arrays.stream(dataInput).skip(5).collect(Collectors.joining());
+            String title = Arrays.stream(dataInput).skip(5).collect(Collectors.joining(" "));
 
             Author author = authorsService.getRandomAuthor();
             Set<Category> categories = categoriesService.getRandomCategories();
@@ -57,5 +57,11 @@ public class BookServiceImpl implements BookService {
                 booksRepository.saveAndFlush(book);
             }
         }
+    }
+
+    @Override
+    public void printAllBooksAfter(LocalDate date) {
+        Set<Book> booksSet = this.booksRepository.findAllByReleaseDateAfter(date);
+        booksSet.forEach(book -> System.out.printf("%s\n", book.getTitle()));
     }
 }

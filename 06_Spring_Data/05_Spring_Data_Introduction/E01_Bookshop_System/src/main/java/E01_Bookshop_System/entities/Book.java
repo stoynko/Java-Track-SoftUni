@@ -19,9 +19,11 @@ public class Book extends BaseId {
     private Author author;
 
     @ManyToMany
-    @JoinTable( name = "books_categories",
-            joinColumns = @JoinColumn(name = "cateogry_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
+    @JoinTable(
+            name = "books_categories",
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),            // Book owns the relationship
+            inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id")  // Category is the target
+    )
     private Set<Category> category;
 
     @Column(columnDefinition = "TEXT(1000)")
