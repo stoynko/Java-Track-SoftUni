@@ -65,7 +65,7 @@ public class ConsoleRunner implements CommandLineRunner {
         //booksService.printAllBooksAfter(LocalDate.of(2000, 12, 31));
         //authorsService.printAuthorsByBooksReleasedBefore(LocalDate.of(1990, 01, 01));
         //authorsService.printAuthorsByBookCountDescending();
-        booksService.printAllBooksBy("George", "Powell");
+        //booksService.printAllBooksBy("George", "Powell");
     }
 
     private void seedData() throws IOException {
