@@ -12,4 +12,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     boolean existsByTitle(String title);
     Set<Book> findAllByReleaseDateAfter(LocalDate releaseDateAfter);
+    Set<Book> findAllByAuthor_FirstNameAndAuthor_LastName(String firstName, String lastName);
 }

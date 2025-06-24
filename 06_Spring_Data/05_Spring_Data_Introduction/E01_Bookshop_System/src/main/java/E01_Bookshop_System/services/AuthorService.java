@@ -10,5 +10,6 @@ public interface AuthorService {
     boolean areAuthorsImported();
     void seedAuthors() throws IOException;
     Author getRandomAuthor();
-    void printDistinctAuthorsByBooksReleasedBefore(LocalDate date);
+    void printAuthorsByBooksReleasedBefore(LocalDate date);
+    void printAuthorsByBookCountDescending();
 }

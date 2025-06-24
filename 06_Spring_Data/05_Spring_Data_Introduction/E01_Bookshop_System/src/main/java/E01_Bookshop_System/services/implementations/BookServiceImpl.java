@@ -64,4 +64,14 @@ public class BookServiceImpl implements BookService {
         Set<Book> booksSet = this.booksRepository.findAllByReleaseDateAfter(date);
         booksSet.forEach(book -> System.out.printf("%s\n", book.getTitle()));
     }
+
+    @Override
+    public void printAllBooksBy(String firstName, String lastName) {
+        Set<Book> booksSet = this.booksRepository.findAllByAuthor_FirstNameAndAuthor_LastName(firstName, lastName);
+        booksSet.stream().sorted(Comparator.comparing(Book::getReleaseDate).reversed().thenComparing(Book::getTitle))
+                .forEach(book -> System.out.printf("Title: %s, Release Date: %s, Copies Sold:%d\n",
+                                                                                    book.getTitle(),
+                                                                                    book.getReleaseDate(),
+                                                                                    book.getCopies()));
+    }
 }

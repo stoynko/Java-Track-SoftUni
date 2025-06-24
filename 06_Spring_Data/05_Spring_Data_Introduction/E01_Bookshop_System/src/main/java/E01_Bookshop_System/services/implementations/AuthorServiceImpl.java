@@ -3,9 +3,9 @@ package E01_Bookshop_System.services.implementations;
 import E01_Bookshop_System.entities.*;
 import E01_Bookshop_System.repositories.*;
 import E01_Bookshop_System.services.*;
-import jakarta.persistence.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 
 import java.io.*;
@@ -49,12 +49,25 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void printDistinctAuthorsByBooksReleasedBefore(LocalDate date) {
+    public void printAuthorsByBooksReleasedBefore(LocalDate date) {
         this.authorsRepository.findAll()
                 .stream()
                 .filter(author -> author.getPublishedBooks()
                         .stream()
                         .anyMatch(book -> book.getReleaseDate().isBefore(date)))
                 .forEach(author -> System.out.printf("%s %s\n", author.getFirstName(), author.getLastName()));
+    }
+
+    @Override
+    public void printAuthorsByBookCountDescending() {
+        this.authorsRepository.findAllByOrderByPublishedBooksCountDesc().forEach(author -> {
+            System.out.printf("%s %s - %d\n", author.getFirstName(), author.getLastName(), author.getPublishedBooks().stream().count());
+        });
+
+        /*this.authorsRepository.findAll().stream().sorted((a,b) ->
+            b.getPublishedBooks().size() > a.getPublishedBooks().size() ? 1 : -1).forEach(author -> {
+            System.out.printf("%s %s - %d\n", author.getFirstName(), author.getLastName(),
+                                            author.getPublishedBooks().size());
+        });*/
     }
 }

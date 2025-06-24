@@ -9,4 +9,5 @@ public interface BookService {
     boolean areBooksImported();
     void seedBooks() throws IOException;
     void printAllBooksAfter(LocalDate date);
+    void printAllBooksBy(String firstName, String lastName);
 }
