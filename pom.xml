@@ -22,6 +22,7 @@
         <module>06_Spring_Data/05_Spring_Data_Introduction/L02_Models</module>
         <module>06_Spring_Data/04_Hibernate_Code_First/E02_Sales_Database</module>
         <module>06_Spring_Data/06_Spring_Data_Advanced_Querying/L01_Shampoo_Company</module>
+        <module>06_Spring_Data/06_Spring_Data_Advanced_Querying/E01_Bookshop</module>
     </modules>
 
     <properties>
