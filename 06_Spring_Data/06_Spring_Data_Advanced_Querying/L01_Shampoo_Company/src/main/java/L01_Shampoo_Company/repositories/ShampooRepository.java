@@ -4,7 +4,18 @@ import L01_Shampoo_Company.entities.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.*;
 
+import java.math.*;
+import java.util.*;
+
 @Repository
 public interface ShampooRepository extends JpaRepository<Shampoo, Long> {
-    //private
+
+    //E01. Create a method that selects all shampoos with a given size, ordered by shampoo id.
+    List<Shampoo> findBySizeOrderById(Size size);
+
+    //E02. Create a method that selects all shampoos with a given size or label id. Sort the result ascending by price.
+    List<Shampoo> findBySizeOrLabelIdOrderByPrice(Size size, int labelId);
+
+    //E03. Create a method that selects all shampoos, which price is higher than a given price. Sort the result descending by price.
+    List<Shampoo> findByPriceGreaterThanOrderByPriceDesc(BigDecimal price);
 }
