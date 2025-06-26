@@ -3,6 +3,7 @@ package L01_Shampoo_Company;
 import L01_Shampoo_Company.entities.*;
 import L01_Shampoo_Company.repositories.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import java.math.*;
 import java.sql.*;
@@ -37,6 +38,29 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         //List<Ingredient> ingredientsWithNameAs = ingredientsRepository.findByNameIsStartingWith("M");
         //ingredientsWithNameAs.forEach(ingredient -> System.out.println(ingredient.getName()));
 
-        
+        //E05. Create a method that selects all ingredients, which are contained in a given list. Sort the result ascending by price.
+        //List<Ingredient> ingredientsWithNameAs = ingredientsRepository.findByNameIsInOrderByPrice(List.of("Lavender", "Herbs", "Apple"));
+        //ingredientsWithNameAs.forEach(ingredient -> System.out.println(ingredient.getName()));
+
+        //E06. Create a method that counts all shampoos with price lower than a given price.
+        //int shampoosWithPriceLessThan = shampoosRepository.countByPriceLessThan(BigDecimal.valueOf(8.5));
+        //System.out.println(shampoosWithPriceLessThan);
+
+        //E07. Create a method that selects all shampoos with ingredients included in a given list.
+        //List<Shampoo> shampoosWithIngredientsIn = shampoosRepository.findByIngredientsInList(List.of("Berry", "Mineral-Collagen"));
+        //shampoosWithIngredientsIn.forEach(shampoo -> System.out.println(shampoo.getBrand()));
+
+        //E08. Create a method that selects all shampoos with ingredients less than a given number.
+        //List<Shampoo> shampoosWithIngredientsLessThan = shampoosRepository.findByIngredientsLessThan(2);
+        //shampoosWithIngredientsLessThan.forEach(System.out::println);
+
+        //E09. Create a method that deletes ingredients by a given name. Use named query.
+        //ingredientsRepository.deleteByName("Lavender");
+
+        //E10. Create a method that increases the price of all ingredients by 10%. Use named query.
+        //ingredientsRepository.increaseIngredientsPriceWith();
+
+        //E11. Create a method that updates the price of all ingredients, which names are in a given list.
+        //ingredientsRepository.increaseIngredientsPriceWhenIn(List.of("Lavender", "Aloe Vera"));
     }
 }
