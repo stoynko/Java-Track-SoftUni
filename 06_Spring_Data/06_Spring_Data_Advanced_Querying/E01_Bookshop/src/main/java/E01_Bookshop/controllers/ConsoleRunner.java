@@ -1,12 +1,14 @@
 package E01_Bookshop.controllers;
 
 import E01_Bookshop.entities.enums.*;
+import E01_Bookshop.services.*;
 import E01_Bookshop.services.implementations.*;
 import org.springframework.boot.*;
 import org.springframework.context.annotation.*;
 import org.springframework.stereotype.*;
 
 import java.io.*;
+import java.math.*;
 import java.util.*;
 
 /* Create database for a Bookshop System. A bookshop keeps books. A book can have one author and many categories.
@@ -55,7 +57,7 @@ public class ConsoleRunner implements CommandLineRunner {
     private final BookServiceImpl booksService;
     private final Scanner scanner;
 
-    public ConsoleRunner(CategoryServiceImpl categoryService, AuthorServiceImpl authorsService, BookServiceImpl booksService, Scanner scanner, Scanner scanner1) {
+    public ConsoleRunner(CategoryServiceImpl categoryService, AuthorServiceImpl authorsService, BookServiceImpl booksService, Scanner scanner, Scanner scanner1, BookService bookService) {
         this.categoriesService = categoryService;
         this.authorsService = authorsService;
         this.booksService = booksService;
@@ -68,6 +70,17 @@ public class ConsoleRunner implements CommandLineRunner {
 
         //E01. Write a program that prints the titles of all books, for which the age restriction matches the given input (minor, teen or adult). Ignore the casing of the input.
         //booksService.printAllBooksForAgeGroup(AgeRestrictionType.valueOf((scanner.nextLine()).toUpperCase()));
+
+        //E02. Write a program that prints the titles of the golden edition books, which have less than 5000 copies.
+        //booksService.printAllBooksByEditionTypeAndCopies(EditionType.GOLD, 5000);
+
+        //E03. Write a program that prints the titles and prices of books with price lower than 5 and higher than 40.
+        //booksService.findByPriceLessThanOrPriceGreaterThan(BigDecimal.valueOf(5), BigDecimal.valueOf(40));
+
+        //E04. Write a program that prints the titles of all books that are NOT released in a given year.
+        //booksService.findByReleaseYearNotEqualTo(Integer.parseInt(scanner.nextLine()));
+
+
     }
 
     private void seedData() throws IOException {

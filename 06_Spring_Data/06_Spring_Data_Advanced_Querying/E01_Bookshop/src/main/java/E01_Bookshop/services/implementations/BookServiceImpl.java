@@ -79,4 +79,23 @@ public class BookServiceImpl implements BookService {
         bookSet.forEach(book -> System.out.println(book.getTitle()));
     }
 
+    public void printAllBooksByEditionTypeAndCopies(EditionType editionType, int copies) {
+        Set<Book> bookSet = this.booksRepository.findByEditionTypeIsAndCopiesLessThan(editionType, copies);
+        bookSet.forEach(book -> System.out.println(book.getTitle()));
+    }
+
+    public void findByPriceLessThanOrPriceGreaterThan(BigDecimal lowerBound, BigDecimal upperBound) {
+        Set<Book> bookSet = this.booksRepository.findByPriceLessThanOrPriceGreaterThan(lowerBound, upperBound);
+        bookSet.forEach(book -> System.out.printf("%s - $%.2f\n", book.getTitle(), book.getPrice()));
+    }
+
+    //E04. Write a program that prints the titles of all books that are NOT released in a given year.
+    public void findByReleaseYearNotEqualTo(int inputYear) {
+        this.booksRepository.findAll().stream().forEach(book -> {
+            if (book.getReleaseDate().getYear() != inputYear) {
+                System.out.println(book.getTitle());
+            }
+        });
+    }
+
 }
