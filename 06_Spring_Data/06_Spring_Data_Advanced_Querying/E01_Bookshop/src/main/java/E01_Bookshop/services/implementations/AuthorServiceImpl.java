@@ -9,6 +9,7 @@ import org.springframework.stereotype.*;
 import java.io.*;
 import java.nio.file.*;
 import java.time.*;
+import java.util.*;
 import java.util.concurrent.*;
 
 @Service
@@ -65,5 +66,14 @@ public class AuthorServiceImpl implements AuthorService {
             System.out.printf("%s %s - %d\n", author.getFirstName(), author.getLastName(),
                                             author.getPublishedBooks().size());
         });*/
+    }
+
+    //E06. Write a program that prints the names of those authors, whose first name ends with a given string.
+    public void findByFirstNameIsEndingWith(String param) {
+        Set<Author> authorSet = this.authorsRepository.findByFirstNameIsEndingWith(param);
+        authorSet.forEach(author -> {
+            String fullName = author.getFirstName() + " " + author.getLastName();
+            System.out.println(fullName);
+        });
     }
 }

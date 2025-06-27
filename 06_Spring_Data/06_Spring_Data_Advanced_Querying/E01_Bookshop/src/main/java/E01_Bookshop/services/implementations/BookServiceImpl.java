@@ -98,4 +98,11 @@ public class BookServiceImpl implements BookService {
         });
     }
 
+    //E05. Write a program that prints the title, the edition type and the price of books, which are released before a given date. The date will be in the format dd-MM-yyyy.
+    public void findByReleaseDateBefore(int inputDay, int inputMonth, int inputYear) {
+        Set<Book> bookSet = this.booksRepository.findByReleaseDateBefore(LocalDate.of(inputYear, inputMonth, inputDay));
+        bookSet.forEach(book -> {
+            System.out.printf("%s %s %.2f\n", book.getTitle(), book.getEditionType(), book.getPrice());
+        });
+    }
 }

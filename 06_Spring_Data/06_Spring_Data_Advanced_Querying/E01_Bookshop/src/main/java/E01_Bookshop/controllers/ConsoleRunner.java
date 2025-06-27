@@ -80,7 +80,13 @@ public class ConsoleRunner implements CommandLineRunner {
         //E04. Write a program that prints the titles of all books that are NOT released in a given year.
         //booksService.findByReleaseYearNotEqualTo(Integer.parseInt(scanner.nextLine()));
 
+        //E05. Write a program that prints the title, the edition type and the price of books, which are released before a given date. The date will be in the format dd-MM-yyyy.
+        //booksService.findByReleaseDateBefore(Integer.parseInt(scanner.nextLine()),
+        //                                     Integer.parseInt(scanner.nextLine()),
+        //                                     Integer.parseInt(scanner.nextLine()));
 
+        //E06. Write a program that prints the names of those authors, whose first name ends with a given string.
+        this.authorsService.findByFirstNameIsEndingWith(scanner.nextLine());
     }
 
     private void seedData() throws IOException {
