@@ -27,4 +27,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     //E05. Write a program that prints the title, the edition type and the price of books, which are released before a given date. The date will be in the format dd-MM-yyyy.
     Set<Book> findByReleaseDateBefore(LocalDate inputDate);
+
+    //E07. Write a program that prints the titles of books, which contain a given string (regardless of the casing).
+    Set<Book> findByTitleContaining(String param);
+
+    //E08. Write a program that prints the titles of books, which are written by authors, whose last name starts with a given string.
+    Set<Book> findBookByAuthor_LastNameStartingWith(String param);
 }

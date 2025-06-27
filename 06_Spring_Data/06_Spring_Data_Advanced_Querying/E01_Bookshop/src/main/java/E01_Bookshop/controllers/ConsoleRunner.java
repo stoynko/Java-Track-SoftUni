@@ -86,7 +86,13 @@ public class ConsoleRunner implements CommandLineRunner {
         //                                     Integer.parseInt(scanner.nextLine()));
 
         //E06. Write a program that prints the names of those authors, whose first name ends with a given string.
-        this.authorsService.findByFirstNameIsEndingWith(scanner.nextLine());
+        //this.authorsService.findByFirstNameIsEndingWith(scanner.nextLine());
+
+        //E07. Write a program that prints the titles of books, which contain a given string (regardless of the casing).
+        //booksService.findByTitleContaining(scanner.nextLine());
+
+        //E08. Write a program that prints the titles of books, which are written by authors, whose last name starts with a given string.
+        booksService.findByAuthorLastNameStartingWith(scanner.nextLine());
     }
 
     private void seedData() throws IOException {

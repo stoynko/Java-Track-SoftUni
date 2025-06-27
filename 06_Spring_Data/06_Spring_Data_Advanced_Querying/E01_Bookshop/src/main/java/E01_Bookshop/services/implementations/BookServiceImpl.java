@@ -105,4 +105,16 @@ public class BookServiceImpl implements BookService {
             System.out.printf("%s %s %.2f\n", book.getTitle(), book.getEditionType(), book.getPrice());
         });
     }
+
+    //E07. Write a program that prints the titles of books, which contain a given string (regardless of the casing).
+    public void findByTitleContaining(String param) {
+        Set<Book> bookSet = this.booksRepository.findByTitleContaining(param);
+        bookSet.forEach(book -> System.out.println(book.getTitle()));
+    }
+
+    //E08. Write a program that prints the titles of books, which are written by authors, whose last name starts with a given string.
+    public void findByAuthorLastNameStartingWith(String param) {
+        Set<Book> bookSet = this.booksRepository.findBookByAuthor_LastNameStartingWith(param);
+        bookSet.forEach(book -> System.out.println(book.getTitle()));
+    }
 }
