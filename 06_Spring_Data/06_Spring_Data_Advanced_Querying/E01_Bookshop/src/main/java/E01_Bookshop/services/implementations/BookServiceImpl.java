@@ -2,6 +2,7 @@ package E01_Bookshop.services.implementations;
 
 import E01_Bookshop.entities.*;
 import E01_Bookshop.entities.enums.*;
+import E01_Bookshop.entities.interfaces.*;
 import E01_Bookshop.repositories.*;
 import E01_Bookshop.services.*;
 import org.springframework.stereotype.*;
@@ -142,6 +143,26 @@ public class BookServiceImpl implements BookService {
         return this.booksRepository.countBooksByTitleLongerThan(charCount);
     }
 
-    //E10. Write a program that prints the total number of book copies by author. Order the results descending by total book copies.
+    /*E11. Write a program that prints information (title, edition type, age restriction and price) for a book by given title.
+           When retrieving the book information select only those fields and do NOT include any other information in the returned result. */
+    public void printBookInfo (String title) {
+        BookInfo book = booksRepository.findByTitleIs(title);
+        System.out.printf("%s %s %s %.2f\n", book.getTitle(), book.getEditionType().name(),
+                                           book.getAgeGroup().name(), book.getPrice());
+    }
 
+    /*E12. Write a program that increases the copies of all books released after a given date with a given number.
+             Print the total amount of book copies that were added.
+        Input:
+            •	On the first line – date in the format dd MMM yyyy. If a book is released after that date (exclusively),
+                increase its book copies with the provided number from the second line of the input.
+            •	On the second line – the number of book copies each book should be increased with.
+        Output:
+            •	Total number of books that were added to the database.*/
+    @Override
+    public void updateBookCopiesWithAmount(String date, long copiesCount) {
+        LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        int updatedBooksCount = booksRepository.updateBookCopiesWithAmount(parsedDate, copiesCount);
+        System.out.println(updatedBooksCount);
+    }
 }

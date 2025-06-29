@@ -2,8 +2,10 @@ package E01_Bookshop.repositories;
 
 import E01_Bookshop.entities.*;
 import E01_Bookshop.entities.enums.*;
+import E01_Bookshop.entities.interfaces.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import java.math.*;
 import java.time.*;
@@ -40,4 +42,21 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     //E09. Write a program that prints the number of books, whose title is longer than a given number.
     @Query("SELECT COUNT(b) FROM Book b WHERE LENGTH(b.title) > :charCount")
     int countBooksByTitleLongerThan(int charCount);
+
+    /*E11. Write a program that prints information (title, edition type, age restriction and price) for a book by given title.
+             When retrieving the book information select only those fields and do NOT include any other information in the returned result. */
+    BookInfo findByTitleIs(String title);
+
+    /*E12. Write a program that increases the copies of all books released after a given date with a given number.
+             Print the total amount of book copies that were added.
+        Input:
+            •	On the first line – date in the format dd MMM yyyy. If a book is released after that date (exclusively),
+                increase its book copies with the provided number from the second line of the input.
+            •	On the second line – the number of book copies each book should be increased with.
+        Output:
+            •	Total number of books that were added to the database.*/
+    @Query("UPDATE Book b SET b.copies = b.copies + :copiesCount WHERE b.releaseDate > :date")
+    @Modifying
+    @Transactional
+    int updateBookCopiesWithAmount(LocalDate date, long copiesCount);
 }

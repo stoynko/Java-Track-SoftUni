@@ -1,6 +1,7 @@
 package E01_Bookshop.controllers;
 
 import E01_Bookshop.entities.enums.*;
+import E01_Bookshop.entities.interfaces.*;
 import E01_Bookshop.services.*;
 import E01_Bookshop.services.implementations.*;
 import org.springframework.boot.*;
@@ -100,8 +101,28 @@ public class ConsoleRunner implements CommandLineRunner {
         //System.out.println(booksService.countByBookTitleLengthLongerThan(Integer.parseInt(scanner.nextLine())));
 
         //E10. Write a program that prints the total number of book copies by author. Order the results descending by total book copies.
-        authorsService.findByBookCopiesCount();
+        //authorsService.findByBookCopiesCount();
+
+        /*E11. Write a program that prints information (title, edition type, age restriction and price) for a book by given title.
+             When retrieving the book information select only those fields and do NOT include any other information in the returned result.*/
+        //booksService.printBookInfo(scanner.nextLine());
+
+        /*E12. Write a program that increases the copies of all books released after a given date with a given number.
+             Print the total amount of book copies that were added.
+        Input:
+            •	On the first line – date in the format dd MMM yyyy. If a book is released after that date (exclusively),
+                increase its book copies with the provided number from the second line of the input.
+            •	On the second line – the number of book copies each book should be increased with.
+        Output:
+            •	Total number of books that were added to the database.*/
+        //booksService.updateBookCopiesWithAmount(scanner.nextLine(), Integer.parseInt(scanner.nextLine()));
+
+        //E13. Write a program that removes from the database those books, which copies are lower than a given number. Print the number of books that were deleted from the database.
+
+
     }
+
+
 
     private void seedData() throws IOException {
         if (!this.categoriesService.areCategoriesImported()) {
