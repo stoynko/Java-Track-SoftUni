@@ -14,4 +14,6 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     //E06. Write a program that prints the names of those authors, whose first name ends with a given string.
     Set<Author> findByFirstNameIsEndingWith(String param);
+
+    //E10. Write a program that prints the total number of book copies by author. Order the results descending by total book copies.
 }

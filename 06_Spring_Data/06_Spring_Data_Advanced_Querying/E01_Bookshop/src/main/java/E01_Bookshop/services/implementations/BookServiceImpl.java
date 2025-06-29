@@ -84,6 +84,7 @@ public class BookServiceImpl implements BookService {
         bookSet.forEach(book -> System.out.println(book.getTitle()));
     }
 
+    //E03. Write a program that prints the titles and prices of books with price lower than 5 and higher than 40.
     public void findByPriceLessThanOrPriceGreaterThan(BigDecimal lowerBound, BigDecimal upperBound) {
         Set<Book> bookSet = this.booksRepository.findByPriceLessThanOrPriceGreaterThan(lowerBound, upperBound);
         bookSet.forEach(book -> System.out.printf("%s - $%.2f\n", book.getTitle(), book.getPrice()));
@@ -96,6 +97,14 @@ public class BookServiceImpl implements BookService {
                 System.out.println(book.getTitle());
             }
         });
+    }
+
+    //E04. Write a program that prints the titles of all books that are NOT released in a given year.
+    public void findByReleaseDateNotIn(int inputYear) {
+        LocalDate startBound = LocalDate.of(inputYear, 01, 01);
+        LocalDate endBound = LocalDate.of(inputYear, 12, 31);
+        this.booksRepository.findByReleaseDateBeforeOrReleaseDateAfter(startBound, endBound)
+                .forEach(book -> System.out.println(book.getTitle()));
     }
 
     //E05. Write a program that prints the title, the edition type and the price of books, which are released before a given date. The date will be in the format dd-MM-yyyy.
@@ -117,4 +126,22 @@ public class BookServiceImpl implements BookService {
         Set<Book> bookSet = this.booksRepository.findBookByAuthor_LastNameStartingWith(param);
         bookSet.forEach(book -> System.out.println(book.getTitle()));
     }
+
+    //E09. Write a program that prints the number of books, whose title is longer than a given number.
+    public int countByBookTitleLongerThan(int charCount) {
+        int countOfBooks = 0;
+        for (Book book : this.booksRepository.findAll()) {
+            if (book.getTitle().length() > charCount) {
+                countOfBooks += 1;
+            }
+        }
+        return countOfBooks;
+    }
+
+    public int countByBookTitleLengthLongerThan(int charCount) {
+        return this.booksRepository.countBooksByTitleLongerThan(charCount);
+    }
+
+    //E10. Write a program that prints the total number of book copies by author. Order the results descending by total book copies.
+
 }

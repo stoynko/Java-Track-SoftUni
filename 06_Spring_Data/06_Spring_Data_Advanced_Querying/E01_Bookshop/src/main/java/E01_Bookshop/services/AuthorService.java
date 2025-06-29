@@ -12,4 +12,6 @@ public interface AuthorService {
     Author getRandomAuthor();
     void printAuthorsByBooksReleasedBefore(LocalDate date);
     void printAuthorsByBookCountDescending();
+    void findByFirstNameIsEndingWith(String param);
+    void findByBookCopiesCount();
 }

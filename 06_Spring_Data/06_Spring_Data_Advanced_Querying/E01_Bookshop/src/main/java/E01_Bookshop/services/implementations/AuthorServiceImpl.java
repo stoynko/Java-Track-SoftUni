@@ -12,6 +12,8 @@ import java.time.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+import static org.hibernate.internal.util.collections.ArrayHelper.forEach;
+
 @Service
 public class AuthorServiceImpl implements AuthorService {
 
@@ -74,6 +76,18 @@ public class AuthorServiceImpl implements AuthorService {
         authorSet.forEach(author -> {
             String fullName = author.getFirstName() + " " + author.getLastName();
             System.out.println(fullName);
+        });
+    }
+
+    //E10. Write a program that prints the total number of book copies by author. Order the results descending by total book copies.
+    public void findByBookCopiesCount() {
+        authorsRepository.findAll().stream()
+                         .sorted(Comparator.comparingInt((Author author) -> author.getPublishedBooks().stream()
+                            .mapToInt(Book::getCopies).sum()).reversed())
+                         .forEach(author -> {
+                             System.out.printf("%s %s - %d\n", author.getFirstName(),
+                             author.getLastName(),
+                             author.getPublishedBooks().stream().mapToInt(Book::getCopies).sum());
         });
     }
 }

@@ -16,4 +16,11 @@ public interface BookService {
     void printAllBooksForAgeGroup(AgeRestrictionType ageRestrictionType);
     void printAllBooksByEditionTypeAndCopies(EditionType editionType, int copies);
     void findByPriceLessThanOrPriceGreaterThan(BigDecimal lowerBound, BigDecimal upperBound);
+    void findByReleaseYearNotEqualTo(int inputYear);
+    void findByReleaseDateNotIn(int inputYear);
+    void findByReleaseDateBefore(int inputDay, int inputMonth, int inputYear);
+    void findByTitleContaining(String param);
+    void findByAuthorLastNameStartingWith(String param);
+    int countByBookTitleLongerThan(int charCount);
+    int countByBookTitleLengthLongerThan(int charCount);
 }

@@ -25,6 +25,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     //E03. Write a program that prints the titles and prices of books with price lower than 5 and higher than 40.
     Set<Book> findByPriceLessThanOrPriceGreaterThan(BigDecimal lowerBound, BigDecimal upperBound);
 
+    //E04. Write a program that prints the titles of all books that are NOT released in a given year.
+    Set<Book> findByReleaseDateBeforeOrReleaseDateAfter(LocalDate startBound, LocalDate endBound);
+
     //E05. Write a program that prints the title, the edition type and the price of books, which are released before a given date. The date will be in the format dd-MM-yyyy.
     Set<Book> findByReleaseDateBefore(LocalDate inputDate);
 
@@ -33,4 +36,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     //E08. Write a program that prints the titles of books, which are written by authors, whose last name starts with a given string.
     Set<Book> findBookByAuthor_LastNameStartingWith(String param);
+
+    //E09. Write a program that prints the number of books, whose title is longer than a given number.
+    @Query("SELECT COUNT(b) FROM Book b WHERE LENGTH(b.title) > :charCount")
+    int countBooksByTitleLongerThan(int charCount);
 }

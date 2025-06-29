@@ -79,6 +79,7 @@ public class ConsoleRunner implements CommandLineRunner {
 
         //E04. Write a program that prints the titles of all books that are NOT released in a given year.
         //booksService.findByReleaseYearNotEqualTo(Integer.parseInt(scanner.nextLine()));
+        //booksService.findByReleaseDateNotIn(Integer.parseInt(scanner.nextLine()));
 
         //E05. Write a program that prints the title, the edition type and the price of books, which are released before a given date. The date will be in the format dd-MM-yyyy.
         //booksService.findByReleaseDateBefore(Integer.parseInt(scanner.nextLine()),
@@ -92,7 +93,14 @@ public class ConsoleRunner implements CommandLineRunner {
         //booksService.findByTitleContaining(scanner.nextLine());
 
         //E08. Write a program that prints the titles of books, which are written by authors, whose last name starts with a given string.
-        booksService.findByAuthorLastNameStartingWith(scanner.nextLine());
+        //booksService.findByAuthorLastNameStartingWith(scanner.nextLine());
+
+        //E09. Write a program that prints the number of books, whose title is longer than a given number.
+        //System.out.println(booksService.countByBookTitleLongerThan(Integer.parseInt(scanner.nextLine())));
+        //System.out.println(booksService.countByBookTitleLengthLongerThan(Integer.parseInt(scanner.nextLine())));
+
+        //E10. Write a program that prints the total number of book copies by author. Order the results descending by total book copies.
+        authorsService.findByBookCopiesCount();
     }
 
     private void seedData() throws IOException {
