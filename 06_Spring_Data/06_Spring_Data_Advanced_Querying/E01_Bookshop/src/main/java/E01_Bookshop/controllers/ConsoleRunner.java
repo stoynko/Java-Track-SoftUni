@@ -117,12 +117,15 @@ public class ConsoleRunner implements CommandLineRunner {
             •	Total number of books that were added to the database.*/
         //booksService.updateBookCopiesWithAmount(scanner.nextLine(), Integer.parseInt(scanner.nextLine()));
 
-        //E13. Write a program that removes from the database those books, which copies are lower than a given number. Print the number of books that were deleted from the database.
+        /*E13. Write a program that removes from the database those books, which copies are lower than a given number.
+             Print the number of books that were deleted from the database. */
+        //booksService.deleteAndPrintCountOfBooksWithPriceLowerThan(Long.parseLong(scanner.nextLine()));
 
-
+        /*E14. Using Workbench (or other similar tool) create a stored procedure, which receives an author's first and last name and returns
+             the total amount of books the author has written. Then write a program that receives an author's name and prints the total number
+             of books the author has written by using the stored procedure you've just created.*/
+        //authorsService.findBookCountByAuthor(scanner.nextLine(), scanner.nextLine());
     }
-
-
 
     private void seedData() throws IOException {
         if (!this.categoriesService.areCategoriesImported()) {

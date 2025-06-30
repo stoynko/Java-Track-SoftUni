@@ -14,4 +14,5 @@ public interface AuthorService {
     void printAuthorsByBookCountDescending();
     void findByFirstNameIsEndingWith(String param);
     void findByBookCopiesCount();
+    void findBookCountByAuthor(String firstName, String lastName);
 }

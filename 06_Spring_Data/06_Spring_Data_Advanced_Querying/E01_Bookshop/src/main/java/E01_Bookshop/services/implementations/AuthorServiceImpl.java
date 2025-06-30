@@ -90,4 +90,10 @@ public class AuthorServiceImpl implements AuthorService {
                              author.getPublishedBooks().stream().mapToInt(Book::getCopies).sum());
         });
     }
+
+    @Override
+    public void findBookCountByAuthor(String firstName, String lastName) {
+        int booksByAuthor = authorsRepository.findBookCountByAuthor(firstName, lastName);
+        System.out.println(booksByAuthor);
+    }
 }

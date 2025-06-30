@@ -165,4 +165,10 @@ public class BookServiceImpl implements BookService {
         int updatedBooksCount = booksRepository.updateBookCopiesWithAmount(parsedDate, copiesCount);
         System.out.println(updatedBooksCount);
     }
+
+    @Override
+    public void deleteAndPrintCountOfBooksWithPriceLowerThan(Long copies) {
+        int updateBooksCount = booksRepository.deleteByCopiesLessThan(copies);
+        System.out.println(updateBooksCount);
+    }
 }

@@ -56,7 +56,11 @@ public interface BookRepository extends JpaRepository<Book, Long> {
         Output:
             •	Total number of books that were added to the database.*/
     @Query("UPDATE Book b SET b.copies = b.copies + :copiesCount WHERE b.releaseDate > :date")
-    @Modifying
-    @Transactional
+    @Modifying @Transactional
     int updateBookCopiesWithAmount(LocalDate date, long copiesCount);
+
+     /*E13. Write a program that removes from the database those books, which copies are lower than a given number.
+             Print the number of books that were deleted from the database. */
+    @Modifying @Transactional
+    int deleteByCopiesLessThan(long copies);
 }

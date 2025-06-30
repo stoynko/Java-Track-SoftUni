@@ -2,12 +2,10 @@ package E01_Bookshop.services;
 
 
 import E01_Bookshop.entities.enums.*;
-import E01_Bookshop.entities.interfaces.*;
 
 import java.io.*;
 import java.math.*;
 import java.time.*;
-import java.util.*;
 
 public interface BookService {
 
@@ -27,4 +25,5 @@ public interface BookService {
     int countByBookTitleLengthLongerThan(int charCount);
     void printBookInfo(String title);
     void updateBookCopiesWithAmount(String date, long copiesCount);
+    void deleteAndPrintCountOfBooksWithPriceLowerThan(Long copies);
 }
