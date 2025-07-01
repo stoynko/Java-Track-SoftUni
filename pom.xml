@@ -23,6 +23,7 @@
         <module>06_Spring_Data/04_Hibernate_Code_First/E02_Sales_Database</module>
         <module>06_Spring_Data/06_Spring_Data_Advanced_Querying/L01_Shampoo_Company</module>
         <module>06_Spring_Data/06_Spring_Data_Advanced_Querying/E01_Bookshop</module>
+        <module>06_Spring_Data/07_Spring_Data_Auto_Mapping_Objects/L01_Simple_Mapping</module>
     </modules>
 
     <properties>
