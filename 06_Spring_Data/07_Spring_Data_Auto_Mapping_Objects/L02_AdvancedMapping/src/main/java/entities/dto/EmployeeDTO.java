@@ -12,14 +12,7 @@ public class EmployeeDTO {
 
     @Override
     public String toString() {
-        return String.format("""
-                             %s
-                             ───
-                             First Name: %s
-                             Last Name: %s
-                             Salary: %.2f
-                             ──────────────
-                             """, getClass().getSimpleName(),firstName, lastName, salary);
+        return String.format("%s %s %.2f", firstName, lastName, salary);
     }
 
     public void setFirstName(String firstName) {
