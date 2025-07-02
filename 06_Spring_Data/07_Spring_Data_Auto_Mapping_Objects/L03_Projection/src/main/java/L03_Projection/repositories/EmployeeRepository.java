@@ -11,4 +11,7 @@ import java.util.*;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     List<Employee> findByBirthdayBeforeOrderBySalaryDesc(LocalDate date);
+
+    @Query("SELECT m FROM Employee e JOIN e.manager AS m")
+    List<Employee> findAllManagers();
 }

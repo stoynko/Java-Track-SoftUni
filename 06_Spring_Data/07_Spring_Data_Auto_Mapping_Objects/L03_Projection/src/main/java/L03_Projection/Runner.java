@@ -17,10 +17,12 @@ public class Runner implements CommandLineRunner {
    birthday, address and manager (another employee). Transform to EmployeeDto (first name, last name, salary, manager's last name)
    those employees who are born before 1990. Order them by salary descending and print them on the console. */
 
-    private EmployeeService employeesService;
+    private final EmployeeService employeesService;
+    private final ManagerService managerService;
 
-    public Runner(EmployeeService employeesService) {
+    public Runner(EmployeeService employeesService, ManagerService managerService) {
         this.employeesService = employeesService;
+        this.managerService = managerService;
     }
 
     @Override
@@ -28,7 +30,6 @@ public class Runner implements CommandLineRunner {
 
         Scanner scanner = new Scanner(System.in);
         int inputYear = Integer.parseInt(scanner.nextLine());
-
 
         List<EmployeeDTO> employees = employeesService.findEmployeesBornBefore(inputYear);
         employees.forEach(System.out::println);
