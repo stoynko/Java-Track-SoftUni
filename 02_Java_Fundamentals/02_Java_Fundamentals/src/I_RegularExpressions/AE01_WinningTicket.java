@@ -5,7 +5,7 @@ import java.util.regex.*;
 
 public class AE01_WinningTicket {
 
-    /*The lottery is exciting. What is not is checking a million tickets for winnings only by hand. So, you are given the task of creating a program that automatically checks if a ticket is a winner.
+/* The lottery is exciting. What is not is checking a million tickets for winnings only by hand. So, you are given the task of creating a program that automatically checks if a ticket is a winner.
 You are given a collection of tickets separated by commas and spaces. You need to check every one of them if it has a winning combination of symbols.
 A valid ticket should have exactly 20 characters. The winning symbols are '@', '#', '$' and '^'. But for a ticket to be a winner,
 the symbol should uninterruptedly repeat at least 6 times in both the ticket left half and the ticket right half.
