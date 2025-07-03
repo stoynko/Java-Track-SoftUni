@@ -32,9 +32,8 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                     registerUser(inputData);
                 }
                 case "2" -> {
-                    //String email = inputData[1];
-                    //String password = inputData[2];
-                    //loginUser(email, password);
+                    String[] inputData = reader.readLine().split("\\|");
+                    loginUser(inputData);
                 }
                 default -> {
                     System.out.println("Invalid input.");
@@ -43,6 +42,13 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
 
 
         }
+    }
+
+    private void loginUser(String[] inputData) {
+        String email = inputData[1];
+        String password = inputData[2];
+        LoginUserDTO userDTO = new LoginUserDTO(email, password);
+        System.out.println(this.userService.loginUser(userDTO));
     }
 
     private void registerUser(String[] inputData) {

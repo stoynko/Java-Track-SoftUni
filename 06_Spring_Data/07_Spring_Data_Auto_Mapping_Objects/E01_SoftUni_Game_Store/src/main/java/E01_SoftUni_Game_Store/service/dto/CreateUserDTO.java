@@ -9,6 +9,8 @@ public class CreateUserDTO {
 
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z]).{6,}$", message = "Invalid password.")
     private String password;
+
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z]).{6,}$", message = "Invalid confirmation password.")
     private String passwordConfirmation;
     private String fullName;
 
