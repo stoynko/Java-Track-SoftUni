@@ -7,4 +7,5 @@ public interface UserService {
     String registerUser(CreateUserDTO userCreationDTO);
     String loginUser(LoginUserDTO loginUserDTO);
     boolean isAdmin();
+    String logoutUser();
 }

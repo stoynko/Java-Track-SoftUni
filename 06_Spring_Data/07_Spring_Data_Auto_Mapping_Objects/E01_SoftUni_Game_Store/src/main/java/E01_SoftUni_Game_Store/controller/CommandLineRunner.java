@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import java.io.*;
+import java.sql.*;
 
 @Component
 public class CommandLineRunner implements org.springframework.boot.CommandLineRunner {
@@ -24,7 +25,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         String input;
         init();
 
-        while(!"3".equals(input = reader.readLine())) {
+        while(!"4".equals(input = reader.readLine())) {
 
             switch (input) {
                 case "1" -> {
@@ -35,6 +36,9 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                     String[] inputData = reader.readLine().split("\\|");
                     loginUser(inputData);
                 }
+                case "3" -> {
+                    logoutUser();
+                }
                 default -> {
                     System.out.println("Invalid input.");
                 }
@@ -42,6 +46,10 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
 
 
         }
+    }
+
+    private void logoutUser() {
+        System.out.println(this.userService.logoutUser());
     }
 
     private void loginUser(String[] inputData) {
@@ -64,7 +72,8 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         StringBuilder output = new StringBuilder();
         output.append("1. Register").append(System.lineSeparator());
         output.append("2. Login").append(System.lineSeparator());
-        output.append("3. Terminate").append(System.lineSeparator());
+        output.append("3. Logout").append(System.lineSeparator());
+        output.append("4. Terminate").append(System.lineSeparator());
         System.out.println(output);
     }
 }

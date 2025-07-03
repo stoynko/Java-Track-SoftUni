@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public String registerUser(CreateUserDTO userCreationDTO) {
 
-
         if (this.usersRepository.findUserByEmail(userCreationDTO.getEmail()) != null) {
             return "User with this email already exists.";
         }
@@ -56,9 +55,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String loginUser(LoginUserDTO loginUserDTO) {
-
         Optional<User> user = this.usersRepository.findUserByEmailAndPassword(loginUserDTO.getEmail(), loginUserDTO.getPassword());
-
         if (!userSessionManager.hasActiveSession() && user.isPresent()) {
             userSessionManager.setActiveSession(user.get());
             return String.format("Successfully logged in %s", user.get().getFullName());
@@ -70,6 +67,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isAdmin() {
         return this.userSessionManager.hasActiveSession() && this.userSessionManager.getActiveSession().isAdmin();
+    }
+
+    @Override
+    public String logoutUser() {
+        if (userSessionManager.hasActiveSession()) {
+            User loggedUser = userSessionManager.getActiveSession();
+            userSessionManager.terminateActiveSession();
+            return String.format("User %s successfully logged out", loggedUser.getFullName());
+        } else {
+            return "Cannot log out. No user was logged in.";
+        }
     }
 
     private void setRootUserAsAdmin(User user) {
