@@ -6,9 +6,9 @@ import org.springframework.context.*;
 import org.springframework.stereotype.*;
 
 @Service
-public class ApplicationUtilImpl implements ApplicationUtil {
+public class ApplicationUtilImpl implements ApplicationUtil  {
 
-    private ApplicationContext context;
+    private final ApplicationContext context;
 
     public ApplicationUtilImpl(ApplicationContext context) {
         this.context = context;

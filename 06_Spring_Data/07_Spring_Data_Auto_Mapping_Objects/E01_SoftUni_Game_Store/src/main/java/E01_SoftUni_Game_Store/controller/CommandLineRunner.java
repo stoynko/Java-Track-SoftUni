@@ -5,6 +5,7 @@ import E01_SoftUni_Game_Store.data.entities.*;
 import E01_SoftUni_Game_Store.service.*;
 import E01_SoftUni_Game_Store.service.dto.*;
 import E01_SoftUni_Game_Store.service.implementations.*;
+import E01_SoftUni_Game_Store.service.utilities.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.*;
 import org.springframework.stereotype.*;
@@ -19,15 +20,15 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
     private final UserSessionManager userSessionManager;
     private final BufferedReader reader;
     private final SessionManager sessionManager;
-    private final ApplicationUtilImpl applicationUtilImpl;
+    private final ApplicationUtil applicatinUtil;
 
     @Autowired
-    public CommandLineRunner(UserService userService, UserSessionManager userSessionManager, BufferedReader reader, SessionManager sessionManager, ApplicationUtilImpl applicationUtilImpl) {
+    public CommandLineRunner(UserService userService, UserSessionManager userSessionManager, BufferedReader reader, SessionManager sessionManager, ApplicationUtil applicatinUtil) {
         this.userSessionManager = userSessionManager;
         this.userService = userService;
         this.reader = reader;
         this.sessionManager = sessionManager;
-        this.applicationUtilImpl = applicationUtilImpl;
+        this.applicatinUtil = applicatinUtil;
     }
 
     @Override
@@ -73,7 +74,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                 logoutUser();
                 return;
             } else if ("exit".equals(input.toLowerCase()) || "4".equals(input)) {
-                applicationUtilImpl.shutdown();
+                applicatinUtil.shutdown();
             } else {
                 System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
             }
@@ -83,8 +84,8 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
 
     private List<String> processInputData(BufferedReader reader) throws IOException {
         return Arrays.stream(reader.readLine().split("\\|"))
-                                        .map(e -> e.trim())
-                                        .collect(Collectors.toList());
+                .map(e -> e.trim())
+                .collect(Collectors.toList());
     }
 
     private void registerUser(List<String> inputData) {
