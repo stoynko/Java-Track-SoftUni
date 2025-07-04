@@ -1,7 +1,10 @@
 package E01_SoftUni_Game_Store.controller;
 
+import E01_SoftUni_Game_Store.core.*;
+import E01_SoftUni_Game_Store.data.entities.*;
 import E01_SoftUni_Game_Store.service.*;
 import E01_SoftUni_Game_Store.service.dto.*;
+import E01_SoftUni_Game_Store.service.implementations.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
@@ -12,18 +15,20 @@ import java.sql.*;
 public class CommandLineRunner implements org.springframework.boot.CommandLineRunner {
 
     private final UserService userService;
+    private final UserSessionManager userSessionManager;
+    private final BufferedReader reader;
 
     @Autowired
-    public CommandLineRunner(UserService userService) {
+    public CommandLineRunner(UserService userService, UserSessionManager userSessionManager, BufferedReader reader) {
+        this.userSessionManager = userSessionManager;
         this.userService = userService;
+        this.reader = reader;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String input;
-        init();
 
         while(!"4".equals(input = reader.readLine())) {
 
@@ -46,6 +51,10 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
 
 
         }
+    }
+
+    private void displayMenu() {
+        User activeUser = userSessionManager.getActiveSession();
     }
 
     private void logoutUser() {

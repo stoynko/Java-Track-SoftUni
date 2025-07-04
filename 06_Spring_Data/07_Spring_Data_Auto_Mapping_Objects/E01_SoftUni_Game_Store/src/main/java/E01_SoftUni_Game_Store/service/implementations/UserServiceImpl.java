@@ -1,16 +1,15 @@
 package E01_SoftUni_Game_Store.service.implementations;
 
+import E01_SoftUni_Game_Store.data.common.*;
 import E01_SoftUni_Game_Store.data.entities.*;
 import E01_SoftUni_Game_Store.data.repositories.*;
 import E01_SoftUni_Game_Store.service.*;
 import E01_SoftUni_Game_Store.service.dto.*;
 import E01_SoftUni_Game_Store.service.utilities.*;
 import jakarta.validation.*;
-import org.hibernate.validator.messageinterpolation.*;
 import org.modelmapper.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
-
 import java.util.*;
 import java.util.stream.*;
 
@@ -34,11 +33,11 @@ public class UserServiceImpl implements UserService {
     public String registerUser(CreateUserDTO userCreationDTO) {
 
         if (this.usersRepository.findUserByEmail(userCreationDTO.getEmail()) != null) {
-            return "User with this email already exists.";
+            return SystemErrorMessage.REGISTRATION_EMAIL_EXISTS;
         }
 
         if (!userCreationDTO.getPassword().equals(userCreationDTO.getPasswordConfirmation())) {
-            return "Passwords do not match.";
+            return SystemErrorMessage.REGISTRATION_PASSWORD_MISMATCH;
         }
 
         if (!validator.isValid(userCreationDTO)) {
@@ -50,7 +49,7 @@ public class UserServiceImpl implements UserService {
         User user = this.modelMapper.map(userCreationDTO, User.class);
         setRootUserAsAdmin(user);
         this.usersRepository.saveAndFlush(user);
-        return String.format("%s was registered successfully!", user.getFullName());
+        return String.format(ConsoleLogMessage.REGISTRATION_SUCCESSFULL, user.getFullName());
     }
 
     @Override
@@ -58,9 +57,9 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = this.usersRepository.findUserByEmailAndPassword(loginUserDTO.getEmail(), loginUserDTO.getPassword());
         if (!userSessionManager.hasActiveSession() && user.isPresent()) {
             userSessionManager.setActiveSession(user.get());
-            return String.format("Successfully logged in %s", user.get().getFullName());
+            return String.format(ConsoleLogMessage.LOGIN_SUCCESSFULL, user.get().getFullName());
         } else {
-            return "Invalid email and/or password.";
+            return SystemErrorMessage.LOGIN_INCORRECT_DATA;
         }
     }
 
@@ -74,9 +73,9 @@ public class UserServiceImpl implements UserService {
         if (userSessionManager.hasActiveSession()) {
             User loggedUser = userSessionManager.getActiveSession();
             userSessionManager.terminateActiveSession();
-            return String.format("User %s successfully logged out", loggedUser.getFullName());
+            return String.format(ConsoleLogMessage.LOGOUT_SUCCESSFULL, loggedUser.getFullName());
         } else {
-            return "Cannot log out. No user was logged in.";
+            return SystemErrorMessage.LOGOUT_NO_ACTIVE_SESSION;
         }
     }
 
