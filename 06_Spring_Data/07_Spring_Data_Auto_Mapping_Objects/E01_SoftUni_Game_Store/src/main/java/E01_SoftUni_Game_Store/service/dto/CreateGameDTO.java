@@ -1,36 +1,50 @@
-package E01_SoftUni_Game_Store.data.entities;
+package E01_SoftUni_Game_Store.service.dto;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.*;
 
 import java.math.*;
 import java.time.*;
 
-@Entity
-@Table(name = "games")
-public class Game extends BaseEntity{
+public class CreateGameDTO {
 
-    @Basic
+    @Length(min = 3, max = 100)
+    @Pattern
+    (regexp = "^[A-Z]{1}.*",
+    message = "Game title has to start with an uppercase letter.")
     private String title;
 
-    @Column(name = "trailer_url")
+    @Length(min = 10, max = 11)
     private String trailerURL;
 
-    @Column(name = "thumbnail_url")
+    @Pattern
+    (regexp = "/^(?:http[s]?:\\/\\/.)?(?:www\\.)?[-a-zA-Z0-9@%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b(?:[-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)$",
+    message = "The URL should start with an http or https protocol.")
     private String imageThumbnailURL;
 
-    @Basic
+    @Positive
     private double size;
 
-    @Basic
+    @Positive
     private BigDecimal price;
 
-    @Basic
+    @Length(min = 20)
     private String description;
 
-    @Column(name = "release_date")
     private LocalDate releaseDate;
 
-    public Game() { }
+    public CreateGameDTO() { }
+
+    public CreateGameDTO(String title, String trailerURL, String imageThumbnailURL, double size, BigDecimal price, String description, LocalDate releaseDate) {
+        this.title = title;
+        this.trailerURL = trailerURL;
+        this.imageThumbnailURL = imageThumbnailURL;
+        this.size = size;
+        this.price = price;
+        this.description = description;
+        this.releaseDate = releaseDate;
+    }
 
     public void setTitle(String title) {
         this.title = title;

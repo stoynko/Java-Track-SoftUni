@@ -17,15 +17,17 @@ import java.util.stream.*;
 public class CommandLineRunner implements org.springframework.boot.CommandLineRunner {
 
     private final UserService userService;
+    private final GameService gamesService;
     private final UserSessionManager userSessionManager;
     private final BufferedReader reader;
     private final SessionManager sessionManager;
     private final ApplicationUtil applicatinUtil;
 
     @Autowired
-    public CommandLineRunner(UserService userService, UserSessionManager userSessionManager, BufferedReader reader, SessionManager sessionManager, ApplicationUtil applicatinUtil) {
+    public CommandLineRunner(UserService userService, GameService gamesService, UserSessionManager userSessionManager, BufferedReader reader, SessionManager sessionManager, ApplicationUtil applicatinUtil) {
         this.userSessionManager = userSessionManager;
         this.userService = userService;
+        this.gamesService = gamesService;
         this.reader = reader;
         this.sessionManager = sessionManager;
         this.applicatinUtil = applicatinUtil;
@@ -98,7 +100,8 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         while (true) {
             if ("add game".equals(input.toLowerCase()) || "1".equals(input)) {
                 try {
-                    //TODO Implement addGame()
+                    List<String> inputData = processInputData(reader);
+                    this.gamesService.addGame(List<String>);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                 }
@@ -188,5 +191,9 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
 
     private void logoutUser() {
         System.out.println(this.userService.logoutUser());
+    }
+
+    private void addGame(List<String> inputData) {
+
     }
 }
