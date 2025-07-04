@@ -6,13 +6,14 @@ public class ConsoleLogMessage {
                                             1. Register
                                             2. Login
                                             3. Logout
-                                            4. Terminate
+                                            4. Exit Application
                                             """;
     public static final String MAIN_MENU_ADMIN = """
                                                 1. Add Game
                                                 2. Edit Game
                                                 3. Delete Game
                                                 4. Logout
+                                                5. Exit Application
                                                 """;
 
     public static final String MAIN_MENU_USER = """
@@ -20,9 +21,12 @@ public class ConsoleLogMessage {
                                                2. Remove Item
                                                3. Buy Item
                                                4. Logout
+                                               5. Exit Application
                                                """;
-
+    public static final String REGISTRATION_REQUIRED_INFO = "> Email | Password | Password | Full Name";
+    public static final String LOGIN_REQUIRED_INFO = "> Email | Password | Password";
     public static final String REGISTRATION_SUCCESSFULL = "User %s was registered successfully!";
     public static final String LOGIN_SUCCESSFULL = "Successfully logged in user %s";
     public static final String LOGOUT_SUCCESSFULL = "User %s was successfully logged out";
+
 }
