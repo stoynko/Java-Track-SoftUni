@@ -1,14 +1,12 @@
 package E01_SoftUni_Game_Store.controller;
 
 import E01_SoftUni_Game_Store.data.common.*;
-import E01_SoftUni_Game_Store.data.entities.*;
 import E01_SoftUni_Game_Store.data.repositories.*;
 import E01_SoftUni_Game_Store.service.*;
 import E01_SoftUni_Game_Store.service.dto.*;
 import E01_SoftUni_Game_Store.service.implementations.*;
 import E01_SoftUni_Game_Store.service.utilities.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.context.*;
 import org.springframework.stereotype.*;
 
 import java.io.*;
@@ -17,8 +15,6 @@ import java.time.*;
 import java.time.format.*;
 import java.util.*;
 import java.util.stream.*;
-
-import static java.time.format.DateTimeFormatter.ofPattern;
 
 @Component
 public class CommandLineRunner implements org.springframework.boot.CommandLineRunner {
@@ -89,10 +85,31 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                 }
                 return;
-            } else if ("logout".equals(input.toLowerCase()) || "4".equals(input)) {
+            } else if ("all games".equals(input.toLowerCase()) || "4".equals(input)) {
+                try {
+                    //TODO Implement displayAllGames()
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
+                }
+                return;
+            } else if ("game details".equals(input.toLowerCase()) || "5".equals(input)) {
+                try {
+                    //TODO Implement displayGameDetails()
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
+                }
+                return;
+            } else if ("owned games".equals(input.toLowerCase()) || "6".equals(input)) {
+                try {
+                    //TODO Implement displayOwnedGames()
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
+                }
+                return;
+            } else if ("logout".equals(input.toLowerCase()) || "7".equals(input)) {
                 logoutUser();
                 return;
-            } else if ("exit".equals(input.toLowerCase()) || "5".equals(input)) {
+            } else if ("exit".equals(input.toLowerCase()) || "8".equals(input)) {
                 applicatinUtil.shutdown();
             } else {
                 System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
