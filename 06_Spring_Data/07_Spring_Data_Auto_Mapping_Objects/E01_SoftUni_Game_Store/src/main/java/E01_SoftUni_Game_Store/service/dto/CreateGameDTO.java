@@ -1,7 +1,6 @@
 package E01_SoftUni_Game_Store.service.dto;
 
 import E01_SoftUni_Game_Store.data.common.*;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 

@@ -28,5 +28,7 @@ public class ConsoleLogMessage {
     public static final String REGISTRATION_SUCCESSFULL = "User %s was registered successfully!";
     public static final String LOGIN_SUCCESSFULL = "Successfully logged in user %s";
     public static final String LOGOUT_SUCCESSFULL = "User %s was successfully logged out";
-    public static final String ADDED_GAME = "%s was successfully added to the catalog.";
+    public static final String GAME_ADDED = "%s was successfully added to the catalog.";
+    public static final String GAME_EDITED = "Game with title %s has been updated.";
+    public static final String GAME_DELETED = "Game with title %s has been deleted.";
 }

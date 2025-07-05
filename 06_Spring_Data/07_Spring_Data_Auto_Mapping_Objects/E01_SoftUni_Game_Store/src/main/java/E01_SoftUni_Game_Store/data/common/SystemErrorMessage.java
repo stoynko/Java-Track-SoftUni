@@ -10,4 +10,6 @@ public class SystemErrorMessage {
     public static final String INVALID_GAME_TITLE = "The game title has to start with an uppercase letter.";
     public static final String INVALID_GAME_URL = "The URL should start with an http or https protocol.";
     public static final String GAME_WITH_TITLE_EXISTS = "Game with title %s already exists in the catalog.";
+    public static final String GAME_NON_EXISTENT = "Game with an id of %d does not exist in the catalog";
+    public static final String UNEXPECTED_ERROR = "Unexpected error has occured.";
 }

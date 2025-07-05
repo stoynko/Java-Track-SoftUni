@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
+import java.util.stream.*;
 
 @Service
 public class ValidatorUtilImpl implements ValidatorUtil {
@@ -26,4 +27,13 @@ public class ValidatorUtilImpl implements ValidatorUtil {
     public <E> boolean isValid(E e) {
         return validate(e).isEmpty();
     }
+
+    @Override
+    public <E> String getViolations(E e) {
+        return validator.validate(e)
+                .stream().map(ConstraintViolation::getMessage)
+                .collect(Collectors.joining(" | "));
+    }
+
+
 }

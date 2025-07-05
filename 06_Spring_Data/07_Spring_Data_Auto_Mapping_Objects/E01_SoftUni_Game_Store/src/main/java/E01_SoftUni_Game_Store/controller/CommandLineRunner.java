@@ -47,10 +47,6 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
 
         while (true) {
             displayMenu();
-            //yani@email.com|Yani123|Yani123|Yani
-            //yani@email.com|Yani123|Yani123
-            //pesho@pesho.com|Pep123|Pep123|Pesho
-            //Overwatch|100.00|15.5|FqnKB22pOC0|https://us.battle.net/forums/static/images/social-thumbs/overwatch.png|Overwatch is a team-based multiplayer online first-person shooter video game developed and published by Blizzard Entertainment.|24-05-2016
         }
     }
 
@@ -118,15 +114,17 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                 }
                 return;
             } else if ("edit game".equals(input.toLowerCase()) || "2".equals(input)) {
+                List<String> inputData = processInputData(reader);
                 try {
-                    //TODO Implement editGame()
+                    editGame(inputData);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                 }
                 return;
             } else if ("delete game".equals(input.toLowerCase()) || "3".equals(input)) {
+                Long gameID = Long.parseLong(reader.readLine());
                 try {
-                    //TODO Implement deleteGame()
+                    deleteGame(gameID);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                 }
@@ -214,5 +212,17 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         LocalDate releaseDate = LocalDate.parse(inputData.get(6), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         CreateGameDTO gameDTO = new CreateGameDTO(title, price, size, trailerURL, thumbnailURL, description, releaseDate);
         System.out.println(gamesService.addGame(gameDTO));
+    }
+
+    private void editGame(List<String> inputData) {
+        long gameID = Long.parseLong(inputData.get(0));
+        BigDecimal price = BigDecimal.valueOf(Double.parseDouble(inputData.get(1)));
+        double size = Double.parseDouble(inputData.get(2));
+        EditGameDTO editDTO = new EditGameDTO(gameID, price, size);
+        System.out.println(gamesService.editGame(editDTO));
+    }
+
+    private void deleteGame(Long gameID) {
+        System.out.println(gamesService.deleteGame(gameID));
     }
 }
