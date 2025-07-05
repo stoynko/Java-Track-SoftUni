@@ -7,4 +7,7 @@ public class SystemErrorMessage {
     public static final String LOGIN_INCORRECT_DATA = "Invalid email and/or password.";
     public static final String LOGOUT_NO_ACTIVE_SESSION = "Cannot log out. No user is logged in.";
     public static final String INVALID_INPUT_DATA = "Invalid input";
+    public static final String INVALID_GAME_TITLE = "The game title has to start with an uppercase letter.";
+    public static final String INVALID_GAME_URL = "The URL should start with an http or https protocol.";
+    public static final String GAME_WITH_TITLE_EXISTS = "Game with title %s already exists in the catalog.";
 }

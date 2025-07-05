@@ -2,6 +2,7 @@ package E01_SoftUni_Game_Store.controller;
 
 import E01_SoftUni_Game_Store.data.common.*;
 import E01_SoftUni_Game_Store.data.entities.*;
+import E01_SoftUni_Game_Store.data.repositories.*;
 import E01_SoftUni_Game_Store.service.*;
 import E01_SoftUni_Game_Store.service.dto.*;
 import E01_SoftUni_Game_Store.service.implementations.*;
@@ -9,9 +10,15 @@ import E01_SoftUni_Game_Store.service.utilities.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.*;
 import org.springframework.stereotype.*;
+
 import java.io.*;
+import java.math.*;
+import java.time.*;
+import java.time.format.*;
 import java.util.*;
 import java.util.stream.*;
+
+import static java.time.format.DateTimeFormatter.ofPattern;
 
 @Component
 public class CommandLineRunner implements org.springframework.boot.CommandLineRunner {
@@ -22,15 +29,17 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
     private final BufferedReader reader;
     private final SessionManager sessionManager;
     private final ApplicationUtil applicatinUtil;
+    private final GamesRepository gamesRepository;
 
     @Autowired
-    public CommandLineRunner(UserService userService, GameService gamesService, UserSessionManager userSessionManager, BufferedReader reader, SessionManager sessionManager, ApplicationUtil applicatinUtil) {
+    public CommandLineRunner(UserService userService, GameService gamesService, UserSessionManager userSessionManager, BufferedReader reader, SessionManager sessionManager, ApplicationUtil applicatinUtil, GamesRepository gamesRepository) {
         this.userSessionManager = userSessionManager;
         this.userService = userService;
         this.gamesService = gamesService;
         this.reader = reader;
         this.sessionManager = sessionManager;
         this.applicatinUtil = applicatinUtil;
+        this.gamesRepository = gamesRepository;
     }
 
     @Override
@@ -39,7 +48,9 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         while (true) {
             displayMenu();
             //yani@email.com|Yani123|Yani123|Yani
+            //yani@email.com|Yani123|Yani123
             //pesho@pesho.com|Pep123|Pep123|Pesho
+            //Overwatch|100.00|15.5|FqnKB22pOC0|https://us.battle.net/forums/static/images/social-thumbs/overwatch.png|Overwatch is a team-based multiplayer online first-person shooter video game developed and published by Blizzard Entertainment.|24-05-2016
         }
     }
 
@@ -99,9 +110,9 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
 
         while (true) {
             if ("add game".equals(input.toLowerCase()) || "1".equals(input)) {
+                List<String> inputData = processInputData(reader);
                 try {
-                    List<String> inputData = processInputData(reader);
-                    this.gamesService.addGame(List<String>);
+                    addGame(inputData);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                 }
@@ -194,6 +205,14 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
     }
 
     private void addGame(List<String> inputData) {
-
+        String title = inputData.get(0);
+        BigDecimal price = BigDecimal.valueOf(Double.parseDouble(inputData.get(1)));
+        Double size = Double.parseDouble(inputData.get(2));
+        String trailerURL = inputData.get(3);
+        String thumbnailURL = inputData.get(4);
+        String description = inputData.get(5);
+        LocalDate releaseDate = LocalDate.parse(inputData.get(6), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        CreateGameDTO gameDTO = new CreateGameDTO(title, price, size, trailerURL, thumbnailURL, description, releaseDate);
+        System.out.println(gamesService.addGame(gameDTO));
     }
 }

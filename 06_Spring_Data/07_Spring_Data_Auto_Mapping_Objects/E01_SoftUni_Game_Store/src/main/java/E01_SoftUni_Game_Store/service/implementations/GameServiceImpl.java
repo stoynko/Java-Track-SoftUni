@@ -35,6 +35,11 @@ public class GameServiceImpl implements GameService {
         }
 
         Game game = this.modelMapper.map(gameCreationDTO, Game.class);
+
+        if (this.gamesRepository.existsByTitle(game.getTitle())) {
+            return String.format(SystemErrorMessage.GAME_WITH_TITLE_EXISTS, game.getTitle());
+        }
+
         this.gamesRepository.saveAndFlush(game);
         return String.format(ConsoleLogMessage.ADDED_GAME, game.getTitle());
     }

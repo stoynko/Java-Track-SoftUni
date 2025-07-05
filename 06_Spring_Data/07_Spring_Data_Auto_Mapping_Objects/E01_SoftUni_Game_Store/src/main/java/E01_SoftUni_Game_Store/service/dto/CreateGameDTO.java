@@ -1,5 +1,6 @@
 package E01_SoftUni_Game_Store.service.dto;
 
+import E01_SoftUni_Game_Store.data.common.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
@@ -12,15 +13,13 @@ public class CreateGameDTO {
     @Length(min = 3, max = 100)
     @Pattern
     (regexp = "^[A-Z]{1}.*",
-    message = "Game title has to start with an uppercase letter.")
+    message = SystemErrorMessage.INVALID_GAME_TITLE)
     private String title;
 
     @Length(min = 10, max = 11)
     private String trailerURL;
 
-    @Pattern
-    (regexp = "/^(?:http[s]?:\\/\\/.)?(?:www\\.)?[-a-zA-Z0-9@%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b(?:[-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)$",
-    message = "The URL should start with an http or https protocol.")
+    @URL(message = SystemErrorMessage.INVALID_GAME_URL)
     private String imageThumbnailURL;
 
     @Positive
@@ -36,12 +35,12 @@ public class CreateGameDTO {
 
     public CreateGameDTO() { }
 
-    public CreateGameDTO(String title, String trailerURL, String imageThumbnailURL, double size, BigDecimal price, String description, LocalDate releaseDate) {
+    public CreateGameDTO(String title, BigDecimal price, double size, String trailerURL, String imageThumbnailURL, String description, LocalDate releaseDate) {
         this.title = title;
+        this.price = price;
+        this.size = size;
         this.trailerURL = trailerURL;
         this.imageThumbnailURL = imageThumbnailURL;
-        this.size = size;
-        this.price = price;
         this.description = description;
         this.releaseDate = releaseDate;
     }
