@@ -12,6 +12,7 @@ import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
 import java.util.*;
+import java.util.stream.*;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -51,7 +52,7 @@ public class GameServiceImpl implements GameService {
         }
 
         if (!gamesRepository.existsById(gameEditDTO.getId())) {
-            return String.format(SystemErrorMessage.GAME_NON_EXISTENT);
+            return String.format(SystemErrorMessage.GAME_ID_NON_EXISTENT);
         }
 
         Game game = gamesRepository.findById(gameEditDTO.getId());
@@ -72,7 +73,7 @@ public class GameServiceImpl implements GameService {
     public String deleteGame(Long gameID) {
 
         if (!gamesRepository.existsById(gameID)) {
-            return String.format(SystemErrorMessage.GAME_NON_EXISTENT);
+            return String.format(SystemErrorMessage.GAME_ID_NON_EXISTENT);
         }
 
         Game game = gamesRepository.findById(gameID).get();
@@ -84,5 +85,28 @@ public class GameServiceImpl implements GameService {
     @Override
     public boolean gameExists(Game game) {
         return this.gamesRepository.existsById(game.getId());
+    }
+
+    @Override
+    public Set<GameBasicViewDTO> displayAllGames() {
+        return gamesRepository.findAll().stream()
+                              .map(game -> modelMapper.map(game, GameBasicViewDTO.class))
+                              .collect(Collectors.toSet());
+    }
+
+    @Override
+    public GameDetailedViewDTO displayGameDetails(String title) {
+        Game game = this.gamesRepository.findGameByTitle(title);
+        if (game != null) {
+            return modelMapper.map(game, GameDetailedViewDTO.class);
+        } else {
+            return new GameDetailedViewDTO();
+        }
+    }
+    @Override
+    public Set<GameBasicViewDTO> displayOwnedGames(UserSessionManager userSessionManager){
+
+            //return gamesRepository.findAll
+        return Set.of();
     }
 }

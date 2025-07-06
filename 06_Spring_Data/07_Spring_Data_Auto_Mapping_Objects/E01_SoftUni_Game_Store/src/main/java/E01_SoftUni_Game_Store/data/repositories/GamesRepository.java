@@ -12,4 +12,6 @@ public interface GamesRepository extends JpaRepository<Game, Long> {
     boolean existsById(long gameID);
     boolean existsByTitle(String title);
     void deleteGameById(Long gameID);
+    Game findGameByTitle(String title);
+    //Set<Game> findGameBy
 }
