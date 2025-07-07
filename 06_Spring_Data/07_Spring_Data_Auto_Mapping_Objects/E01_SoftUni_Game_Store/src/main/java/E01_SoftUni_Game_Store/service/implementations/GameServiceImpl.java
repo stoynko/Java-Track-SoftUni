@@ -100,7 +100,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public GameDetailedViewDTO displayGameDetails(String title) {
-        Game game = this.gamesRepository.findGameByTitle(title);
+        Game game = this.gamesRepository.findByTitle(title);
         if (game != null) {
             return modelMapper.map(game, GameDetailedViewDTO.class);
         } else {
@@ -112,5 +112,52 @@ public class GameServiceImpl implements GameService {
         return userSessionManager.getActiveSession().getGames().stream()
                                  .map(game -> modelMapper.map(game, GameOwnedDTO.class))
                                  .collect(Collectors.toSet());
+    }
+
+    @Override
+    public String addItemToBasket(String title) {
+
+        Game game = this.gamesRepository.findByTitle(title);
+
+        if (game == null) {
+            return String.format(SystemErrorMessage.GAME_TITLE_NON_EXISTENT, title);
+        }
+
+        userSessionManager.getActiveSession().getShoppingBasket().add(game);
+        return String.format(ConsoleLogMessage.GAME_ADDED_TO_BASKET, game.getTitle());
+    }
+
+    @Override
+    public String removeItemFromBasket(String title) {
+
+        Game game = this.gamesRepository.findByTitle(title);
+
+        if (game == null) {
+            return String.format(SystemErrorMessage.GAME_TITLE_NON_EXISTENT, title);
+        }
+        if (userSessionManager.getActiveSession().getShoppingBasket().contains(game)) {
+            userSessionManager.getActiveSession().getShoppingBasket().remove(game);
+            return String.format(ConsoleLogMessage.GAME_REMOVED_FROM_BASKET, game.getTitle());
+        }
+
+        return String.format(SystemErrorMessage.GAME_NOT_IN_BASKET, title);
+    }
+
+    @Override
+    public String buyItems() {
+        User user = userSessionManager.getActiveSession();
+        user.getShoppingBasket().forEach(game -> {
+            if (!user.getGames().contains(game)) {
+                user.getGames().add(game);
+                user.getShoppingBasket().remove(game);
+            }
+        });
+
+        if (!user.getShoppingBasket().isEmpty()) {
+            String ownedGames = user.getShoppingBasket().stream().map(game -> game.getTitle()).collect(Collectors.joining(","));
+            return String.format("Purchase was unsuccessful for %s", ownedGames);
+        }
+
+        return ConsoleLogMessage.GAME_PURCHASED_SUCCESSFULLY;
     }
 }

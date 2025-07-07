@@ -15,4 +15,7 @@ public interface GameService {
     Set<GameBasicViewDTO> displayAllGames();
     GameDetailedViewDTO displayGameDetails(String title);
     Set<GameOwnedDTO> displayOwnedGames();
+    String addItemToBasket(String title);
+    String removeItemFromBasket(String title);
+    String buyItems();
 }

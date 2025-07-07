@@ -25,17 +25,15 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
     private final BufferedReader reader;
     private final SessionManager sessionManager;
     private final ApplicationUtil applicationUtil;
-    private final GamesRepository gamesRepository;
 
     @Autowired
-    public CommandLineRunner(UserService userService, GameService gamesService, UserSessionManager userSessionManager, BufferedReader reader, SessionManager sessionManager, ApplicationUtil applicationUtil, GamesRepository gamesRepository) {
+    public CommandLineRunner(UserService userService, GameService gamesService, UserSessionManager userSessionManager, BufferedReader reader, SessionManager sessionManager, ApplicationUtil applicationUtil) {
         this.userSessionManager = userSessionManager;
         this.userService = userService;
         this.gamesService = gamesService;
         this.reader = reader;
         this.sessionManager = sessionManager;
         this.applicationUtil = applicationUtil;
-        this.gamesRepository = gamesRepository;
     }
 
     @Override
@@ -64,28 +62,30 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
     private void userMenuListener(String input) throws IOException {
 
         while (true) {
-            if ("add item".equals(input.toLowerCase()) || "1".equals(input)) {
+            if ("add item".equalsIgnoreCase(input) || "1".equals(input)) {
+                String title = reader.readLine();
                 try {
-                    //TODO Implement addItem()
+                    System.out.println(gamesService.addItemToBasket(title));
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                 }
                 return;
-            } else if ("remove item".equals(input.toLowerCase()) || "2".equals(input)) {
+            } else if ("remove item".equalsIgnoreCase(input) || "2".equals(input)) {
+                String title = reader.readLine();
                 try {
-                    //TODO Implement removeItem()
+                    System.out.println(gamesService.removeItemFromBasket(title));
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                 }
                 return;
-            } else if ("buy item".equals(input.toLowerCase()) || "3".equals(input)) {
+            } else if ("buy item".equalsIgnoreCase(input) || "3".equals(input)) {
                 try {
-                    //TODO Implement buyItem()
+                    System.out.println(gamesService.buyItems());
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                 }
                 return;
-            } else if ("all games".equals(input.toLowerCase()) || "4".equals(input)) {
+            } else if ("all games".equalsIgnoreCase(input) || "4".equals(input)) {
                 try {
                     gamesService.displayAllGames().stream().forEach(game -> {
                         System.out.printf("%s - %.2f\n", game.getTitle(), game.getPrice());
@@ -94,7 +94,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                 }
                 return;
-            } else if ("game details".equals(input.toLowerCase()) || "5".equals(input)) {
+            } else if ("game details".equalsIgnoreCase(input) || "5".equals(input)) {
                 String title = reader.readLine();
                 try {
                     GameDetailedViewDTO game = gamesService.displayGameDetails(title);
@@ -105,7 +105,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                     System.out.println(String.format(SystemErrorMessage.GAME_TITLE_NON_EXISTENT, title));
                 }
                 return;
-            } else if ("owned games".equals(input.toLowerCase()) || "6".equals(input)) {
+            } else if ("owned games".equalsIgnoreCase(input) || "6".equals(input)) {
                 try {
                     Set<GameOwnedDTO> ownedGames = gamesService.displayOwnedGames();
                     if (ownedGames.isEmpty()) {
@@ -118,10 +118,10 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                 }
                 return;
-            } else if ("logout".equals(input.toLowerCase()) || "7".equals(input)) {
+            } else if ("logout".equalsIgnoreCase(input) || "7".equals(input)) {
                 logoutUser();
                 return;
-            } else if ("exit".equals(input.toLowerCase()) || "8".equals(input)) {
+            } else if ("exit".equalsIgnoreCase(input) || "8".equals(input)) {
                 applicationUtil.shutdown();
             } else {
                 System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
@@ -131,7 +131,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         }
     }
 
-        private String displayGameDetails(GameDetailedViewDTO game, String title) {
+    private String displayGameDetails(GameDetailedViewDTO game, String title) {
             if (game == null) {
                 return String.format(SystemErrorMessage.GAME_TITLE_NON_EXISTENT, title);
             }
@@ -145,10 +145,43 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
             return output.toString();
         }
 
+    private void mainMenuListener(String input) throws IOException {
+        while (true) {
+            if ("register".equalsIgnoreCase(input) || "1".equals(input)) {
+                System.out.println(ConsoleLogMessage.REGISTRATION_REQUIRED_INFO);
+                List<String> inputData = processInputData(reader);
+                try {
+                    registerUser(inputData);
+                    loginUser(inputData);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
+                }
+                return;
+            } else if ("login".equalsIgnoreCase(input) || "2".equals(input)) {
+                System.out.println(ConsoleLogMessage.LOGIN_REQUIRED_INFO);
+                List<String> inputData = processInputData(reader);
+                try {
+                    loginUser(inputData);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
+                }
+                return;
+            } else if ("logout".equalsIgnoreCase(input) || "3".equals(input)) {
+                logoutUser();
+                return;
+            } else if ("exit".equalsIgnoreCase(input) || "4".equals(input)) {
+                applicationUtil.shutdown();
+            } else {
+                System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
+                return;
+            }
+            input = reader.readLine();
+        }
+    }
         private void adminMenuListener(String input) throws IOException {
 
             while (true) {
-                if ("add game".equals(input.toLowerCase()) || "1".equals(input)) {
+                if ("add game".equalsIgnoreCase(input) || "1".equals(input)) {
                     List<String> inputData = processInputData(reader);
                     try {
                         addGame(inputData);
@@ -156,7 +189,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                         System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                     }
                     return;
-                } else if ("edit game".equals(input.toLowerCase()) || "2".equals(input)) {
+                } else if ("edit game".equalsIgnoreCase(input) || "2".equals(input)) {
                     List<String> inputData = processInputData(reader);
                     try {
                         editGame(inputData);
@@ -164,7 +197,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                         System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                     }
                     return;
-                } else if ("delete game".equals(input.toLowerCase()) || "3".equals(input)) {
+                } else if ("delete game".equalsIgnoreCase(input) || "3".equals(input)) {
                     Long gameID = Long.parseLong(reader.readLine());
                     try {
                         deleteGame(gameID);
@@ -172,10 +205,10 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                         System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                     }
                     return;
-                } else if ("logout".equals(input.toLowerCase()) || "4".equals(input)) {
+                } else if ("logout".equalsIgnoreCase(input) || "4".equals(input)) {
                     logoutUser();
                     return;
-                } else if ("exit".equals(input.toLowerCase()) || "5".equals(input)) {
+                } else if ("exit".equalsIgnoreCase(input) || "5".equals(input)) {
                     applicationUtil.shutdown();
                 } else {
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
@@ -185,39 +218,6 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
             }
         }
 
-        private void mainMenuListener(String input) throws IOException {
-            while (true) {
-                if ("register".equals(input.toLowerCase()) || "1".equals(input)) {
-                    System.out.println(ConsoleLogMessage.REGISTRATION_REQUIRED_INFO);
-                    List<String> inputData = processInputData(reader);
-                    try {
-                        registerUser(inputData);
-                        loginUser(inputData);
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
-                    }
-                    return;
-                } else if ("login".equals(input.toLowerCase()) || "2".equals(input)) {
-                    System.out.println(ConsoleLogMessage.LOGIN_REQUIRED_INFO);
-                    List<String> inputData = processInputData(reader);
-                    try {
-                        loginUser(inputData);
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
-                    }
-                    return;
-                } else if ("logout".equals(input.toLowerCase()) || "3".equals(input)) {
-                    logoutUser();
-                    return;
-                } else if ("exit".equals(input.toLowerCase()) || "4".equals(input)) {
-                    applicationUtil.shutdown();
-                } else {
-                    System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
-                    return;
-                }
-                input = reader.readLine();
-            }
-        }
 
         private List<String> processInputData(BufferedReader reader) throws IOException {
             return Arrays.stream(reader.readLine().split("\\|"))

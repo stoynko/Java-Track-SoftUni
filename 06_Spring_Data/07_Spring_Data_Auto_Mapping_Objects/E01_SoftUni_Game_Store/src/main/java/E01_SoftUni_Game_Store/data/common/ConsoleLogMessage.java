@@ -39,4 +39,9 @@ public class ConsoleLogMessage {
     public static final String GAME_EDITED = "Game with title %s has been updated.";
     public static final String GAME_DELETED = "Game with title %s has been deleted.";
     public static final String GAME_OWNER_BY_USER = "User %s owns the following games:";
+    public static final String GAME_ADDED_TO_BASKET = "Game %s has been added to your shopping basket.";
+    public static final String GAME_REMOVED_FROM_BASKET = "Game %s has been removed from your shopping basket.";
+    public static final String GAME_PURCHASED_SUCCESSFULLY = "Purchase successful!";
+
+
 }

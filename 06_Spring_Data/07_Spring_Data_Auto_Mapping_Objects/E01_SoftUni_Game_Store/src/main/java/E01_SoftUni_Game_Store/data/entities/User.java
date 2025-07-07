@@ -3,6 +3,7 @@ package E01_SoftUni_Game_Store.data.entities;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.*;
+import org.modelmapper.internal.bytebuddy.implementation.bind.annotation.*;
 
 import java.util.*;
 
@@ -28,7 +29,12 @@ public class User extends BaseEntity{
     @Column(name = "admin")
     private boolean admin;
 
-    public User() { }
+    @Transient
+    private Set<Game> shoppingBasket;
+
+    public User() {
+        this.shoppingBasket = new HashSet<>();
+    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -64,6 +70,10 @@ public class User extends BaseEntity{
 
     public Set<Game> getGames() {
         return games;
+    }
+
+    public Set<Game> getShoppingBasket() {
+        return shoppingBasket;
     }
 
     public boolean isAdmin() {

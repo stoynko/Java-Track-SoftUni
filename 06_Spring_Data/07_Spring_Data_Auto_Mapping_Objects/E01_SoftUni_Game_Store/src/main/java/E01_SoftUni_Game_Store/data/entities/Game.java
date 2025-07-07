@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.*;
 import java.time.*;
+import java.util.*;
 
 @Entity
 @Table(name = "games")
@@ -31,6 +32,18 @@ public class Game extends BaseEntity{
     private LocalDate releaseDate;
 
     public Game() { }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Game game = (Game) o;
+        return Double.compare(size, game.size) == 0 && Objects.equals(title, game.title) && Objects.equals(trailerURL, game.trailerURL) && Objects.equals(imageThumbnailURL, game.imageThumbnailURL) && Objects.equals(price, game.price) && Objects.equals(description, game.description) && Objects.equals(releaseDate, game.releaseDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, trailerURL, imageThumbnailURL, size, price, description, releaseDate);
+    }
 
     public void setTitle(String title) {
         this.title = title;
