@@ -12,5 +12,6 @@ public class SystemErrorMessage {
     public static final String GAME_WITH_TITLE_EXISTS = "Game with title %s already exists in the catalog.";
     public static final String GAME_ID_NON_EXISTENT = "Game with an id of %d does not exist in the catalog";
     public static final String GAME_TITLE_NON_EXISTENT = "Game with title %s does not exist in the catalog";
+    public static final String USER_NO_OWNED_GAMES = "User %s does not own any games.";
     public static final String UNEXPECTED_ERROR = "Unexpected error has occurred.";
 }

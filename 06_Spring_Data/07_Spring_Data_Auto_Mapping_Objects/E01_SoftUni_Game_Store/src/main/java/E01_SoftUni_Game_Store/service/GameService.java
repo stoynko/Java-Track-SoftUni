@@ -14,5 +14,5 @@ public interface GameService {
     boolean gameExists(Game game);
     Set<GameBasicViewDTO> displayAllGames();
     GameDetailedViewDTO displayGameDetails(String title);
-    Set<GameBasicViewDTO> displayOwnedGames(UserSessionManager userSessionManager);
+    Set<GameOwnedDTO> displayOwnedGames();
 }

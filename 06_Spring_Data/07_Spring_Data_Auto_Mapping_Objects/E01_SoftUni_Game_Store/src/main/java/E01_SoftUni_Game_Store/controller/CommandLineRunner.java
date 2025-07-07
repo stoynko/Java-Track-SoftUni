@@ -24,17 +24,17 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
     private final UserSessionManager userSessionManager;
     private final BufferedReader reader;
     private final SessionManager sessionManager;
-    private final ApplicationUtil applicatinUtil;
+    private final ApplicationUtil applicationUtil;
     private final GamesRepository gamesRepository;
 
     @Autowired
-    public CommandLineRunner(UserService userService, GameService gamesService, UserSessionManager userSessionManager, BufferedReader reader, SessionManager sessionManager, ApplicationUtil applicatinUtil, GamesRepository gamesRepository) {
+    public CommandLineRunner(UserService userService, GameService gamesService, UserSessionManager userSessionManager, BufferedReader reader, SessionManager sessionManager, ApplicationUtil applicationUtil, GamesRepository gamesRepository) {
         this.userSessionManager = userSessionManager;
         this.userService = userService;
         this.gamesService = gamesService;
         this.reader = reader;
         this.sessionManager = sessionManager;
-        this.applicatinUtil = applicatinUtil;
+        this.applicationUtil = applicationUtil;
         this.gamesRepository = gamesRepository;
     }
 
@@ -107,7 +107,13 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                 return;
             } else if ("owned games".equals(input.toLowerCase()) || "6".equals(input)) {
                 try {
-                    gamesService.displayOwnedGames(userSessionManager).stream();
+                    Set<GameOwnedDTO> ownedGames = gamesService.displayOwnedGames();
+                    if (ownedGames.isEmpty()) {
+                        System.out.println(String.format(SystemErrorMessage.USER_NO_OWNED_GAMES, userSessionManager.getActiveSession().getFullName()));
+                    } else {
+                        System.out.println(String.format(ConsoleLogMessage.GAME_OWNER_BY_USER, userSessionManager.getActiveSession().getFullName()));
+                        ownedGames.forEach(game -> System.out.println(game.getTitle()));
+                    }
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                 }
@@ -116,7 +122,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                 logoutUser();
                 return;
             } else if ("exit".equals(input.toLowerCase()) || "8".equals(input)) {
-                applicatinUtil.shutdown();
+                applicationUtil.shutdown();
             } else {
                 System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
             }
@@ -170,7 +176,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                     logoutUser();
                     return;
                 } else if ("exit".equals(input.toLowerCase()) || "5".equals(input)) {
-                    applicatinUtil.shutdown();
+                    applicationUtil.shutdown();
                 } else {
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                 }
@@ -204,7 +210,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                     logoutUser();
                     return;
                 } else if ("exit".equals(input.toLowerCase()) || "4".equals(input)) {
-                    applicatinUtil.shutdown();
+                    applicationUtil.shutdown();
                 } else {
                     System.out.println(SystemErrorMessage.INVALID_INPUT_DATA);
                     return;

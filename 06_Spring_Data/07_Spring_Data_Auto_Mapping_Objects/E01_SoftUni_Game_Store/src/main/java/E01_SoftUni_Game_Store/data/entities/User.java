@@ -1,6 +1,8 @@
 package E01_SoftUni_Game_Store.data.entities;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.*;
 
 import java.util.*;
 
@@ -17,7 +19,7 @@ public class User extends BaseEntity{
     @Column(name = "full_name")
     private String fullName;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_games",
                joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"))

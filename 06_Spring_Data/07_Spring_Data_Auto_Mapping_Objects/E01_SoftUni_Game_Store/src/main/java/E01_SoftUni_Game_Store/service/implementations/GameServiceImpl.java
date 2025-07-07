@@ -20,11 +20,15 @@ public class GameServiceImpl implements GameService {
     private GamesRepository gamesRepository;
     private final ModelMapper modelMapper;
     private final ValidatorUtil validator;
+    private final UserSessionManager userSessionManager;
+    private final UserService userService;
 
-    public GameServiceImpl(GamesRepository gamesRepository, ModelMapper modelMapper, ValidatorUtil validator) {
+    public GameServiceImpl(GamesRepository gamesRepository, ModelMapper modelMapper, ValidatorUtil validator, UserSessionManager userSessionManager, UserService userService) {
         this.gamesRepository = gamesRepository;
         this.modelMapper = modelMapper;
         this.validator = validator;
+        this.userSessionManager = userSessionManager;
+        this.userService = userService;
     }
 
     @Override
@@ -104,9 +108,9 @@ public class GameServiceImpl implements GameService {
         }
     }
     @Override
-    public Set<GameBasicViewDTO> displayOwnedGames(UserSessionManager userSessionManager){
-
-            //return gamesRepository.findAll
-        return Set.of();
+    public Set<GameOwnedDTO> displayOwnedGames(){
+        return userSessionManager.getActiveSession().getGames().stream()
+                                 .map(game -> modelMapper.map(game, GameOwnedDTO.class))
+                                 .collect(Collectors.toSet());
     }
 }
