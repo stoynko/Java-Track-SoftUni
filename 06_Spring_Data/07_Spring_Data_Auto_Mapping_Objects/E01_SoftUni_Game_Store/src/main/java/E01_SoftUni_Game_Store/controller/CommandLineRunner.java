@@ -1,7 +1,6 @@
 package E01_SoftUni_Game_Store.controller;
 
 import E01_SoftUni_Game_Store.data.common.*;
-import E01_SoftUni_Game_Store.data.repositories.*;
 import E01_SoftUni_Game_Store.service.*;
 import E01_SoftUni_Game_Store.service.dto.*;
 import E01_SoftUni_Game_Store.service.implementations.*;
@@ -15,6 +14,62 @@ import java.time.*;
 import java.time.format.*;
 import java.util.*;
 import java.util.stream.*;
+
+/*The game store is a platform, where users can buy games. Your task is to create a console application for the store.
+    Data Models:
+    Create the required entities. Use appropriate data types.
+            • The system contains information about users and games.
+            • Users can register in the system. After successful registration, the user has email, password, full name,
+              list of games and information on whether he/she is an administrator or not.
+            • The first registered user becomes also an administrator. You can manually mark users as admins in the database.
+            • A game has a title, trailer (YouTube Video Id), image thumbnail (URL), size, price, description and release date
+            • Users can make orders. Each order has a single buyer (user) and one or many products.
+    Functionality:
+        • All users can view all games.
+        • All users can view the details of each game.
+        • Logged-in users can logout.
+        • Logged in users can add/remove games from their shopping cart.
+        • Logged in users can buy games that are added to the shopping cart and those games are added to the profile of the user and cannot be bought for a second time.
+        • Administrators can add, edit or delete games.
+        • Basic user can not add, edit or delete game.
+
+1.	Design the Database - Design entity classes and create a database to hold the users, games and orders.
+2.	Implement User Registration, Login and Logout
+    The guest users can register and log in.
+        • RegisterUser|<email>|<password>|<confirmPassword>|<fullName> - This command adds a new user to the database in case of valid parameters.
+            Otherwise, prints an appropriate message informing why the user cannot be registered. The requirements for valid parameters are:
+            o	Email – must contain @ sign and a period. It must be unique.
+            o	Password – length must be at least 6 symbols and must contain at least 1 uppercase, 1 lowercase letter and 1 digit.
+            o	Confirm Password – must match the provided password.
+        • LoginUser|<email>|<password> - This command sets the current logged in user if it exists. Otherwise, prints an appropriate message. Logged in user can logout.
+        • Logout – This command logs out the user from the system. If there is no logged in user, print appropriate message.
+
+As an admin, you have the option to add/edit/delete games to the catalog.
+    • AddGame|<title>|<price>|<size>|<trailer>|<thubnailURL>|<description>|<releaseDate>
+    • EditGame|<id>|<values> - A game should be edited in case of valid id. Otherwise, print the appropriate message.
+      A game should be added/edited only to the catalog, if it matches the following criteria:
+        o Title – has to begin with an uppercase letter and must have a length between 3 and 100 symbols (inclusively).
+        o Price – must be a positive number.
+        o Size – must be a positive number.
+        o Trailer – only videos from YouTube are allowed. Only their ID, which is a string of exactly 11 characters, should be saved to the database.
+    For example, if the URL to the trailer is https://www.youtube.com/watch?v=edYCtaNueQY, the required part that must be saved into the database is edYCtaNueQY.
+    That would be always the last 11 characters from the provided URL.
+        o Thumbnail URL – it should be plain text starting with http://, https://
+        o Description – must be at least 20 symbols
+    •	DeleteGame|<id> - A game should be deleted in case of valid id. Otherwise, print an appropriate message.
+
+Implement a view for retrieving different information about the games.
+    • AllGames - print titles and price of all games.
+    • DetailsGame|<gameTitle> - print details for а single game.
+    • OwnedGames – print the games bought by the currently logged in user.
+        o First you have to make a game purchase method from a user.
+
+Each user should be able to buy a game.
+    • AddItem|<gameTitle> - add game to shopping cart
+    • RemoveItem|<gameTitle> - remove game from shopping cart
+    • BuyItem – buy all games from the shopping cart
+        o A user can buy a game only once!
+        o If he owns a game, he shouldn't be able to add it to the shopping cart. */
 
 @Component
 public class CommandLineRunner implements org.springframework.boot.CommandLineRunner {
