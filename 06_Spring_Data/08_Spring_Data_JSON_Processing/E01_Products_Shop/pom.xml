@@ -11,8 +11,8 @@
 	<groupId>oknyots</groupId>
 	<artifactId>E01_Products_Shop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>E01_Products_Shop</name>
-	<description>E01_Products_Shop</description>
+	<name>E01_Products_Shop.E01_Products_Shop</name>
+	<description>E01_Products_Shop.E01_Products_Shop</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -44,6 +44,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>9.0.1.Final</version>
 		</dependency>
 	</dependencies>
 
