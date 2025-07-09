@@ -17,11 +17,13 @@ public class Product extends BaseEntity {
     @Basic
     private BigDecimal price;
 
-    @Column(name = "buyer_id")
-    private long buyerID;
+    @ManyToOne
+    @JoinColumn(name = "buyer_id", referencedColumnName = "id")
+    private User buyer;
 
-    @Column(name = "seller_id")
-    private long sellerID;
+    @ManyToOne
+    @JoinColumn(name = "seller_id", referencedColumnName = "id")
+    private User seller;
 
     @ManyToMany
     @JoinTable(name = "categories_products",
@@ -39,12 +41,16 @@ public class Product extends BaseEntity {
         this.price = price;
     }
 
-    public void setBuyerID(long buyerID) {
-        this.buyerID = buyerID;
+    public void setCategory(Set<Category> category) {
+        this.category = category;
     }
 
-    public void setSellerID(long sellerID) {
-        this.sellerID = sellerID;
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
     }
 
     public String getName() {
@@ -55,12 +61,16 @@ public class Product extends BaseEntity {
         return price;
     }
 
-    public long getBuyerID() {
-        return buyerID;
+    public Set<Category> getCategory() {
+        return category;
     }
 
-    public long getSellerID() {
-        return sellerID;
+    public User getBuyer() {
+        return buyer;
+    }
+
+    public User getSeller() {
+        return seller;
     }
 }
 
