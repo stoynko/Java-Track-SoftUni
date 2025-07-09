@@ -19,7 +19,7 @@ public class User extends BaseEntity {
     @Column(nullable = true)
     private byte age;
 
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(name = "users_friends",
             joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "friend_id", referencedColumnName = "id"))

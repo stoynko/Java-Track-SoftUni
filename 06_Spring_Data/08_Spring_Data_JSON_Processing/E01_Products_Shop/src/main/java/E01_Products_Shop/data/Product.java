@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.validator.constraints.*;
 
 import java.math.*;
+import java.util.*;
 
 @Entity
 @Table(name = "products")
@@ -20,7 +21,13 @@ public class Product extends BaseEntity {
     private long buyerID;
 
     @Column(name = "seller_id")
-    private long selledID;
+    private long sellerID;
+
+    @ManyToMany
+    @JoinTable(name = "categories_products",
+    joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
+    private Set<Category> category;
 
     public Product() { }
 
@@ -36,8 +43,8 @@ public class Product extends BaseEntity {
         this.buyerID = buyerID;
     }
 
-    public void setSelledID(long selledID) {
-        this.selledID = selledID;
+    public void setSellerID(long sellerID) {
+        this.sellerID = sellerID;
     }
 
     public String getName() {
@@ -52,8 +59,8 @@ public class Product extends BaseEntity {
         return buyerID;
     }
 
-    public long getSelledID() {
-        return selledID;
+    public long getSellerID() {
+        return sellerID;
     }
 }
 
