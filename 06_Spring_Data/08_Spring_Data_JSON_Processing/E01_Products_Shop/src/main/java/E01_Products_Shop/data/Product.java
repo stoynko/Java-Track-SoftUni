@@ -2,6 +2,7 @@ package E01_Products_Shop.data;
 
 import jakarta.persistence.*;
 import org.hibernate.validator.constraints.*;
+import org.springframework.stereotype.*;
 
 import java.math.*;
 import java.util.*;

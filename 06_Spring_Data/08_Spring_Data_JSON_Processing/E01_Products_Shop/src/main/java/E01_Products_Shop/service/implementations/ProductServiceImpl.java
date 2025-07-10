@@ -5,10 +5,12 @@ import E01_Products_Shop.repositories.*;
 import E01_Products_Shop.service.*;
 import E01_Products_Shop.service.dtos.*;
 import E01_Products_Shop.service.utilities.*;
+import com.fasterxml.jackson.core.type.*;
 import com.fasterxml.jackson.databind.*;
 import com.google.gson.*;
 import org.modelmapper.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.core.io.*;
 import org.springframework.stereotype.*;
 
 import java.io.*;
@@ -40,7 +42,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void importDataWithJackson() {
-
+        try {
+            InputStream inputStream = new ClassPathResource(PRODUCTS_JSON_PATH_JACKSON).getInputStream();
+            Set<ImportProductDTO> inputProducts = objectMapper.readValue(inputStream, new TypeReference<Set<ImportProductDTO>>() { });
+            for (ImportProductDTO productDTO : inputProducts) {
+                Product product = modelMapper.map(productDTO, Product.class);
+                product.setCategory(categoryService.getRandomCategories());
+                product.setSeller(userService.getRandomUser());
+                product.setBuyer(userService.getRandomUser());
+                productRepository.saveAndFlush(product);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load or parse JSON file with path: " + PRODUCTS_JSON_PATH_JACKSON, e);
+        }
     }
 
     @Override

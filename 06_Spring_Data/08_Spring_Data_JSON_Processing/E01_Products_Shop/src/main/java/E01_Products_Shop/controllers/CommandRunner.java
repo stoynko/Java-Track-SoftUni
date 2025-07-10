@@ -30,7 +30,7 @@ public class CommandRunner implements CommandLineRunner {
         }
 
         if (!this.productService.isImported()) {
-            //productService.importDataWithGSON();
+            //productService.importDataWithJackson();
             productService.importDataWithGSON();
         }
 
