@@ -106,6 +106,7 @@ public class ProductServiceImpl implements ProductService {
             }
             return productDTO;
         }).collect(Collectors.toList());
-        exporterUtil.exportWithGson(productDTOsInRange, "products-in-range");
+        exporterUtil.exportWithGson(productDTOsInRange, "products-in-range-gson");
+        exporterUtil.exportWithJackson(productDTOsInRange, "products-in-range-jackson");
     }
 }

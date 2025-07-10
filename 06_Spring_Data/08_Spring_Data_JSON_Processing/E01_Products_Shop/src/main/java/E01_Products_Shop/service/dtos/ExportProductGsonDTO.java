@@ -1,8 +1,9 @@
 package E01_Products_Shop.service.dtos;
 
+import java.io.*;
 import java.math.*;
 
-public class ExportProductGsonDTO {
+public class ExportProductGsonDTO implements Serializable {
 
     private String name;
 

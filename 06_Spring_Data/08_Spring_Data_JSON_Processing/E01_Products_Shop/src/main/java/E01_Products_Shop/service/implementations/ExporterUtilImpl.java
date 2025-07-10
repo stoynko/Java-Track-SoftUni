@@ -2,6 +2,7 @@ package E01_Products_Shop.service.implementations;
 
 import E01_Products_Shop.service.utilities.*;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.*;
 import com.google.gson.*;
 import org.springframework.stereotype.*;
 
@@ -22,8 +23,8 @@ public class ExporterUtilImpl implements ExporterUtil {
 
     @Override
     public <E> void exportWithGson(Iterable<E> data, String fileName) {
-        String jsonString = gson.toJson(data);
         String fullPath = DEFAULT_LOCATION + fileName + ".json";
+        String jsonString = gson.toJson(data);
         File file = new File(fullPath);
 
         try (FileWriter fileWriter = new FileWriter(file)) {
@@ -34,8 +35,14 @@ public class ExporterUtilImpl implements ExporterUtil {
     }
 
     @Override
-    public <E> void exportWithJackson(Iterable<E> e, String fileName) {
-
+    public <E> void exportWithJackson(Iterable<E> data, String fileName) {
+        String fullPath = DEFAULT_LOCATION + fileName + ".json";
+        File file = new File(fullPath);
+        try {
+            objectMapper.writer().withDefaultPrettyPrinter().writeValue(file, data);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to write to JSON file: " + fullPath, e);
+        }
     }
 
 
