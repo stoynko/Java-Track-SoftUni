@@ -14,8 +14,11 @@ import org.springframework.core.io.*;
 import org.springframework.stereotype.*;
 
 import java.io.*;
+import java.math.*;
 import java.nio.file.*;
 import java.util.*;
+import java.util.concurrent.*;
+import java.util.stream.*;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -29,27 +32,34 @@ public class ProductServiceImpl implements ProductService {
     private static ObjectMapper objectMapper;
     private final Gson gson;
     private final CategoryService categoryService;
+    private final ExporterUtil exporterUtil;
 
     @Autowired
-    public ProductServiceImpl(UserService userService, ProductRepository productRepository, ModelMapper modelMapper, ObjectMapper objectMapper, Gson gson, CategoryService categoryService) {
+    public ProductServiceImpl(UserService userService, ProductRepository productRepository, ModelMapper modelMapper, ObjectMapper objectMapper, Gson gson, CategoryService categoryService, ExporterUtil exporterUtil) {
         this.userService = userService;
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
         this.objectMapper = objectMapper;
         this.gson = gson;
         this.categoryService = categoryService;
+        this.exporterUtil = exporterUtil;
     }
 
     @Override
     public void importDataWithJackson() {
         try {
             InputStream inputStream = new ClassPathResource(PRODUCTS_JSON_PATH_JACKSON).getInputStream();
-            Set<ImportProductDTO> inputProducts = objectMapper.readValue(inputStream, new TypeReference<Set<ImportProductDTO>>() { });
+            Set<ImportProductDTO> inputProducts = objectMapper.readValue(inputStream, new TypeReference<Set<ImportProductDTO>>() {
+            });
             for (ImportProductDTO productDTO : inputProducts) {
                 Product product = modelMapper.map(productDTO, Product.class);
                 product.setCategory(categoryService.getRandomCategories());
                 product.setSeller(userService.getRandomUser());
-                product.setBuyer(userService.getRandomUser());
+
+                boolean randomBool = ThreadLocalRandom.current().nextBoolean();
+                if (randomBool) {
+                    product.setBuyer(userService.getRandomUser());
+                }
                 productRepository.saveAndFlush(product);
             }
         } catch (IOException e) {
@@ -66,7 +76,11 @@ public class ProductServiceImpl implements ProductService {
                 Product product = modelMapper.map(productDTO, Product.class);
                 product.setCategory(categoryService.getRandomCategories());
                 product.setSeller(userService.getRandomUser());
-                product.setBuyer(userService.getRandomUser());
+
+                boolean randomBool = ThreadLocalRandom.current().nextBoolean();
+                if (randomBool) {
+                    product.setBuyer(userService.getRandomUser());
+                }
                 productRepository.saveAndFlush(product);
             }
         } catch (IOException e) {
@@ -77,5 +91,21 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean isImported() {
         return productRepository.count() > 0;
+    }
+
+    @Override
+    public void exportProductsInRange(BigDecimal lowerBound, BigDecimal upperBound) {
+        Set<Product> productsInRange = productRepository.findAllByPriceBetweenAndBuyerIsNullOrderByPrice(lowerBound, upperBound);
+
+        List<ExportProductGsonDTO> productDTOsInRange = productsInRange.stream().map(product -> {
+            ExportProductGsonDTO productDTO = modelMapper.map(product, ExportProductGsonDTO.class);
+            if (product.getSeller().getFirstName() == null) {
+                productDTO.setSellerNames(product.getSeller().getLastName());
+            } else {
+                productDTO.setSellerNames(product.getSeller().getFirstName() + " " + product.getSeller().getLastName());
+            }
+            return productDTO;
+        }).collect(Collectors.toList());
+        exporterUtil.exportWithGson(productDTOsInRange, "products-in-range");
     }
 }

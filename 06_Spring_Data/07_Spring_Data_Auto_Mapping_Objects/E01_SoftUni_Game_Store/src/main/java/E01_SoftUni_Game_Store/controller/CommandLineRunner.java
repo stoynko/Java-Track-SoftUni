@@ -74,19 +74,18 @@ Each user should be able to buy a game.
 @Component
 public class CommandLineRunner implements org.springframework.boot.CommandLineRunner {
 
+    private final BufferedReader reader;
     private final UserService userService;
     private final GameService gamesService;
     private final UserSessionManager userSessionManager;
-    private final BufferedReader reader;
     private final SessionManager sessionManager;
     private final ApplicationUtil applicationUtil;
 
-    @Autowired
-    public CommandLineRunner(UserService userService, GameService gamesService, UserSessionManager userSessionManager, BufferedReader reader, SessionManager sessionManager, ApplicationUtil applicationUtil) {
-        this.userSessionManager = userSessionManager;
+    public CommandLineRunner(BufferedReader reader, UserService userService, GameService gamesService, UserSessionManager userSessionManager, SessionManager sessionManager, ApplicationUtil applicationUtil) {
+        this.reader = reader;
         this.userService = userService;
         this.gamesService = gamesService;
-        this.reader = reader;
+        this.userSessionManager = userSessionManager;
         this.sessionManager = sessionManager;
         this.applicationUtil = applicationUtil;
     }

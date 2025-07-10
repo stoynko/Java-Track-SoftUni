@@ -48,8 +48,7 @@ public class UserServiceImpl implements UserService {
                     continue;
                 }
                 User user = modelMapper.map(userDTO, User.class);
-                user.setFriends(getRandomFriends());
-                userRepository.saveAndFlush(modelMapper.map(userDTO, User.class));
+                userRepository.saveAndFlush(user);
             }
         } catch (IOException e) {
             throw new RuntimeException("Failed to load or parse JSON file with path: " + USERS_JSON_PATH_JACKSON, e);

@@ -8,8 +8,15 @@ import org.modelmapper.*;
 import org.springframework.context.annotation.*;
 import org.springframework.stereotype.*;
 
+import java.io.*;
+
 @Service
 public class BeanConfigurations {
+
+    @Bean
+    BufferedReader reader() {
+        return new BufferedReader(new InputStreamReader(System.in));
+    }
 
     @Bean
     ModelMapper modelMapper() {
@@ -21,6 +28,8 @@ public class BeanConfigurations {
 
     @Bean
     Gson gson() {
-        return new Gson();
+        return new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
     }
 }

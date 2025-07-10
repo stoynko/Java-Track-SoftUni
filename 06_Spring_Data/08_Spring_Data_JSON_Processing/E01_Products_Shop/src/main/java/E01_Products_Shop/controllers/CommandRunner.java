@@ -4,17 +4,22 @@ import E01_Products_Shop.service.*;
 import org.springframework.boot.*;
 import org.springframework.stereotype.*;
 
+import java.io.*;
+import java.math.*;
+
 @Component
 public class CommandRunner implements CommandLineRunner {
 
-    private CategoryService categoryService;
+    private BufferedReader reader;
     private UserService userService;
     private ProductService productService;
+    private CategoryService categoryService;
 
-    public CommandRunner(CategoryService categoryService, UserService userService, ProductService productService) {
-        this.categoryService = categoryService;
+    public CommandRunner(BufferedReader reader, UserService userService, ProductService productService, CategoryService categoryService) {
+        this.reader = reader;
         this.userService = userService;
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
 /*A products shop holds users, products and categories for the products. Users can sell and buy products.
@@ -53,5 +58,15 @@ Randomly generate categories for each product from the existing categories. */
             //productService.importDataWithJackson();
             productService.importDataWithGSON();
         }
+
+        /* Get all products in a specified price range (e.g. 500 to 1000), which have no buyer. Order them by price (from lowest to highest).
+           Select only the product name, price and the full name of the seller. Export the result to JSON. */
+        exportProductsInRage(reader);
+    }
+
+    private void exportProductsInRage(BufferedReader reader) throws IOException {
+        BigDecimal lowerBound = BigDecimal.valueOf(Double.parseDouble(reader.readLine()));
+        BigDecimal upperBound = BigDecimal.valueOf(Double.parseDouble(reader.readLine()));
+        productService.exportProductsInRange(lowerBound, upperBound);
     }
 }
