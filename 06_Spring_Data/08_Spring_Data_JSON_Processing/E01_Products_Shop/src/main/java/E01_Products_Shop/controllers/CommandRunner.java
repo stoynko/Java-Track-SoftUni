@@ -9,18 +9,30 @@ public class CommandRunner implements CommandLineRunner {
 
     private CategoryService categoryService;
     private UserService userService;
+    private ProductService productService;
 
-    public CommandRunner(CategoryService categoryService, UserService userService) {
+    public CommandRunner(CategoryService categoryService, UserService userService, ProductService productService) {
         this.categoryService = categoryService;
         this.userService = userService;
+        this.productService = productService;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        //categoryService.importDataWithJackson();
-        if (!categoryService.isImported()) {
-            categoryService.importDataWithGSON();
+        if (!this.categoryService.isImported()) {
+            categoryService.importDataWithJackson();
+            //categoryService.importDataWithGSON();
         }
-        userService.importDataWithGSON();
+
+        if (!this.userService.isImported()) {
+            userService.importDataWithJackson();
+            //userService.importDataWithGSON();
+        }
+
+        if (!this.productService.isImported()) {
+            //productService.importDataWithGSON();
+            productService.importDataWithGSON();
+        }
+
     }
 }

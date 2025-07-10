@@ -5,13 +5,17 @@ import E01_Products_Shop.repositories.*;
 import E01_Products_Shop.service.*;
 import E01_Products_Shop.service.dtos.*;
 import E01_Products_Shop.service.utilities.*;
+import com.fasterxml.jackson.core.type.*;
 import com.fasterxml.jackson.databind.*;
 import com.google.gson.*;
 import org.modelmapper.*;
+import org.springframework.core.io.*;
 import org.springframework.stereotype.*;
 
 import java.io.*;
 import java.nio.file.*;
+import java.util.*;
+import java.util.concurrent.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -35,7 +39,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void importDataWithJackson() {
-
+        try {
+            InputStream inputStream = new ClassPathResource(USERS_JSON_PATH_JACKSON).getInputStream();
+            Set<ImportUserDTO> inputUsers = objectMapper.readValue(inputStream, new TypeReference<>() { });
+            for (ImportUserDTO userDTO : inputUsers) {
+                if (!validatorUtil.isValid(userDTO)) {
+                    System.out.println(validatorUtil.getViolations(userDTO));
+                    continue;
+                }
+                userRepository.saveAndFlush(modelMapper.map(userDTO, User.class));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load or parse JSON file with path: " + USERS_JSON_PATH_JACKSON, e);
+        }
     }
 
     @Override
@@ -57,6 +73,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isImported() {
-        return false;
+        return this.userRepository.count() > 0;
+    }
+
+    @Override
+    public User getRandomUser() {
+        long randomId = ThreadLocalRandom.current().nextLong(1, this.userRepository.count() + 1);
+        return this.userRepository.findById(randomId).get();
     }
 }

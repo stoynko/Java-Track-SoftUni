@@ -1,11 +1,8 @@
 package E01_Products_Shop.service;
 
-import E01_Products_Shop.data.*;
-
-public interface UserService {
+public interface ProductService {
 
     void importDataWithJackson();
     void importDataWithGSON();
     boolean isImported();
-    User getRandomUser();
 }
