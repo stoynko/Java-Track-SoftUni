@@ -68,7 +68,12 @@ public class CategoryServiceImpl implements CategoryService {
                 categoriesRepository.saveAndFlush(modelMapper.map(categoryDTO, Category.class));
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to load or parse JSON file with path: " + CATEGORIES_JSON_PATH_JACKSON, e);
+            throw new RuntimeException("Failed to load or parse JSON file with path: " + CATEGORIES_JSON_PATH_GSON, e);
         }
+    }
+
+    @Override
+    public boolean isImported() {
+        return categoriesRepository.count() > 0;
     }
 }

@@ -8,14 +8,19 @@ import org.springframework.stereotype.*;
 public class CommandRunner implements CommandLineRunner {
 
     private CategoryService categoryService;
+    private UserService userService;
 
-    public CommandRunner(CategoryService categoryService) {
+    public CommandRunner(CategoryService categoryService, UserService userService) {
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @Override
     public void run(String... args) throws Exception {
         //categoryService.importDataWithJackson();
-        categoryService.importDataWithGSON();
+        if (!categoryService.isImported()) {
+            categoryService.importDataWithGSON();
+        }
+        userService.importDataWithGSON();
     }
 }
