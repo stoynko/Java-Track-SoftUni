@@ -47,6 +47,8 @@ public class UserServiceImpl implements UserService {
                     System.out.println(validatorUtil.getViolations(userDTO));
                     continue;
                 }
+                User user = modelMapper.map(userDTO, User.class);
+                user.setFriends(getRandomFriends());
                 userRepository.saveAndFlush(modelMapper.map(userDTO, User.class));
             }
         } catch (IOException e) {
@@ -80,5 +82,20 @@ public class UserServiceImpl implements UserService {
     public User getRandomUser() {
         long randomId = ThreadLocalRandom.current().nextLong(1, this.userRepository.count() + 1);
         return this.userRepository.findById(randomId).get();
+    }
+
+    @Override
+    public Set<User> getRandomFriends() {
+        Set<User> randomFriends = new HashSet<>();
+        int randomFriendsCount = ThreadLocalRandom.current().nextInt(1, 4);
+
+        while (randomFriends.size() != randomFriendsCount) {
+            long randomId = ThreadLocalRandom.current().nextLong(1, userRepository.count() + 1);
+            User user = userRepository.findById(randomId).get();
+            if (!randomFriends.contains(user)) {
+                randomFriends.add(user);
+            }
+        }
+        return randomFriends;
     }
 }
