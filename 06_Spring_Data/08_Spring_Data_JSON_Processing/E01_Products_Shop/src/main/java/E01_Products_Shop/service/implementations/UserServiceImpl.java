@@ -97,4 +97,9 @@ public class UserServiceImpl implements UserService {
         }
         return randomFriends;
     }
+
+    @Override
+    public void exportUsersWithSoldProducts() {
+        userRepository.findBySoldIsNotNull().stream().forEach(p -> System.out.println("new"));
+    }
 }

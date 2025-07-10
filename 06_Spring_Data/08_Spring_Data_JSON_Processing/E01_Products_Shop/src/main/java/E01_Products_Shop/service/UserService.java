@@ -11,4 +11,5 @@ public interface UserService {
     boolean isImported();
     User getRandomUser();
     Set<User> getRandomFriends();
+    void exportUsersWithSoldProducts();
 }

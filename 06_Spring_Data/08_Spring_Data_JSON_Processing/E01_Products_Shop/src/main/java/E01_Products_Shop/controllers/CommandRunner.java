@@ -61,12 +61,21 @@ Randomly generate categories for each product from the existing categories. */
 
         /* Get all products in a specified price range (e.g. 500 to 1000), which have no buyer. Order them by price (from lowest to highest).
            Select only the product name, price and the full name of the seller. Export the result to JSON. */
-        exportProductsInRage(reader);
+        //exportProductsInRage(reader);
+
+        /*Get all users who have at least 1 item sold with a buyer. Order them by last name, then by first name.
+        Select the person's first and last name. For each of the products sold (products with buyers), select the product's name,
+        price and the buyer's first and last name. */
+        exportUsersWithSoldProducts();
     }
 
     private void exportProductsInRage(BufferedReader reader) throws IOException {
         BigDecimal lowerBound = BigDecimal.valueOf(Double.parseDouble(reader.readLine()));
         BigDecimal upperBound = BigDecimal.valueOf(Double.parseDouble(reader.readLine()));
         productService.exportProductsInRange(lowerBound, upperBound);
+    }
+
+    private void exportUsersWithSoldProducts() {
+        userService.exportUsersWithSoldProducts();
     }
 }

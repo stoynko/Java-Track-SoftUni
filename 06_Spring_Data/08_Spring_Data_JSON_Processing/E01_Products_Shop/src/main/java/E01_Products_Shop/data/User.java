@@ -25,6 +25,9 @@ public class User extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "friend_id", referencedColumnName = "id"))
     private Set<User> friends;
 
+    @OneToMany(mappedBy = "seller", targetEntity = Product.class)
+    Set<Product> sold;
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -57,6 +60,10 @@ public class User extends BaseEntity {
         this.friends = friends;
     }
 
+    public void setSold(Set<Product> soldProducts) {
+        this.sold = soldProducts;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -71,5 +78,9 @@ public class User extends BaseEntity {
 
     public Set<User> getFriends() {
         return friends;
+    }
+
+    public Set<Product> getSold() {
+        return sold;
     }
 }

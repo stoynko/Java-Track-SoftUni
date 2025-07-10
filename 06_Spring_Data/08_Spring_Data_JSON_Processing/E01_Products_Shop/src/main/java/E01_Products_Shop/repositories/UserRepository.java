@@ -4,8 +4,9 @@ import E01_Products_Shop.data.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.*;
 
-import java.nio.file.*;
+import java.util.*;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    Set<User> findBySoldIsNotNull();
 }
