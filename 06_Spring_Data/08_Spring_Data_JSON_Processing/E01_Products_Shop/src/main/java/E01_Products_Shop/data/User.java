@@ -37,7 +37,7 @@ public class User extends BaseEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, age, friends);
+        return Objects.hash(firstName, lastName, age);
     }
 
     public User() {

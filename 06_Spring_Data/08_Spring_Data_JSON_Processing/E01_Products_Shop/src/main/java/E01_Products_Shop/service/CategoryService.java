@@ -7,7 +7,10 @@ import java.util.*;
 public interface CategoryService {
 
     Set<Category> getRandomCategories();
+
     void importDataWithJackson();
+
     void importDataWithGSON();
+
     boolean isImported();
 }

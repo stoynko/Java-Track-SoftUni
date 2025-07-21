@@ -63,10 +63,15 @@ Randomly generate categories for each product from the existing categories. */
            Select only the product name, price and the full name of the seller. Export the result to JSON. */
         //exportProductsInRage(reader);
 
-        /*Get all users who have at least 1 item sold with a buyer. Order them by last name, then by first name.
+        /* Get all users who have at least 1 item sold with a buyer. Order them by last name, then by first name.
         Select the person's first and last name. For each of the products sold (products with buyers), select the product's name,
         price and the buyer's first and last name. */
         exportUsersWithSoldProducts();
+
+        /* Get all categories. Order them by the number of products in each category (a product can be in many categories).
+        For each category select its name, the number of products, the average price of those products and the total revenue
+        (total price sum) of those products (regardless if they have a buyer or not). */
+
     }
 
     private void exportProductsInRage(BufferedReader reader) throws IOException {

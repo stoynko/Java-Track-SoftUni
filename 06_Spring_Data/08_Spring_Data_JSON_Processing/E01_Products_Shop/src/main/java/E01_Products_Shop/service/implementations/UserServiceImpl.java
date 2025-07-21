@@ -16,12 +16,14 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.*;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private static final String USERS_JSON_PATH_JACKSON = "json/users.json";
     private static final String USERS_JSON_PATH_GSON = "06_Spring_Data/08_Spring_Data_JSON_Processing/E01_Products_Shop/src/main/resources/json/users.json";
+    private final ExporterUtil exporterUtil;
 
     private UserRepository userRepository;
     private ValidatorUtil validatorUtil;
@@ -29,12 +31,13 @@ public class UserServiceImpl implements UserService {
     private Gson gson;
     private ModelMapper modelMapper;
 
-    public UserServiceImpl(UserRepository userRepository, ValidatorUtil validatorUtil, ObjectMapper objectMapper, Gson gson, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, ValidatorUtil validatorUtil, ObjectMapper objectMapper, Gson gson, ModelMapper modelMapper, ExporterUtil exporterUtil) {
         this.userRepository = userRepository;
         this.validatorUtil = validatorUtil;
         this.objectMapper = objectMapper;
         this.gson = gson;
         this.modelMapper = modelMapper;
+        this.exporterUtil = exporterUtil;
     }
 
     @Override
@@ -100,6 +103,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void exportUsersWithSoldProducts() {
-        userRepository.findBySoldIsNotNull().stream().forEach(p -> System.out.println("new"));
+        Set<User> users = userRepository.findBySoldIsNotNullOrderByLastNameAscFirstNameAsc();
+        List<ExportUserSoldProductsDTO> usersDTO = users.stream().map(user -> {
+            ExportUserSoldProductsDTO userDTO = modelMapper.map(user, ExportUserSoldProductsDTO.class);
+            return userDTO;
+        }).collect(Collectors.toList());
+        exporterUtil.exportWithJackson(usersDTO, "users-with-sells-jackson");
     }
 }
