@@ -8,9 +8,11 @@ import E01_Products_Shop.service.utilities.*;
 import com.fasterxml.jackson.core.type.*;
 import com.fasterxml.jackson.databind.*;
 import com.google.gson.*;
+import jakarta.persistence.*;
 import org.modelmapper.*;
 import org.springframework.core.io.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import java.io.*;
 import java.nio.file.*;
@@ -102,12 +104,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void exportUsersWithSoldProducts() {
         Set<User> users = userRepository.findBySoldIsNotNullOrderByLastNameAscFirstNameAsc();
-        List<ExportUserSoldProductsDTO> usersDTO = users.stream().map(user -> {
-            ExportUserSoldProductsDTO userDTO = modelMapper.map(user, ExportUserSoldProductsDTO.class);
-            return userDTO;
-        }).collect(Collectors.toList());
-        exporterUtil.exportWithJackson(usersDTO, "users-with-sells-jackson");
+
+        List<ExportUserSoldProductsDTO> usersWithSoldProducts = users.stream().map(user -> {
+            ExportUserSoldProductsDTO userDTO = modelMapper.map(User.class, ExportUserSoldProductsDTO.class);
+
+            List<ExportSoldProductDTO> productsDTO = user.getSold().stream()
+                    .filter(product -> product.getBuyer() != null)
+                    .map(product -> {
+               ExportSoldProductDTO productDTO = new ExportSoldProductDTO();
+               productDTO.setName(product.getName());
+               productDTO.setPrice(product.getPrice());
+               if (product.getBuyer().getFirstName() != null) {
+                   productDTO.setBuyerFirstName(product.getBuyer().getFirstName());
+               }
+               productDTO.setBuyerLastName(product.getBuyer().getLastName());
+               return productDTO;
+           }).toList();
+           userDTO.setSoldProducts(productsDTO.toArray(new ExportSoldProductDTO[0]));
+           return userDTO;
+        }).toList();
+
+        exporterUtil.exportWithJackson(usersWithSoldProducts, "users-with-sold-products-jackson");
     }
 }
