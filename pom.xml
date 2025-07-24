@@ -27,7 +27,8 @@
         <module>06_Spring_Data/07_Spring_Data_Auto_Mapping_Objects/L02_AdvancedMapping</module>
         <module>06_Spring_Data/07_Spring_Data_Auto_Mapping_Objects/L03_Projection</module>
         <module>06_Spring_Data/07_Spring_Data_Auto_Mapping_Objects/E01_SoftUni_Game_Store</module>
-        <module>06_Spring_Data/08_Spring_Data_JSON_Processing/E01_Products_Shop</module>
+        <module>06_Spring_Data/08_Spring_Data_JSON_XML_Processing/E01_Products_Shop</module>
+        <module>06_Spring_Data/08_Spring_Data_JSON_XML_Processing/E02_Car_Dealer</module>
     </modules>
 
     <properties>
