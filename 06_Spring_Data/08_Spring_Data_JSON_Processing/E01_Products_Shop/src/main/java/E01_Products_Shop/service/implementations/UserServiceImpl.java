@@ -8,7 +8,6 @@ import E01_Products_Shop.service.utilities.*;
 import com.fasterxml.jackson.core.type.*;
 import com.fasterxml.jackson.databind.*;
 import com.google.gson.*;
-import jakarta.persistence.*;
 import org.modelmapper.*;
 import org.springframework.core.io.*;
 import org.springframework.stereotype.*;
@@ -110,31 +109,23 @@ public class UserServiceImpl implements UserService {
 
         Set<User> users = userRepository.findBySoldIsNotNullOrderByLastNameAscFirstNameAsc();
 
-        List<ExportSellerDTO> usersWithSoldProducts = users.stream().map(user -> {
-            ExportSellerDTO userDTO = modelMapper.map(user, ExportSellerDTO.class);
+        List<ExportSellerProductInfoDTO> usersWithSoldProducts = users.stream().map(user -> {
+            ExportSellerProductInfoDTO userDTO = modelMapper.map(user, ExportSellerProductInfoDTO.class);
             Set<ExportSoldProductDTO> productsDTO = user.getSold().stream()
                     .filter(product -> product.getBuyer() != null)
                     .map(product -> {
-                        ExportSoldProductDTO productDTO = new ExportSoldProductDTO();
-                        productDTO.setName(product.getName());
-                        productDTO.setPrice(product.getPrice());
-                        if (product.getBuyer() != null) {
-                            if (product.getBuyer().getFirstName() != null) {
-                                String buyerName = product.getBuyer().getFirstName();
-                                productDTO.setBuyerFirstName(buyerName);
-                            }
-                            productDTO.setBuyerLastName(product.getBuyer().getLastName());
-                        }
+                        ExportSoldProductDTO productDTO = modelMapper.map(product, ExportSoldProductDTO.class);
                         return productDTO;
                     }).collect(Collectors.toSet());
             userDTO.setSoldProducts(productsDTO);
             return userDTO;
         }).filter(userDTO -> !userDTO.getSoldProducts().isEmpty())
-          .sorted(Comparator.comparing(ExportSellerDTO::getLastName)
+          .sorted(Comparator.comparing(ExportSellerProductInfoDTO::getLastName)
           .thenComparing(user -> Optional.ofNullable(user.getFirstName()).orElse("")))
           .toList();
 
         exporterUtil.exportWithJackson(usersWithSoldProducts, "users-with-sold-products-jackson");
         exporterUtil.exportWithGson(usersWithSoldProducts, "users-with-sold-products-gson");
+
     }
 }

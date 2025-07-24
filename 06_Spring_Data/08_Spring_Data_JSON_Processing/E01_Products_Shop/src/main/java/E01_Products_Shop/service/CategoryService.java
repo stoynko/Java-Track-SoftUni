@@ -13,4 +13,6 @@ public interface CategoryService {
     void importDataWithGSON();
 
     boolean isImported();
+
+    void exportCategoriesInfo();
 }

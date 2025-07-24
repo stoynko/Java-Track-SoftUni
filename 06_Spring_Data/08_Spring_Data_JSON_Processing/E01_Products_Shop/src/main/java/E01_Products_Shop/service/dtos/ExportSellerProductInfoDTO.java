@@ -1,10 +1,8 @@
 package E01_Products_Shop.service.dtos;
 
-import E01_Products_Shop.data.*;
-
 import java.util.*;
 
-public class ExportSellerDTO {
+public class ExportSellerProductInfoDTO {
 
     private String firstName;
 
@@ -12,7 +10,7 @@ public class ExportSellerDTO {
 
     private Set<ExportSoldProductDTO> soldProducts;
 
-    public ExportSellerDTO() {
+    public ExportSellerProductInfoDTO() {
     }
 
     public void setFirstName(String firstName) {

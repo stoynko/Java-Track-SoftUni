@@ -8,6 +8,14 @@ import java.util.*;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    //@Query("SELECT u FROM User AS u WHERE size(u.sold) > 0 ORDER BY u.lastName, u.firstName")
+
     Set<User> findBySoldIsNotNullOrderByLastNameAscFirstNameAsc();
+
+    @Query("""
+           SELECT u FROM User AS u
+           JOIN u.sold AS p
+           WHERE p.buyer IS NOT NULL 
+           ORDER BY u.lastName, u.firstName                                                      
+           """)
+    Set<User> findUserWithSoldProductsOrderByLastName();
 }

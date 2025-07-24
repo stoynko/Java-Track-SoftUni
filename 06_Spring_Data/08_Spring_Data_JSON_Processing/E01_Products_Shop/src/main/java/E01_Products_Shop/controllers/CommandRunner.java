@@ -10,10 +10,10 @@ import java.math.*;
 @Component
 public class CommandRunner implements CommandLineRunner {
 
-    private BufferedReader reader;
-    private UserService userService;
-    private ProductService productService;
-    private CategoryService categoryService;
+    private final BufferedReader reader;
+    private final UserService userService;
+    private final ProductService productService;
+    private final CategoryService categoryService;
 
     public CommandRunner(BufferedReader reader, UserService userService, ProductService productService, CategoryService categoryService) {
         this.reader = reader;
@@ -42,7 +42,7 @@ Leave out some products that have not been sold (i.e. buyer is null).
 Randomly generate categories for each product from the existing categories. */
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args){
 
         if (!this.userService.isImported()) {
             userService.importDataWithJackson();
@@ -74,6 +74,8 @@ Randomly generate categories for each product from the existing categories. */
         For each category select its name, the number of products, the average price of those products and the total revenue
         (total price sum) of those products (regardless if they have a buyer or not). */
 
+        exportCategoriesInfo();
+
     }
 
     private void exportProductsInRage(BufferedReader reader) throws IOException {
@@ -84,5 +86,10 @@ Randomly generate categories for each product from the existing categories. */
 
     private void exportUsersWithSoldProducts() {
         userService.exportUsersWithSoldProducts();
+    }
+
+    private void exportCategoriesInfo() {
+        System.out.println();
+        categoryService.exportCategoriesInfo();
     }
 }

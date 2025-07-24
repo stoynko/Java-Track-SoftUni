@@ -29,14 +29,16 @@ public class CategoryServiceImpl implements CategoryService {
     private final ObjectMapper objectMapper;
     private final ValidatorUtil validatorUtil;
     private final Gson gson;
+    private final ExporterUtil exporterUtil;
 
     @Autowired
-    public CategoryServiceImpl(CategoryRepository categoriesRepository, ModelMapper modelMapper, ObjectMapper objectMapper, ValidatorUtil validatorUtil, Gson gson) {
+    public CategoryServiceImpl(CategoryRepository categoriesRepository, ModelMapper modelMapper, ObjectMapper objectMapper, ValidatorUtil validatorUtil, Gson gson, ExporterUtil exporterUtil) {
         this.categoriesRepository = categoriesRepository;
         this.modelMapper = modelMapper;
         this.objectMapper = objectMapper;
         this.validatorUtil = validatorUtil;
         this.gson = gson;
+        this.exporterUtil = exporterUtil;
     }
 
     @Override
@@ -92,5 +94,18 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public boolean isImported() {
         return categoriesRepository.count() > 0;
+    }
+
+    @Override
+    public void exportCategoriesInfo() {
+        List<CategoryInfoProjection> categoriesInfo = categoriesRepository.getCategoriesInfo();
+
+        categoriesInfo.stream().map(categoryProjection -> {
+            ExportCategoryInfoDTO categoryDTO = modelMapper.map(categoryProjection, ExportCategoryInfoDTO.class);
+            return categoryDTO;
+        }).toList();
+
+        exporterUtil.exportWithJackson(categoriesInfo, "categories-info-jackson");
+        exporterUtil.exportWithGson(categoriesInfo, "categories-info-gson");
     }
 }
