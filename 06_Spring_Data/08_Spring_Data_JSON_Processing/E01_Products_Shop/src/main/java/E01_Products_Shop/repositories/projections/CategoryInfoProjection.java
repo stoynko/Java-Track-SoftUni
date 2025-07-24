@@ -1,4 +1,4 @@
-package E01_Products_Shop.repositories;
+package E01_Products_Shop.repositories.projections;
 
 import java.math.*;
 

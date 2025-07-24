@@ -1,6 +1,7 @@
 package E01_Products_Shop.repositories;
 
 import E01_Products_Shop.data.*;
+import E01_Products_Shop.repositories.projections.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.*;
 
@@ -20,7 +21,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
        ORDER BY products_in_category DESC; */
 
     @Query("""
-            SELECT new E01_Products_Shop.repositories.CategoryInfoProjection(
+            SELECT new E01_Products_Shop.repositories.projections.CategoryInfoProjection(
                 c.name,
                 COUNT(p),
                 AVG(p.price),

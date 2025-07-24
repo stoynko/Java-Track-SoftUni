@@ -2,6 +2,7 @@ package E01_Products_Shop.service.implementations;
 
 import E01_Products_Shop.data.*;
 import E01_Products_Shop.repositories.*;
+import E01_Products_Shop.repositories.projections.*;
 import E01_Products_Shop.service.*;
 import E01_Products_Shop.service.dtos.*;
 import E01_Products_Shop.service.utilities.*;
