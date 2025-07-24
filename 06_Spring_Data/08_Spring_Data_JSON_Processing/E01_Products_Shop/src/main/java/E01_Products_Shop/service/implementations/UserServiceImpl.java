@@ -46,7 +46,8 @@ public class UserServiceImpl implements UserService {
     public void importDataWithJackson() {
         try {
             InputStream inputStream = new ClassPathResource(USERS_JSON_PATH_JACKSON).getInputStream();
-            Set<ImportUserDTO> inputUsers = objectMapper.readValue(inputStream, new TypeReference<>() { });
+            Set<ImportUserDTO> inputUsers = objectMapper.readValue(inputStream, new TypeReference<>() {
+            });
             for (ImportUserDTO userDTO : inputUsers) {
                 if (!validatorUtil.isValid(userDTO)) {
                     System.out.println(validatorUtil.getViolations(userDTO));
@@ -106,27 +107,34 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void exportUsersWithSoldProducts() {
+
         Set<User> users = userRepository.findBySoldIsNotNullOrderByLastNameAscFirstNameAsc();
 
-        List<ExportUserSoldProductsDTO> usersWithSoldProducts = users.stream().map(user -> {
-            ExportUserSoldProductsDTO userDTO = modelMapper.map(User.class, ExportUserSoldProductsDTO.class);
-
-            List<ExportSoldProductDTO> productsDTO = user.getSold().stream()
+        List<ExportSellerDTO> usersWithSoldProducts = users.stream().map(user -> {
+            ExportSellerDTO userDTO = modelMapper.map(user, ExportSellerDTO.class);
+            Set<ExportSoldProductDTO> productsDTO = user.getSold().stream()
                     .filter(product -> product.getBuyer() != null)
                     .map(product -> {
-               ExportSoldProductDTO productDTO = new ExportSoldProductDTO();
-               productDTO.setName(product.getName());
-               productDTO.setPrice(product.getPrice());
-               if (product.getBuyer().getFirstName() != null) {
-                   productDTO.setBuyerFirstName(product.getBuyer().getFirstName());
-               }
-               productDTO.setBuyerLastName(product.getBuyer().getLastName());
-               return productDTO;
-           }).toList();
-           userDTO.setSoldProducts(productsDTO.toArray(new ExportSoldProductDTO[0]));
-           return userDTO;
-        }).toList();
+                        ExportSoldProductDTO productDTO = new ExportSoldProductDTO();
+                        productDTO.setName(product.getName());
+                        productDTO.setPrice(product.getPrice());
+                        if (product.getBuyer() != null) {
+                            if (product.getBuyer().getFirstName() != null) {
+                                String buyerName = product.getBuyer().getFirstName();
+                                productDTO.setBuyerFirstName(buyerName);
+                            }
+                            productDTO.setBuyerLastName(product.getBuyer().getLastName());
+                        }
+                        return productDTO;
+                    }).collect(Collectors.toSet());
+            userDTO.setSoldProducts(productsDTO);
+            return userDTO;
+        }).filter(userDTO -> !userDTO.getSoldProducts().isEmpty())
+          .sorted(Comparator.comparing(ExportSellerDTO::getLastName)
+          .thenComparing(user -> Optional.ofNullable(user.getFirstName()).orElse("")))
+          .toList();
 
         exporterUtil.exportWithJackson(usersWithSoldProducts, "users-with-sold-products-jackson");
+        exporterUtil.exportWithGson(usersWithSoldProducts, "users-with-sold-products-gson");
     }
 }
