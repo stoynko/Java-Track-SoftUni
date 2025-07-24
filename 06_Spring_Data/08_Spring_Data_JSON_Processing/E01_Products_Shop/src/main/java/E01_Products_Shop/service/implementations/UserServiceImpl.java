@@ -27,11 +27,11 @@ public class UserServiceImpl implements UserService {
     private static final String USERS_JSON_PATH_GSON = "06_Spring_Data/08_Spring_Data_JSON_Processing/E01_Products_Shop/src/main/resources/json/users.json";
     private final ExporterUtil exporterUtil;
 
-    private UserRepository userRepository;
-    private ValidatorUtil validatorUtil;
-    private ObjectMapper objectMapper;
-    private Gson gson;
-    private ModelMapper modelMapper;
+    private final UserRepository userRepository;
+    private final ValidatorUtil validatorUtil;
+    private final ObjectMapper objectMapper;
+    private final Gson gson;
+    private final ModelMapper modelMapper;
 
     public UserServiceImpl(UserRepository userRepository, ValidatorUtil validatorUtil, ObjectMapper objectMapper, Gson gson, ModelMapper modelMapper, ExporterUtil exporterUtil) {
         this.userRepository = userRepository;

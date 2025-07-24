@@ -24,9 +24,9 @@ public class CategoryServiceImpl implements CategoryService {
     private static final String CATEGORIES_JSON_PATH_JACKSON = "json/categories.json";
     private static final String CATEGORIES_JSON_PATH_GSON = "06_Spring_Data/08_Spring_Data_JSON_Processing/E01_Products_Shop/src/main/resources/json/categories.json";
 
-    private static CategoryRepository categoriesRepository;
-    private static ModelMapper modelMapper;
-    private static ObjectMapper objectMapper;
+    private final CategoryRepository categoriesRepository;
+    private final ModelMapper modelMapper;
+    private final ObjectMapper objectMapper;
     private final ValidatorUtil validatorUtil;
     private final Gson gson;
 
