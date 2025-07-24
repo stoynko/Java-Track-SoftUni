@@ -109,7 +109,7 @@ public class CategoryServiceImpl implements CategoryService {
             return categoryDTO;
         }).toList();
 
-        exporter.exportCollectionWithJackson(categories, "categories-info-jackson");
-        exporter.exportCollectionWithGson(categories, "categories-info-gson");
+        exporter.exportJSONCollectionWithJackson(categories, "categories-info-jackson");
+        exporter.exportJSONCollectionWithGson(categories, "categories-info-gson");
     }
 }

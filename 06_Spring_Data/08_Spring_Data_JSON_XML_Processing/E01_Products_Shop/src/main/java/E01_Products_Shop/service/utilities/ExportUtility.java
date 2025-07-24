@@ -4,9 +4,11 @@ import java.io.*;
 
 public interface ExportUtility {
 
-    <E>void exportCollectionWithJackson(Iterable<E> e, String fileName);
-    <E>void exportWithJackson(E e, String fileName);
-    <E>void exportCollectionWithGson(Iterable<E> e, String fileName);
-    <E>void exportWithGson(E e, String fileName);
+    <E>void exportJSONCollectionWithJackson(Iterable<E> e, String fileName);
+    <E>void exportJSONWithJackson(E data, String fileName);
+    <E>void exportJSONCollectionWithGson(Iterable<E> e, String fileName);
+    <E>void exportJSONWithGson(E data, String fileName);
+    <E>void exportXMLCollection(Iterable<E> data, String fileName);
+    <E>void exportXML(E data, String fileName);
     File createFile(String fileName);
 }

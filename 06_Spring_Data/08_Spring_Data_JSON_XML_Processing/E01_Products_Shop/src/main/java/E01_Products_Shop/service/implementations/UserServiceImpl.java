@@ -127,8 +127,8 @@ public class UserServiceImpl implements UserService {
                         .thenComparing(user -> Optional.ofNullable(user.getFirstName()).orElse("")))
                 .toList();
 
-        exporter.exportWithJackson(usersWithSoldProducts, "users-with-sold-products-jackson");
-        exporter.exportWithGson(usersWithSoldProducts, "users-with-sold-products-gson");
+        exporter.exportJSONWithJackson(usersWithSoldProducts, "users-with-sold-products-jackson");
+        exporter.exportJSONWithGson(usersWithSoldProducts, "users-with-sold-products-gson");
     }
 
     @Override
@@ -161,6 +161,6 @@ public class UserServiceImpl implements UserService {
         usersDTO.setUsers(users);
         usersProductsDTO.add(usersDTO);
 
-        exporter.exportWithJackson(usersProductsDTO, "users-products-jackson");
+        exporter.exportJSONWithJackson(usersProductsDTO, "users-products-jackson");
     }
 }

@@ -36,6 +36,8 @@ public class BeanConfigurations {
 
     @Bean
     XmlMapper xmlMapper() {
-        return new XmlMapper();
+        XmlMapper xmlMapper = new XmlMapper();
+        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        return xmlMapper;
     }
 }
