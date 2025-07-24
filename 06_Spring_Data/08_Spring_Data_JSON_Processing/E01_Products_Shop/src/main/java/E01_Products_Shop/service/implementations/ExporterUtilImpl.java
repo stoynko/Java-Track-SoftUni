@@ -12,8 +12,8 @@ public class ExporterUtilImpl implements ExporterUtil {
 
     private static final String DEFAULT_LOCATION = "06_Spring_Data/08_Spring_Data_JSON_Processing/E01_Products_Shop/src/main/resources/json/exports/";
 
-    Gson gson;
-    ObjectMapper objectMapper;
+    private final Gson gson;
+    private final ObjectMapper objectMapper;
 
     public ExporterUtilImpl(Gson gson, ObjectMapper objectMapper) {
         this.gson = gson;
