@@ -2,15 +2,19 @@ package E01_Products_Shop.service.dtos;
 
 import java.util.*;
 
-public class ExportSellerProductInfoDTO {
+public class ExportSellerInfoDTO {
 
     private String firstName;
 
     private String lastName;
 
+    private byte age;
+
     private Set<ExportSoldProductDTO> soldProducts;
 
-    public ExportSellerProductInfoDTO() {
+    private ExportProductInfoDTO soldProd;
+
+    public ExportSellerInfoDTO() {
     }
 
     public void setFirstName(String firstName) {
@@ -19,6 +23,10 @@ public class ExportSellerProductInfoDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setAge(byte age) {
+        this.age = age;
     }
 
     public void setSoldProducts(Set<ExportSoldProductDTO> soldProducts) {
@@ -35,5 +43,9 @@ public class ExportSellerProductInfoDTO {
 
     public Set<ExportSoldProductDTO> getSoldProducts() {
         return soldProducts;
+    }
+
+    public byte getAge() {
+        return age;
     }
 }

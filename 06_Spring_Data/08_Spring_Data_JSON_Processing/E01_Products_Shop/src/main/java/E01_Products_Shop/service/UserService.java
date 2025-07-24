@@ -12,4 +12,5 @@ public interface UserService {
     User getRandomUser();
     Set<User> getRandomFriends();
     void exportUsersWithSoldProducts();
+    void exportUsersWithListedProducts();
 }

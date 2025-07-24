@@ -109,23 +109,55 @@ public class UserServiceImpl implements UserService {
 
         Set<User> users = userRepository.findBySoldIsNotNullOrderByLastNameAscFirstNameAsc();
 
-        List<ExportSellerProductInfoDTO> usersWithSoldProducts = users.stream().map(user -> {
-            ExportSellerProductInfoDTO userDTO = modelMapper.map(user, ExportSellerProductInfoDTO.class);
-            Set<ExportSoldProductDTO> productsDTO = user.getSold().stream()
-                    .filter(product -> product.getBuyer() != null)
-                    .map(product -> {
-                        ExportSoldProductDTO productDTO = modelMapper.map(product, ExportSoldProductDTO.class);
-                        return productDTO;
-                    }).collect(Collectors.toSet());
-            userDTO.setSoldProducts(productsDTO);
-            return userDTO;
-        }).filter(userDTO -> !userDTO.getSoldProducts().isEmpty())
-          .sorted(Comparator.comparing(ExportSellerProductInfoDTO::getLastName)
-          .thenComparing(user -> Optional.ofNullable(user.getFirstName()).orElse("")))
-          .toList();
+        List<ExportSellerInfoDTO> usersWithSoldProducts = users.stream().map(user -> {
+                    ExportSellerInfoDTO userDTO = modelMapper.map(user, ExportSellerInfoDTO.class);
+                    Set<ExportSoldProductDTO> productsDTO = user.getSold().stream()
+                            .filter(product -> product.getBuyer() != null)
+                            .map(product -> {
+                                ExportSoldProductDTO productDTO = modelMapper.map(product, ExportSoldProductDTO.class);
+                                return productDTO;
+                            }).collect(Collectors.toSet());
+                    userDTO.setSoldProducts(productsDTO);
+                    return userDTO;
+                }).filter(userDTO -> !userDTO.getSoldProducts().isEmpty())
+                .sorted(Comparator.comparing(ExportSellerInfoDTO::getLastName)
+                        .thenComparing(user -> Optional.ofNullable(user.getFirstName()).orElse("")))
+                .toList();
 
         exporterUtil.exportWithJackson(usersWithSoldProducts, "users-with-sold-products-jackson");
         exporterUtil.exportWithGson(usersWithSoldProducts, "users-with-sold-products-gson");
+    }
 
+    @Override
+    @Transactional
+    public void exportUsersWithListedProducts() {
+        List<User> data = userRepository.findUsersWithListedProducts();
+        List<ExportUsersListedProductsDTO> usersProductsDTO = new ArrayList<>();
+
+        ExportUsersListedProductsDTO usersDTO = new ExportUsersListedProductsDTO();
+        usersDTO.setUsersCount(data.size());
+
+        List<ExportSellerWithListedProductsDTO> users = data.stream().map(user -> {
+
+            ExportSellerWithListedProductsDTO userDTO = modelMapper.map(user, ExportSellerWithListedProductsDTO.class);
+
+            List<ExportSoldProductInfoDTO> productsSold = user.getSold().stream()
+                    .map(product -> {
+                        ExportSoldProductInfoDTO productDTO = modelMapper.map(product, ExportSoldProductInfoDTO.class);
+                        return productDTO;
+                    }).toList();
+
+            ExportProductInfoDTO productInfoDTO = new ExportProductInfoDTO();
+            productInfoDTO.setCount(productsSold.size());
+            productInfoDTO.setProducts(productsSold);
+
+            userDTO.setSoldProducts(productInfoDTO);
+            return userDTO;
+        }).toList();
+
+        usersDTO.setUsers(users);
+        usersProductsDTO.add(usersDTO);
+
+        exporterUtil.exportWithJackson(usersProductsDTO, "users-products-jackson");
     }
 }

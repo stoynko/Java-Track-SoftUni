@@ -74,8 +74,12 @@ Randomly generate categories for each product from the existing categories. */
         For each category select its name, the number of products, the average price of those products and the total revenue
         (total price sum) of those products (regardless if they have a buyer or not). */
 
-        exportCategoriesInfo();
+        //exportCategoriesInfo();
 
+        /* Get all users who have at least 1 product sold. Order them by the number of products sold (from highest to lowest),
+          then by last name (ascending). Select only their first and last name, age and for each product - name and price. */
+
+        exportUsersWithListedProducts();
     }
 
     private void exportProductsInRage(BufferedReader reader) throws IOException {
@@ -89,7 +93,10 @@ Randomly generate categories for each product from the existing categories. */
     }
 
     private void exportCategoriesInfo() {
-        System.out.println();
         categoryService.exportCategoriesInfo();
+    }
+
+    private void exportUsersWithListedProducts() {
+        userService.exportUsersWithListedProducts();
     }
 }
