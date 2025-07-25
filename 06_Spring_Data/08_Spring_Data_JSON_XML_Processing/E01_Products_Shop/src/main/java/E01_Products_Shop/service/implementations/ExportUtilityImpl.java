@@ -71,7 +71,6 @@ public class ExportUtilityImpl implements ExportUtility {
     @Override
     public <E> void exportXMLCollection(Iterable<E> data, String fileName) {
         File file = createFile(fileName);
-        xmlMapper.writeValue();
     }
 
     @Override

@@ -23,7 +23,7 @@ import java.util.stream.*;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private static final String PRODUCTS_JSON_PATH_JACKSON = "json/products.json";
+    private static final String PRODUCTS_JSON_PATH_JACKSON = "json/imports/products.json";
     private static final String PRODUCTS_JSON_PATH_GSON = "06_Spring_Data/08_Spring_Data_JSON_Processing/E01_Products_Shop/src/main/resources/json/products.json";
 
     private final UserService userService;

@@ -23,7 +23,7 @@ import java.util.concurrent.*;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private static final String CATEGORIES_JSON_PATH_JACKSON = "json/categories.json";
+    private static final String CATEGORIES_JSON_PATH_JACKSON = "json/imports/categories.json";
     private static final String CATEGORIES_JSON_PATH_GSON = "06_Spring_Data/08_Spring_Data_JSON_Processing/E01_Products_Shop/src/main/resources/json/categories.json";
 
     private final CategoryRepository categoriesRepository;
