@@ -7,7 +7,7 @@ import java.util.*;
 @Entity(name = "suppliers")
 public class Supplier extends BaseEntity {
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "is_importer", nullable = false)

@@ -1,14 +1,17 @@
 package E02_Car_Dealer.data.dtos.supplier.input;
 
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.dataformat.xml.annotation.*;
 
+import java.io.*;
 
-public class ImportSupplierDTO {
+@JacksonXmlRootElement(localName = "supplier")
+public class ImportSupplierDTO implements Serializable {
 
-    @JacksonXmlProperty(isAttribute = true)
+    @JacksonXmlProperty(isAttribute = true, localName = "name")
     private String name;
 
-    @JacksonXmlProperty(isAttribute = true)
+    @JacksonXmlProperty(isAttribute = true, localName = "is-importer")
     private Boolean isImporter;
 
     public ImportSupplierDTO() { }

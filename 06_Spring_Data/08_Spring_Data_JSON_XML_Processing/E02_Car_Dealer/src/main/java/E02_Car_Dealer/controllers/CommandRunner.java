@@ -8,6 +8,7 @@ import org.springframework.core.io.*;
 import org.springframework.stereotype.*;
 
 import java.io.*;
+import java.util.*;
 
 @Component
 public class CommandRunner implements CommandLineRunner {
@@ -25,15 +26,18 @@ public class CommandRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        //importSuppliers();
+        importSuppliers();
 
     }
 
     public void importSuppliers() {
         InputStream inputStream = readResourceFileAsInputStream(SUPPLIERS_IMPORT_PATH);
         try {
-            ImportSupplierDTO supplierDTO = xmlMapper.readValue(inputStream, ImportSupplierDTO.class);
-            supplierService.importData(supplierDTO);
+            ReadSupplierDTO wrapper = xmlMapper.readValue(inputStream, ReadSupplierDTO.class);
+            List<ImportSupplierDTO> supplierDTOs = wrapper.getSuppliers();
+            for (ImportSupplierDTO supplierDTO : supplierDTOs) {
+                supplierService.importData(supplierDTO);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
