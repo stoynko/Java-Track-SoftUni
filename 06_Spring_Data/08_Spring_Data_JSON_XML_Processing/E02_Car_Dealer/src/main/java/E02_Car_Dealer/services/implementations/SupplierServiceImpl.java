@@ -20,17 +20,12 @@ import java.io.*;
 public class SupplierServiceImpl implements SupplierService {
 
     private final SuppliersRepository suppliersRepository;
-
     private final ModelMapper modelMapper;
-    private final XmlMapper xmlMapper;
-    private final ObjectMapper objectMapper;
 
 
-    public SupplierServiceImpl(SuppliersRepository suppliersRepository, ModelMapper modelMapper, XmlMapper xmlMapper,ObjectMapper objectMapper) {
+    public SupplierServiceImpl(SuppliersRepository suppliersRepository, ModelMapper modelMapper) {
         this.suppliersRepository = suppliersRepository;
         this.modelMapper = modelMapper;
-        this.xmlMapper = xmlMapper;
-        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -38,5 +33,10 @@ public class SupplierServiceImpl implements SupplierService {
         Supplier supplier = modelMapper.map(supplierDTO, Supplier.class);
         suppliersRepository.saveAndFlush(supplier);
         return modelMapper.map(supplier, SupplierDTO.class);
+    }
+
+    @Override
+    public boolean hasBeenImported() {
+        return suppliersRepository.count() > 0;
     }
 }

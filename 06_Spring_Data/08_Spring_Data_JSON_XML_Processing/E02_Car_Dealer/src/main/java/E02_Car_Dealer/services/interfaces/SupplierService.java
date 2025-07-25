@@ -9,4 +9,6 @@ import org.springframework.validation.annotation.*;
 public interface SupplierService {
 
     SupplierDTO importData (@Valid ImportSupplierDTO supplierDTO);
+
+    boolean hasBeenImported();
 }
