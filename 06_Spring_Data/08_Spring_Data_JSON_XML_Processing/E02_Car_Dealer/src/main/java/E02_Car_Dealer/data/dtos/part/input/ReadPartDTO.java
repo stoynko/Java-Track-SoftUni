@@ -7,7 +7,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.*;
 import java.util.*;
 
 @JacksonXmlRootElement(localName = "parts")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class ReadPartDTO {
 
     @JacksonXmlElementWrapper(useWrapping = false)
