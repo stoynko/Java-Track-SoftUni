@@ -12,7 +12,6 @@ import java.io.*;
 public class ExportUtilityImpl implements ExportUtility {
 
     private static final String GSON_DEFAULT_LOCATION = "06_Spring_Data/08_Spring_Data_JSON_XML_Processing/E01_Products_Shop/src/main/resources/json/exports/";
-    private static final String XML_DEFAULT_LOCATION = "06_Spring_Data/08_Spring_Data_JSON_XML_Processing/E01_Products_Shop/src/main/resources/xml/exports/";
 
     private final Gson gson;
     private final ObjectMapper objectMapper;

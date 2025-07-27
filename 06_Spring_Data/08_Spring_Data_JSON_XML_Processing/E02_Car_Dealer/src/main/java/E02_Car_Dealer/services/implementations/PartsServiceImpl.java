@@ -12,11 +12,9 @@ import org.springframework.transaction.annotation.*;
 @Service
 public class PartsServiceImpl implements PartsService {
 
-
     private final SupplierService supplierService;
     private final PartsRepository partsRepository;
     private final ModelMapper modelMapper;
-
 
     public PartsServiceImpl(PartsRepository partsRepository, ModelMapper modelMapper, SupplierService supplierService) {
         this.partsRepository = partsRepository;
@@ -26,7 +24,7 @@ public class PartsServiceImpl implements PartsService {
 
     @Override
     @Transactional
-    public PartDTO importPart(ImportPartDTO partDTO, PartRelationsDTO relationsDTO) {
+    public PartDTO importPartData(ImportPartDTO partDTO, PartRelationsDTO relationsDTO) {
         Part part = modelMapper.map(partDTO, Part.class);
         Supplier supplier = supplierService.getReferenceById(relationsDTO.getSupplierId());
         part.setSupplier(supplier);

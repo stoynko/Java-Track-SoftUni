@@ -7,6 +7,6 @@ import org.springframework.validation.annotation.*;
 
 @Validated
 public interface PartsService {
-    PartDTO importPart (@Valid ImportPartDTO partDTO, @Valid PartRelationsDTO relationDTO);
+    PartDTO importPartData(@Valid ImportPartDTO partDTO, @Valid PartRelationsDTO relationDTO);
     boolean hasBeenImported();
 }
