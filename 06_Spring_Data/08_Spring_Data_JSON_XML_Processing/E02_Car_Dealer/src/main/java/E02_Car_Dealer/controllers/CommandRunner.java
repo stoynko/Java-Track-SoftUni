@@ -32,10 +32,10 @@ public class CommandRunner implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         List<SupplierDTO> suppliers = new ArrayList<>();
-        List<PartDTO> parts = new ArrayList<>();
+        //List<PartDTO> parts = new ArrayList<>();
 
         if (!supplierService.hasBeenImported()) {
             suppliers = importSuppliers();
@@ -86,7 +86,4 @@ public class CommandRunner implements CommandLineRunner {
         }
     }
 
-    private static int getRandomElement(Collection e) {
-        return ThreadLocalRandom.current().nextInt(e.size());
-    }
 }
