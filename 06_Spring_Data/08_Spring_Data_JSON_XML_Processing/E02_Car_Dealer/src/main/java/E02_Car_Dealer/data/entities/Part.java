@@ -1,6 +1,9 @@
 package E02_Car_Dealer.data.entities;
 
 import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.validation.constraints.*;
+import org.hibernate.annotations.*;
 
 import java.math.*;
 import java.util.*;
@@ -8,13 +11,18 @@ import java.util.*;
 @Entity(name = "parts")
 public class Part extends BaseEntity {
 
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "price", nullable = false)
+    @Min(value = 0, message = "Price cannot be negative.")
     private BigDecimal price;
 
+    @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
 
     @ManyToMany(mappedBy = "partsList", targetEntity = Car.class)

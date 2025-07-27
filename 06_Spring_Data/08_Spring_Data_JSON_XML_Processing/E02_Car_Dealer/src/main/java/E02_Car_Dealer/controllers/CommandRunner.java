@@ -12,6 +12,7 @@ import org.springframework.stereotype.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.*;
 
 @Component
 public class CommandRunner implements CommandLineRunner {
@@ -33,24 +34,27 @@ public class CommandRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        List<SupplierDTO> suppliers = new ArrayList<>();
+        List<PartDTO> parts = new ArrayList<>();
+
         if (!supplierService.hasBeenImported()) {
-            importSuppliers();
+            suppliers = importSuppliers();
         }
 
         if (!partsService.hasBeenImported()) {
-            importParts();
+            importParts(suppliers);
         }
     }
 
-    private void importParts(/*List<SupplierDTO> suppliers*/) {
+    private void importParts(List<SupplierDTO> suppliers) {
         InputStream inputStream = readResourceFileAsInputStream(PARTS_IMPORT_PATH);
-        //List<PartDTO> partsDTOs = new ArrayList<>();
         try {
             ReadPartDTO wrapper = xmlMapper.readValue(inputStream, ReadPartDTO.class);
             List<ImportPartDTO> partDTOS = wrapper.getPartList();
             for (ImportPartDTO partDTO : partDTOS) {
-                PartDTO part = partsService.importPart(partDTO);
-                //partsDTOs.add(part);
+                Long randomSupplierID = ThreadLocalRandom.current().nextLong(1, suppliers.size());
+                PartRelationsDTO partRelationDTO = new PartRelationsDTO(randomSupplierID);
+                partsService.importPart(partDTO, partRelationDTO);
             }
         } catch (IOException ioException) {
             throw new RuntimeException(ioException);
@@ -80,5 +84,9 @@ public class CommandRunner implements CommandLineRunner {
         } catch (IOException ioException) {
             throw new RuntimeException("Failed to load or parse file with path: " + path, ioException);
         }
+    }
+
+    private static int getRandomElement(Collection e) {
+        return ThreadLocalRandom.current().nextInt(e.size());
     }
 }

@@ -29,6 +29,11 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
+    public Supplier getReferenceById(Long id) {
+        return suppliersRepository.getReferenceById(id);
+    }
+
+    @Override
     public SupplierDTO importData(ImportSupplierDTO supplierDTO) {
         Supplier supplier = modelMapper.map(supplierDTO, Supplier.class);
         suppliersRepository.saveAndFlush(supplier);
