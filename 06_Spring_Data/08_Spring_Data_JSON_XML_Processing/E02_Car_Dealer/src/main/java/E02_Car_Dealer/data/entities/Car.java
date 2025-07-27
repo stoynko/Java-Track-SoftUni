@@ -7,12 +7,14 @@ import java.util.*;
 @Entity(name = "cars")
 public class Car extends BaseEntity {
 
+    @Column(name = "make", nullable = false)
     private String make;
 
+    @Column(name = "model", nullable = false)
     private String model;
 
-    @Column(name = "travelled_distance")
-    private double travelledDistance;
+    @Column(name = "travelled_distance", nullable = false)
+    private Long travelledDistance;
 
     @ManyToMany
     @JoinTable(name = "cars_parts",
@@ -32,8 +34,12 @@ public class Car extends BaseEntity {
         this.model = model;
     }
 
-    public void setTravelledDistance(double travelledDistance) {
+    public void setTravelledDistance(Long travelledDistance) {
         this.travelledDistance = travelledDistance;
+    }
+
+    public void setPartsList(List<Part> partsList) {
+        this.partsList = partsList;
     }
 
     public String getMake() {
@@ -44,7 +50,11 @@ public class Car extends BaseEntity {
         return model;
     }
 
-    public double getTravelledDistance() {
+    public Long getTravelledDistance() {
         return travelledDistance;
+    }
+
+    public List<Part> getPartsList() {
+        return partsList;
     }
 }

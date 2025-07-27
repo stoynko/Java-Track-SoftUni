@@ -13,13 +13,18 @@ import org.springframework.transaction.annotation.*;
 public class PartsServiceImpl implements PartsService {
 
     private final SupplierService supplierService;
-    private final PartsRepository partsRepository;
+    private final PartsRepository repository;
     private final ModelMapper modelMapper;
 
-    public PartsServiceImpl(PartsRepository partsRepository, ModelMapper modelMapper, SupplierService supplierService) {
-        this.partsRepository = partsRepository;
+    public PartsServiceImpl(PartsRepository repository, ModelMapper modelMapper, SupplierService supplierService) {
+        this.repository = repository;
         this.modelMapper = modelMapper;
         this.supplierService = supplierService;
+    }
+
+    @Override
+    public Part getReferenceById(Long id) {
+        return repository.getReferenceById(id);
     }
 
     @Override
@@ -28,12 +33,12 @@ public class PartsServiceImpl implements PartsService {
         Part part = modelMapper.map(partDTO, Part.class);
         Supplier supplier = supplierService.getReferenceById(relationsDTO.getSupplierId());
         part.setSupplier(supplier);
-        partsRepository.saveAndFlush(part);
+        repository.saveAndFlush(part);
         return modelMapper.map(part, PartDTO.class);
     }
 
     @Override
     public boolean hasBeenImported() {
-        return partsRepository.count() > 0;
+        return repository.count() > 0;
     }
 }

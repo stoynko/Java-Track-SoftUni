@@ -15,7 +15,7 @@ public class ExportSupplierDTO {
         this.suppliersList = new ArrayList<>();
     }
 
-    public List<ExportSupplierProductsDTO> wgetSuppliersList() {
+    public List<ExportSupplierProductsDTO> getSuppliersList() {
         return suppliersList;
     }
 

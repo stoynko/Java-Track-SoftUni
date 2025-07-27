@@ -14,34 +14,34 @@ import java.util.*;
 @Service
 public class SupplierServiceImpl implements SupplierService {
 
-    private final SuppliersRepository suppliersRepository;
+    private final SuppliersRepository repository;
     private final ModelMapper modelMapper;
 
 
-    public SupplierServiceImpl(SuppliersRepository suppliersRepository, ModelMapper modelMapper) {
-        this.suppliersRepository = suppliersRepository;
+    public SupplierServiceImpl(SuppliersRepository repository, ModelMapper modelMapper) {
+        this.repository = repository;
         this.modelMapper = modelMapper;
     }
 
     @Override
     public Supplier getReferenceById(Long id) {
-        return suppliersRepository.getReferenceById(id);
+        return repository.getReferenceById(id);
     }
 
     @Override
     public SupplierDTO importSupplierData(ImportSupplierDTO supplierDTO) {
         Supplier supplier = modelMapper.map(supplierDTO, Supplier.class);
-        suppliersRepository.saveAndFlush(supplier);
+        repository.saveAndFlush(supplier);
         return modelMapper.map(supplier, SupplierDTO.class);
     }
 
     @Override
     public List<ExportSupplierProductsDTO> exportSuppliers(boolean isImporter) {
-        return suppliersRepository.exportSuppliers(isImporter);
+        return repository.exportSuppliers(isImporter);
     }
 
     @Override
     public boolean hasBeenImported() {
-        return suppliersRepository.count() > 0;
+        return repository.count() > 0;
     }
 }
