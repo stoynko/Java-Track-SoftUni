@@ -29,7 +29,7 @@
         <module>06_Spring_Data/07_Spring_Data_Auto_Mapping_Objects/E01_SoftUni_Game_Store</module>
         <module>06_Spring_Data/08_Spring_Data_JSON_XML_Processing/E01_Products_Shop</module>
         <module>06_Spring_Data/08_Spring_Data_JSON_XML_Processing/E02_Car_Dealer</module>
-        <module>06_Spring_Data/09_Exam_Preparation/Mobiles</module>
+        <module>06_Spring_Data/10_Exam/Exam_Preparation/Volcano</module>
     </modules>
 
     <properties>
