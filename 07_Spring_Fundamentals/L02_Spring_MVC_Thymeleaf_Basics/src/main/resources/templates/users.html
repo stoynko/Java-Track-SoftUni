@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fb;
+            color: #2f2f2f;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #0056b3;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+	    .nav-button {
+            cursor: pointer;
+            text-decoration: none;
+            padding: 10px 12px;
+            background-color: #ffffff;
+            color: #0056b3;
+            border-radius: 10px;
+            position: fixed;
+            right: 40px;
+            top: 12px;
+            margin-left: auto;
+            border: 2px solid #0056b3;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav-button:hover {
+            background-color: #32bbff;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .styled-table {
+            width: 80%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .styled-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .styled-table thead {
+            background-color: #0056b3;
+            color: #fff;
+            text-align: left;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .styled-table tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #e8f4ff;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+<div class="header">User List</div>
+<a href="correct-url" class="nav-button">New User</a>
+
+<div class="main-container">
+    <div class="styled-table">
+        <table>
+            <thead>
+            <tr>
+                <th>User</th>
+                <th>First Name</th>
+                <th>Phone</th>
+                <th>Country</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <a href="correct-url">
+                            <img src="https://cdn4.iconfinder.com/data/icons/famous-character-vol-2-flat/48/Avatar_Famous_Characters-07-512.png"
+                                 alt="Avatar" class="user-avatar">
+                        </a>
+                        <span>Username</span>
+                    </div>
+                </td>
+                <td>john</td>
+                <td>+123456789</td>
+                <td>USA</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <a href="correct-url">
+                            <img src="https://cdn4.iconfinder.com/data/icons/famous-character-vol-2-flat/48/Avatar_Famous_Characters-09-512.png"
+                                 alt="Avatar" class="user-avatar">
+                        </a>
+                        <span>Username</span>
+                    </div>
+                </td>
+                <td>jane</td>
+                <td>+987654321</td>
+                <td>UK</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <a href="correct-url">
+                            <img src="https://cdn4.iconfinder.com/data/icons/famous-character-vol-2-flat/48/Avatar_Famous_Characters-10-512.png"
+                                 alt="Avatar" class="user-avatar">
+                        </a>
+                        <span>Username</span>
+                    </div>
+                </td>
+                <td>emily</td>
+                <td>+1122334455</td>
+                <td>Canada</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <a href="correct-url">
+                            <img src="https://cdn4.iconfinder.com/data/icons/famous-character-vol-2-flat/48/Avatar_Famous_Characters-11-512.png"
+                                 alt="Avatar" class="user-avatar">
+                        </a>
+                        <span>Username</span>
+                    </div>
+                </td>
+                <td>michael</td>
+                <td>+5566778899</td>
+                <td>Australia</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">&copy; 2025 Financial Dashboard. All rights reserved.</div>
+</div>
+</body>
+</html>

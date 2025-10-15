@@ -1,0 +1,11 @@
+.main-content {
+    display: flex;
+    color: #333333;
+    width: 90%;
+    height: 80%;
+    margin-top: 100px;
+    padding: 60px 30px;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}

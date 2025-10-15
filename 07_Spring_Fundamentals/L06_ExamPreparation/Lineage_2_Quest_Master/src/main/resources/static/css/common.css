@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: url('/images/form-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+body {
+    font-family: RalewayCyr, Arial, sans-serif;
+    background: url('/images/l2-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #0a0a0ab5;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(15 15 15 / 20%);
+    padding: 20px 40px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar-left {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    font-family: 'Cinzel', serif;
+    text-transform: none;
+    text-shadow: 0 0 2px #ffffff;
+}
+
+.navbar-right .nav-btn {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 10px 20px;
+    border: 0.8px solid white;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.navbar-right .nav-btn:hover {
+    background-color: white;
+    color: black;
+}
+
+.main-content-index {
+    border-radius: 12px;
+    padding: 60px 30px;
+    margin: 100px auto 0;
+    width: 86%;
+    height: 80vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.main-content-index h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    font-family: Cinzel, serif;
+}
+
+.main-content-index p {
+    font-size: 1rem;
+    max-width: 720px;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    font-family: Cinzel, serif;
+}
+
+.footer {
+    color: white;
+    font-size: small;
+}
+
+.lineage2-title-header {
+    color: #ffcc00;
+    display: inline;
+    text-shadow: none;
+}
+
+.key-header {
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+.gold-regular-button {
+    background-color: #ffa700;
+    color: #161617;
+    font-weight: bold;
+    border: none;
+    padding: 10px 16px;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.gold-regular-button:hover {
+    background-color: #ffcc00;
+}
+
+.nav-btn svg {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}

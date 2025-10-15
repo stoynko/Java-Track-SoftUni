@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fb;
+            color: #2f2f2f;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #0056b3;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+	    .nav-button {
+            cursor: pointer;
+            text-decoration: none;
+            padding: 10px 12px;
+            background-color: #ffffff;
+            color: #0056b3;
+            border-radius: 10px;
+            position: fixed;
+            right: 40px;
+            top: 12px;
+            margin-left: auto;
+            border: 2px solid #0056b3;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav-button:hover {
+            background-color: #32bbff;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-card label {
+            font-weight: 500;
+        }
+
+        .form-card input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            width: 100%;
+            margin-top: 6px;
+        }
+
+        .form-card button {
+            padding: 12px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .form-card button:hover {
+            background-color: #003f86;
+        }
+
+        .alert-warning {
+            color: red;
+            margin-top: 1%;
+            font-size: 14px;
+            font-style: normal;
+            margin-bottom: auto;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+    <title>Create User</title>
+</head>
+<body>
+<div class="header">Create New User</div>
+<a href="correct-url" class="nav-button">Users</a>
+
+<div class="main-container">
+
+    <form class="form-card" method="POST" action="#">
+        <div>
+            <label for="username">Username</label>
+            <input type="text" id="username">
+            <p class="alert-warning">Invalid username!</p>
+        </div>
+
+        <div>
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name">
+            <p class="alert-warning">Invalid first name!</p>
+        </div>
+
+        <div>
+            <label for="country">Country</label>
+            <input type="text" id="country">
+            <p class="alert-warning">Invalid country!</p>
+        </div>
+
+        <div>
+            <label for="balance">Balance</label>
+            <input type="number" id="balance">
+            <p class="alert-warning">Invalid balance!</p>
+        </div>
+
+        <div>
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone">
+            <p class="alert-warning">Invalid phone number!</p>
+        </div>
+
+        <div>
+            <label for="address">Address</label>
+            <input type="text" id="address">
+            <p class="alert-warning">Invalid address!</p>
+        </div>
+
+        <div>
+            <label for="picture">Picture URL</label>
+            <input type="text" id="picture">
+            <p class="alert-warning">Invalid picture url!</p>
+        </div>
+
+        <button type="submit">Create User</button>
+    </form>
+
+    <div class="footer">&copy; 2025 Financial Dashboard. All rights reserved.</div>
+</div>
+</body>
+</html>

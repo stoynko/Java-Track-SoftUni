@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lineage: The Spring Trial</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/role-select.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="navbar">
+    <div class="navbar-left"><p class="lineage2-title-header">Lineage 2:</p> The Quest Master</div>
+    <div class="navbar-right">
+        <a href="/logout" class="nav-btn">Exit</a>
+    </div>
+</header>
+<main class="main-content">
+    <div class="item1">
+        <p class="role-select-header">
+            Become a <span class="key-header">Seer of Fate</span> or a <span class="role-select-text">Blade of Destiny</span>, the choice is yours!
+        </p>
+    </div>
+    <div class="role-grid">
+        <form class="role-select-form quest-master" action="/players/me/role?role=QUEST_MASTER" th:method="PATCH">
+            <button type="submit">Quest Master</button>
+        </form>
+        <form class="role-select-form adventurer" action="/players/me/role?role=ADVENTURER" th:method="PATCH">
+            <button type="submit">Adventurer</button>
+        </form>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

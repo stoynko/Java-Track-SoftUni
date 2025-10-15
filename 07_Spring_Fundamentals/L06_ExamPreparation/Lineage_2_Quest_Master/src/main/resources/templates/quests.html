@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lineage: The Spring Trial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/quest-master-home.css}">
+    <link rel="stylesheet" th:href="@{/css/quests.css}">
+
+</head>
+<body>
+<header class="navbar">
+    <div class="navbar-left"><p class="lineage2-title-header">Lineage 2:</p> The Quest Master</div>
+    <div class="navbar-right">
+        <a href="/logout" class="nav-btn">Exit</a>
+    </div>
+</header>
+<main class="main-content">
+
+    <!-- Quest Creation Form -->
+    <form class="quest-form" th:action="@{quests}" th:method="POST" th:object="${createQuestRequest}">
+        <div class="quest-content">
+
+            <div class="quest-banner">
+                <h2>Quest Attributes</h2>
+                <div class="banner-preview-placeholder" id="banner-preview"></div>
+            </div>
+
+            <div class="divider-glow"></div>
+
+            <!-- Form Fields -->
+            <div class="quest-fields">
+
+                <label for="quest-title">Title
+                    <span class="invalid-form-input" th:if="${#fields.hasErrors('title')}">invalid title</span>
+                    <span class="invalid-form-input validation-text">length must be [6 - 26] symbols</span>
+                </label>
+                <input type="text" id="quest-title" th:field="*{title}" name="questTitle" placeholder="Elven Village Siege"/>
+
+                <label for="reward-item">Reward Item
+                    <span class="invalid-form-input" th:if="${#fields.hasErrors('rewardItem')}">invalid item</span>
+                </label>
+                <select id="reward-item" name="rewardItem">
+                    <option value="" selected >Item</option>
+                    <option value="" th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name}">Archangel's Sword</option>
+                </select>
+
+                <label for="eligible-class">Eligible Class
+                    <span class="invalid-form-input" th:if="${#fields.hasErrors('eligibleClass')}">invalid class</span>
+                </label>
+                <select id="eligible-class" name="eligibleClass">
+                    <option value="" selected>Class</option>
+                    <option value="" th:each="playerClass : ${T(main.model.PlayerClass).values()}" th:value="${playerClass}" th:text="${playerClass.getPlayerClass()}" >Mystic Muse</option>
+
+                </select>
+
+                <label for="description">Quest Description
+                    <span class="invalid-form-input" th:if="${#fields.hasErrors('questDescription')}">invalid description</span>
+                    <span class="invalid-form-input validation-text">length must be [110 - 128] symbols</span>
+                </label>
+                <textarea id="description" name="description" rows="4" th:field="*{questDescription}"
+                          placeholder="Archangel Sword is an ancient magical sword full of dark powers."></textarea>
+
+                <label for="banner-url">Banner URL
+                    <span class="invalid-form-input" th:if="${#fields.hasErrors('imgUrl')}">invalid url</span>
+                </label>
+                <input type="text" id="banner-url" name="bannerUrl" th:field="*{imgUrl}" placeholder="/images/quests/ivory-tower.png"/>
+
+                <label for="xp">XP Points
+                    <span class="invalid-form-input" th:if="${#fields.hasErrors('xpPoints')}">invalid xp points</span>
+                    <span class="invalid-form-input validation-text">value [1 - 13]</span>
+                </label>
+                <input type="number" step="0.1" min="0" id="xp" name="xpPoints" th:field="*{xpPoints}" placeholder="1.5"/>
+
+                <button type="submit" class="gold-regular-button form-button">Create Quest</button>
+            </div>
+
+        </div>
+    </form>
+
+    <!-- Quest List -->
+    <div class="quest-list-wrapper">
+        <div class="quest-preview-panel">
+
+            <div class="quest-preview-entry" th:if="${#lists.isEmpty(allQuests)}">
+                <div class="quest-preview-banner-wrapper">
+                    <img class="quest-preview-banner" src="/images/default-quest-banner-preview.jpeg" alt="Quest Banner"/>
+                    <div class="eligible-class-details">
+                        <img class="quest-preview-class-icon" src="/images/mystic-muse-icon.png" alt="Eligible Class Icon"/>
+                    </div>
+                </div>
+
+                <div class="quest-preview-details">
+                    <h4 class="quest-preview-title">Seek Wisdom</h4>
+                    <p class="quest-preview-description">No missions found in this region. Travel to Talking Island or seek guidance from the Ivory Tower sages.</p>
+
+                    <div class="quest-preview-reward">
+                        <div class="quest-preview-item">
+                            <img class="quest-preview-reward-icon" src="/images/default-item.png" alt="Reward Icon"/>
+                            <span>Item Name</span>
+                        </div>
+                        <div class="quest-preview-xp">
+                            <img class="quest-preview-xp-icon" src="/images/br_cash_rune_of_exp_i00.png" alt="XP Icon"/>
+                            <span class="quest-preview-xp-label">0.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quest-preview-entry" th:each="quest : ${allQuests}">
+                <div class="quest-preview-banner-wrapper" >
+                    <img class="quest-preview-banner" th:src="${quest.bannerUrl}" alt="Quest Banner"/>
+                    <div class="eligible-class-details">
+                        <!--   CHOOSE CORRECT CLASS ICON BASED ON THE ELIGIBLE CLASS FOR THE QUEST -->
+                        <img th:if="${quest.eligibleClass.name() == 'MYSTIC_MUSE'}" class="quest-preview-class-icon" src="/images/mystic-muse-icon.png" alt="Eligible Class Icon"/>
+                        <img th:if="${quest.eligibleClass.name() == 'GHOST_HUNTER'}" class="quest-preview-class-icon" src="/images/ghost-hunter-icon.png" alt="Eligible Class Icon"/>
+                        <img th:if="${quest.eligibleClass.name() == 'DOOMBRINGER'}" class="quest-preview-class-icon" src="/images/doombringer-icon.png" alt="Eligible Class Icon"/>
+                    </div>
+                </div>
+
+                <div class="quest-preview-details">
+                    <h4 class="quest-preview-title" th:text="${quest.title}">Gludio’s Arise</h4>
+                    <p class="quest-preview-description" th:text="${quest.description}">Gludio’s peace is false. A traitor hides in plain sight. Uncover the truth before the city’s heart is lost forever.</p>
+
+                    <div class="quest-preview-reward">
+                        <div class="quest-preview-item">
+                            <img class="quest-preview-reward-icon" th:src="${quest.rewardItem.iconUrl}" alt="Reward Icon"/>
+                            <span th:text="${quest.rewardItem.name}">Leviathan Armor</span>
+                        </div>
+                        <div class="quest-preview-xp">
+                            <img class="quest-preview-xp-icon" src="/images/br_cash_rune_of_exp_i00.png" alt="XP Icon"/>
+                            <span class="quest-preview-xp-label" th:text="${quest.rewardItem.xpBonusMultiplier}">1.8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const titleInput = document.getElementById("quest-title");
+      const descTextarea = document.getElementById("description");
+
+      const titles = [
+        "Elven Village Siege",
+        "Whispers of Aden",
+        "Curse of the Shadow Forest",
+        "Rise of the Orc Warlord",
+        "Chronicles of the Bloody Queen",
+        "The Forgotten Temple",
+        "Echoes of the Underworld",
+        "Trial of the Abyss",
+        "Winds of the Silent Valley",
+        "Revenant of the Ruined Castle"
+      ];
+
+      const descriptions = [
+        "Archangel Sword is an ancient magical sword full of dark powers.",
+        "Dark elves whisper legends of a hidden relic beneath the valley.",
+        "Only the brave may step into the Hall of the Dead and return.",
+        "Forged in fire, the Blade of Eternity consumes the soul of its bearer.",
+        "This quest will test your loyalty, your strength, and your will to survive.",
+        "Legends speak of a phoenix rising from the ruins of the castle.",
+        "A forbidden altar pulses with ancient energy, awaiting its challenger.",
+        "Cursed warriors roam the crypt — end their torment.",
+        "Recover the elven gem before the Blood Brotherhood does.",
+        "Balance must be restored to the kingdom of Aden… at any cost."
+      ];
+
+      let titleIndex = 0;
+      let titleChar = 0;
+      let titleDeleting = false;
+
+      let descIndex = 0;
+      let descChar = 0;
+      let descDeleting = false;
+
+      function typeTitle() {
+        const current = titles[titleIndex];
+        const display = current.substring(0, titleChar);
+
+        if (!titleInput.matches(":focus")) {
+          titleInput.placeholder = display;
+        }
+
+        if (!titleDeleting && titleChar < current.length) {
+          titleChar++;
+        } else if (titleDeleting && titleChar > 0) {
+          titleChar--;
+        } else if (!titleDeleting && titleChar === current.length) {
+          titleDeleting = true;
+          setTimeout(typeTitle, 1000);
+          return;
+        } else if (titleDeleting && titleChar === 0) {
+          titleDeleting = false;
+          titleIndex = (titleIndex + 1) % titles.length;
+        }
+
+        setTimeout(typeTitle, titleDeleting ? 50 : 100);
+      }
+
+      function typeDescription() {
+        const current = descriptions[descIndex];
+        const display = current.substring(0, descChar);
+
+        if (!descTextarea.matches(":focus")) {
+          descTextarea.placeholder = display;
+        }
+
+        if (!descDeleting && descChar < current.length) {
+          descChar++;
+        } else if (descDeleting && descChar > 0) {
+          descChar--;
+        } else if (!descDeleting && descChar === current.length) {
+          descDeleting = true;
+          setTimeout(typeDescription, 1500);
+          return;
+        } else if (descDeleting && descChar === 0) {
+          descDeleting = false;
+          descIndex = (descIndex + 1) % descriptions.length;
+        }
+
+        setTimeout(typeDescription, descDeleting ? 40 : 90);
+      }
+
+      typeTitle();
+      typeDescription();
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+  const bannerInput = document.getElementById("banner-url");
+  const bannerPreview = document.getElementById("banner-preview");
+
+  bannerInput.addEventListener("input", () => {
+    const url = bannerInput.value.trim();
+
+    // Check for some basic image extension
+    const isValid = url.match(/\.(jpeg|jpg|gif|png|webp)$/i);
+
+    if (isValid) {
+      bannerPreview.style.backgroundImage = `url('${url}')`;
+      bannerPreview.classList.add('has-image');
+    } else {
+      bannerPreview.style.backgroundImage = '';
+      bannerPreview.classList.remove('has-image');
+    }
+  });
+});
+</script>
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

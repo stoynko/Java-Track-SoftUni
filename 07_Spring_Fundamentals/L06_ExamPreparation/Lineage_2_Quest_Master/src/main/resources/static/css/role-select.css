@@ -1,0 +1,96 @@
+.main-content {
+    flex-direction: column;
+}
+
+.role-select-header {
+        font-size: 1.2rem;
+        font-weight: 400;
+        text-align: center;
+        line-height: 1.8;
+        color: white;
+        letter-spacing: 1px;
+        word-spacing: 2px;
+        font-family: 'Cinzel', serif;
+}
+
+.role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.role-select-form {
+    position: relative;
+    height: 480px;
+    width: 360px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 0 0 20px rgb(170 170 170 / 20%);
+    transition: transform 0.3s ease;
+}
+
+.role-select-form::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
+.role-select-form:hover::before {
+    opacity: 0;
+    animation: none;
+}
+
+.role-select-form button {
+    position: relative;
+    z-index: 2;
+    background-color: #f7f7f7bf;
+    color: #161617;
+    font-weight: bold;
+    border: none;
+    padding: 10px 16px;
+    font-size: 1rem;
+    width: 60%;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    font-family: 'Cinzel', serif;
+}
+
+.role-select-form button:hover {
+    box-shadow: 0 0 20px rgb(170 170 170 / 20%);
+    background-color: #ffcc00;
+}
+
+.role-select-form.quest-master {
+    background-image: url('/images/quest-master.jpeg');
+}
+
+.role-select-form.adventurer {
+    background-image: url('/images/adventurer.jpeg');
+}
+
+@keyframes subtlePulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.role-select-form {
+  animation: subtlePulse 3.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  transition: transform 0.3s ease-out;
+}

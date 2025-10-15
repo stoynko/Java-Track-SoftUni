@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lineage: The Spring Trial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/adventurer-home.css}">
+</head>
+<body>
+<header class="navbar">
+    <div class="navbar-left"><p class="lineage2-title-header">Lineage 2:</p> The Quest Master</div>
+    <div class="navbar-right">
+        <a href="/logout" class="nav-btn">Exit</a>
+    </div>
+</header>
+<main class="main-content">
+
+    <div class="adventurer-home-container" th:object="${player}">
+
+        <div class="qm-header">
+            <h1>Welcome, <span class="key-header" th:text="${player.nickname}">Adventurer</span>!</h1>
+            <p>The world of Aden awaits your courage. Participate in quests, earn epic loot, and ascend in rank!</p>
+        </div>
+
+
+        <section class="quest-slider-row" th:object="${eligibleQuests}">
+
+            <!--     DISPLAY THIS IF NO QUESTS ARE FOUND    -->
+            <div class="empty-quest-slider" th:if="${#lists.isEmpty(eligibleQuests)}">
+                <span>No quests have been created for you yet. Stay sharp, adventurer.</span>
+            </div>
+
+            <!--    DISPLAY SLIDER WITH QUESTS IF ANY QUEST EXIST   -->
+            <div class="quest-slider" th:unless="${#lists.isEmpty(eligibleQuests)}">
+                <div class="quest-preview-entry" th:each="quest : ${eligibleQuests}">
+                    <div class="quest-preview-banner-wrapper">
+                        <img class="quest-preview-banner" th:src="${quest.bannerUrl}" alt="Quest Banner"/>
+                        <div class="eligible-class-details">
+                            <!--   CHOOSE CORRECT CLASS ICON BASED ON THE ELIGIBLE CLASS FOR THE QUEST -->
+                            <img th:if="${quest.eligibleClass.name == 'MYSTIC_MUSE'}" class="quest-preview-class-icon"
+                                 src="/images/mystic-muse-icon.png" alt="Eligible Class Icon"/>
+                            <img th:if="${quest.eligibleClass.name == 'GHOST_HUNTER'}" class="quest-preview-class-icon"
+                                 src="/images/ghost-hunter-icon.png" alt="Eligible Class Icon"/>
+                            <img th:if="${quest.eligibleClass.name == 'DOOMBRINGER'}" class="quest-preview-class-icon"
+                                 src="/images/doombringer-icon.png" alt="Eligible Class Icon"/>
+                            <form th:action="@{'/quests/' + ${quest.id}}" th:method="PATCH">
+                                <button class="gold-regular-button" th:if="${quest.capturer == null}">Capture</button>
+                                <!--IF THE QUEST HAS A CAPTURER, DISPLAY THE BUTTON BELLOW-->
+                                <button  class="gold-regular-button completed" disabled th:unless="${quest.capturer == null}">Completed</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="quest-preview-details">
+                        <h4 class="quest-preview-title" th:text="${quest.title}">...</h4>
+                        <p class="quest-preview-description"th:text="${quest.description}" >...</p>
+                        <div class="quest-preview-reward">
+                            <div class="quest-preview-item">
+                                <img class="quest-preview-reward-icon"
+                                     th:src="${quest.rewardItem.iconUrl}" alt="Reward Icon"/>
+                                <span th:text="${quest.rewardItem.name}">Leviathan Armor</span>
+                            </div>
+                            <div class="quest-preview-xp">
+                                <img class="quest-preview-xp-icon" src="/images/br_cash_rune_of_exp_i00.png"
+                                     alt="XP Icon"/>
+                                <span class="quest-preview-xp-label" th:text="${quest.xp}">1.8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-adventurer-row">
+
+            <div class="info-column">
+                <div class="info-panel-box">
+                    <div class="info-text-box">
+                        <p>
+                            In the lands of <span class="info-text-box-highlight">Aden</span>, peace is an illusion.
+                            The fall of Elmoreden shattered balance, and chaos spread across the kingdoms.
+                            From the <span class="info-text-box-highlight">Ivory Tower’s secrets</span> to the cursed
+                            plains of the Orc Barracks, heroes rise and fall.
+                            <span class="info-text-box-highlight">Gludio’s gates</span> once welcomed traders—now they
+                            echo with war drums.
+                            Even dragons like Valakas stir in their slumber.
+                            In this world, every quest is a step toward glory… or oblivion. Are you ready to carve your
+                            fate? You better be, young hero...
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Player Details -->
+            <div class="player-column">
+                <div class="player-box">
+                    <img th:if="${player.playerClass.name == 'MYSTIC_MUSE'}" src="/images/mystic-muse-icon.png"
+                         class="player-class-icon" alt="Class Icon"/>
+                    <img th:if="${player.playerClass.name == 'GHOST_HUNTER'}" src="/images/ghost-hunter-icon.png"
+                         class="player-class-icon" alt="Class Icon"/>
+                    <img th:if="${player.playerClass.name == 'DOOMBRINGER'}" src="/images/doombringer-icon.png"
+                         class="player-class-icon" alt="Class Icon"/>
+                    <h3 class="player-nickname" th:text="${player.nickname}">ShadowWolf</h3>
+                    <div class="player-stats">
+                        <p class="class-badge class-mystic-muse" th:text="${player.playerClass.getPlayerClass()}">Mystic
+                            Muse</p>
+
+                        <p class="player-level-attribute" th:text="'Level:' + ${player.getLevel()}">Level:
+                            <strong>5</strong>
+                        </p>
+                        <p class="player-xp-attribute" th:text="'Total XP: ' + ${player.xp}">Total XP:
+                            <strong>132</strong></p>
+
+                        <div class="xp-bar">
+                            <!--th:style="'width:' + ${adventurer.getProgress()} + '%'"-->
+                            <div class="fill" th:style="'width:' + ${player.getProgress()} + '%'"></div>
+                        </div>
+                        <p class="progress-label" th:text="${player.getProgress()} + '% to next level'">60% to next
+                            level</p>
+
+                        <div class="player-flavor">
+                            “Glory is earned, not given.”
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Earned Items -->
+            <div class="box item-list-box" >
+                <!--   DISPLAY LIST WITH ITEMS IF ANY ITEM WAS EARNED BY THE PLAYER   -->
+                <div class="item-list" th:unless="${#lists.isEmpty(capturedQuests)}">
+                    <div class="item-row" th:each="quest : ${capturedQuests}">
+                        <img th:src="${quest.rewardItem.iconUrl}" width="32" height="32"
+                             class="item-icon-list-of-items"/>
+                        <div class="item-info">
+                            <div class="item-name" th:text="${quest.rewardItem.name}">..</div>
+                            <div class="item-attributes" th:text="${quest.rewardItem.getTypeAndXpFormatted()}">...</div>
+                        </div>
+                        <div class="item-meta">
+                            <div class="meta-author" th:text="${quest.title}">Ivory Tower's Silent Cry</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--<div class="empty-item-list" th:if="${#lists.isEmpty(capturedItems)}">
+                    <span>You haven’t earned any items yet.</span>
+                </div>-->
+            </div>
+        </section>
+
+    </div>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

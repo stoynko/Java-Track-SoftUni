@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lineage: The Spring Trial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/forms.css}">
+</head>
+<body>
+<header class="navbar">
+    <div class="navbar-left"><p class="lineage2-title-header">Lineage 2:</p> The Quest Master</div>
+    <div class="navbar-right">
+        <a href="/register" class="nav-btn">Register</a>
+        <a href="/login" class="nav-btn">Login</a>
+    </div>
+</header>
+<main class="main-content">
+    <div class="form-container">
+        <h2>Register</h2>
+        <form th:action="@{/register}" th:method="POST" th:object="${registerRequest}">
+            <label for="username">Username
+                <span class="invalid-form-input" th:if="${#fields.hasErrors('username')}">invalid username</span>
+                <span class="invalid-form-input validation-text">length must be [1 - 12] symbols</span>
+            </label>
+            <input type="text" id="username" name="username" th:field="*{username}" required />
+
+            <label for="password">Password
+                <span class="invalid-form-input" th:if="${#fields.hasErrors('password')}">invalid password</span>
+                <span class="invalid-form-input validation-text">length must be [1 - 12] symbols</span>
+            </label>
+            <input type="password" id="password" name="password" required th:field="*{password}"/>
+
+            <label for="nickname">Nickname
+                <span class="invalid-form-input" th:if="${#fields.hasErrors('nickname')}">invalid nickname</span>
+                <span class="invalid-form-input validation-text">length must be [1 - 12] symbols</span>
+            </label>
+            <input type="text" id="nickname" name="nickname" required th:field="*{nickname}"/>
+
+            <button type="submit">Join the World</button>
+        </form>
+    </div>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

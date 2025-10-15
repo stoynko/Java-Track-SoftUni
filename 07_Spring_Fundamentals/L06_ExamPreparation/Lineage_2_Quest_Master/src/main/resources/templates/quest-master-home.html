@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lineage: The Spring Trial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/quest-master-home.css}">
+</head>
+<body>
+<header class="navbar">
+    <div class="navbar-left"><p class="lineage2-title-header">Lineage 2:</p> The Quest Master</div>
+    <div class="navbar-right">
+        <a href="/logout" class="nav-btn">Exit</a>
+    </div>
+</header>
+<main class="main-content">
+
+    <div class="qm-header">
+        <h1>Welcome, <span class="key-header">Seer of Fate</span></h1>
+        <p>Shape the fate of the realm by crafting trials and watching heroes rise.</p>
+    </div>
+
+    <div class="dashboard-card one">
+        <hr class="quest-line">
+        <p class="quest-box-text"> A new fate shall unfold with every quest you open</p>
+        <hr class="quest-line">
+        <a th:href="@{/quests}" class="gold-regular-button">Open Quests</a>
+    </div>
+
+    <div class="dashboard-card two stats-grid">
+        <div class="stat-card">
+            <img src="/images/adventurer-icon.jpeg" class="stat-icon"/>
+            <div class="stat-label">Adventurers</div>
+            <!--/*@thymesVar id="totalAdventurers" type="java.lang.Integer"*/-->
+            <div class="stat-value" th:text="${totalAdventurers}">37</div>
+        </div>
+        <div class="stat-card">
+            <img src="/images/br_cash_rune_of_exp_i00.png" class="stat-icon"/>
+            <div class="stat-label">Quests</div>
+            <!--/*@thymesVar id="totalQuests" type="java.lang.Integer"*/-->
+            <div class="stat-value" th:text="${totalQuests}">12</div>
+        </div>
+        <div class="stat-card">
+            <img src="/images/vesper-sigil.png" class="stat-icon"/>
+            <div class="stat-label">Items</div>
+            <!--/*@thymesVar id="totalItems" type="java.lang.Integer"*/-->
+            <div class="stat-value" th:text="${totalItems}">1</div>
+        </div>
+    </div>
+
+    <div class="dashboard-card three stats-grid">
+        <div class="stat-card">
+            <a th:href="@{/items}" class="gold-regular-button">New Item</a>
+        </div>
+    </div>
+
+    <div class="qm-advs-section">
+        <h2 class="section-title">Adventurers</h2>
+        <div class="table-scroll-wrapper">
+            <table class="qm-table">
+                <tbody>
+                <!--   DISPLAY THIS ONLY IF THERE ARE NO ADVENTURERS IN THE SERVER.  -->
+                <tr th:if="${allAdventurers.isEmpty()}">
+                    <td colspan="7" style="letter-spacing: 1.2px; font-style: italic; color: #d1d1d1;">There are no
+                        adventurers in the server.
+                    </td>
+                </tr>
+                <tr th:each=" adventurer : ${allAdventurers}">
+                    <td th:if="${adventurer.playerClass.name() == 'MYSTIC_MUSE'}"><img src="/images/mystic-muse-icon.png" class="avatar-img"/></td>
+                    <td th:if="${adventurer.playerClass.name() == 'GHOST_HUNTER'}"><img src="/images/ghost-hunter-icon.png" class="avatar-img"/></td>
+                    <td th:if="${adventurer.playerClass.name() == 'DOOMBRINGER'}"><img src="/images/doombringer-icon.png" class="avatar-img"/></td>
+                    <td th:text="${adventurer.nickname}">Celesthia</td>
+                    <td th:text="${adventurer.playerClass.getPlayerClass()}">Mystic Muse</td>
+                    <td th:text="${adventurer.getLevel() + ' Lvl'}">7 Lvl</td>
+                    <td>
+                        <div class="xp-bar">
+                            <div class="fill" th:style="'width:' + ${adventurer.getProgress()} + '%'"></div>
+                        </div>
+                        <span class="xp-value" th:text="${adventurer.getProgress() + ' %'}">85%</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

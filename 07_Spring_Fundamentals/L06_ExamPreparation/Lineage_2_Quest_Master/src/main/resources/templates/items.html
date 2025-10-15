@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lineage: The Spring Trial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/quest-master-home.css}">
+    <link rel="stylesheet" th:href="@{/css/items.css}">
+</head>
+<body>
+<header class="navbar">
+    <div class="navbar-left"><p class="lineage2-title-header">Lineage 2:</p> The Quest Master</div>
+    <div class="navbar-right">
+        <a href="/logout" class="nav-btn">Exit</a>
+    </div>
+</header>
+<main class="main-content">
+
+    <div class="qm-header">
+        <h1>Forge a <span class="key-header">New Relic</span></h1>
+        <p>Define the rewards that await brave adventurers.</p>
+    </div>
+
+    <div class="segment header">
+        <!-- Info Panel Section -->
+        <div class="info-panel-box">
+            <div class="info-text-box">
+                <p>
+                    In the world of <span class="info-text-box-highlight">Lineage 2</span>, relics are more than just
+                    trinkets — they are enchanted artifacts, forged through ancient knowledge and raw power. Weapons
+                    imbued with divine essence, scrolls that unlock hidden knowledge, and shields that defy death
+                    itself… These relics empower adventurers with additional XP and can define the outcome of every
+                    quest.
+                    <br><br>
+                    As a <span class="info-text-box-highlight">Quest Master</span>, it is your sacred duty to forge
+                    these powerful items and decide their fate. Each relic comes with a purpose — a boost, a curse, or a
+                    test of worthiness. Choose their attributes wisely and grant your heroes the edge they seek on their
+                    perilous journey.
+                </p>
+                <a href="/home" class="gold-regular-button text-button">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Two Columns Wrapper -->
+    <div class="segment two-columns">
+
+        <div class="left-column">
+            <div class="box form-box">
+
+                <h2>Item Attributes</h2>
+
+                <form class="actual-form" th:object="${createItemRequest}" th:action="@{/items}" th:method="POST">
+                    <div class="form-group">
+                        <label>Name
+                            <span th:if="${#fields.hasErrors('name')}" class="invalid-form-input">invalid name</span>
+                            <span class="invalid-form-input validation-text">length must be [6 - 26] symbols</span>
+                        </label>
+                        <input id="item-name-input" type="text" name="name" th:field="*{name}" placeholder="Archangel Sword"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Type
+                            <span class="invalid-form-input" th:if="${#fields.hasErrors('type')}">invalid item type</span>
+                        </label>
+                        <select name="type" id="item-type-input" th:field="*{type}">
+                            <option value="" selected>Item Type</option>
+                            <option th:each="itemType : ${T(main.model.ItemType).values()}" th:value="${itemType}" th:text="${itemType.getItemType()}">Weapon</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>XP Bonus Multiplier
+                            <span class="invalid-form-input" th:if="${#fields.hasErrors('xpBonusMultiplier')}">invalid multiplier</span>
+                            <span class="invalid-form-input validation-text">value [1 - 3]</span>
+                        </label>
+                        <input id="item-bonus-input" type="number" step="0.1" name="xpBonus" placeholder="1.5" th:field="*{xpBonusMultiplier}"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Icon URL
+                            <span class="invalid-form-input" th:if="${#fields.hasErrors('iconUrl')}">invalid url</span>
+                        </label>
+                        <input type="text" id="item-icon-url-input" th:field="*{iconUrl}" name="iconUrl"
+                               placeholder="/images/items/sword.png"/>
+                    </div>
+
+                    <button class="gold-regular-button form-button">Create Item</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="box preview-box">
+                <div class="item-preview">
+                    <div class="item-icon-wrapper">
+                        <img src="/images/default-item.png" alt="Item Icon" class="item-icon"
+                             onerror="this.onerror=null; this.src='/images/default-item.png';"/>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">Unnamed Relic</div>
+                        <div class="item-type">Type: <span>Unknown</span></div>
+                        <div class="item-bonus">XP Bonus: <span>x1</span></div>
+                    </div>
+                    <div class="item-description flavor-text">
+                        <em>Carried by heroes, whispered in taverns, desired by all who seek glory.</em>
+                    </div>
+                </div>
+            </div>
+            <div class="box item-list-box">
+                    <div class="item-list" th:unless="${#lists.isEmpty(allItems)}">
+                        <div th:each="item : ${allItems}" class="item-row">
+                            <img th:src="${item.getIconUrl()}" width="32" height="32" class="item-icon-list-of-items"/>
+                            <div class="item-info">
+                                <div class="item-name" th:text="${item.getName()}">Archangel Sword</div>
+                                <div class="item-attributes" th:text="${item.getXpFormatted()}">Weapon – x3.0 XP</div>
+                            </div>
+                            <div class="item-meta">
+                                <div class="meta-author" th:text="${item.createdBy}">Mandarin</div>
+                                <div class="meta-divider"></div>
+                                <div class="meta-date" th:text="${#temporals.format(item.createdOn, 'dd MMM yyyy')}">21 Feb 2025</div>
+                            </div>
+                        </div>
+                    </div>
+
+            <div class="empty-item-list" th:if="${#lists.isEmpty(allItems)}">
+                 <span>No items were created yet.</span>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script>
+    const nameInput = document.getElementById('item-name-input');
+    const typeInput = document.getElementById('item-type-input');
+    const bonusInput = document.getElementById('item-bonus-input');
+    const iconInput = document.getElementById('item-icon-url-input');
+
+    const previewName = document.querySelector('.item-name');
+    const previewType = document.querySelector('.item-type span');
+    const previewBonus = document.querySelector('.item-bonus span');
+    const previewIcon = document.querySelector('.item-icon');
+
+    nameInput.addEventListener('input', () => {
+      previewName.textContent = nameInput.value || 'Unnamed Relic';
+    });
+
+    typeInput.addEventListener('input', () => {
+      previewType.textContent = typeInput.value || 'Unknown';
+    });
+
+    bonusInput.addEventListener('input', () => {
+      const val = bonusInput.value;
+      previewBonus.textContent = val ? `x${val}` : 'x1.0';
+    });
+
+    iconInput.addEventListener('input', () => {
+       const url = iconInput.value.trim();
+
+       // Very basic image URL check
+       const isLikelyImage = url.match(/\.(png|jpe?g|webp|gif|svg)$/i);
+
+       previewIcon.src = isLikelyImage ? url : '/images/default-item.png';
+    });
+
+</script>
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

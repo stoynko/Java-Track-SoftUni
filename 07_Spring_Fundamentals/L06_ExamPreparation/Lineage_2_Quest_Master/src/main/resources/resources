@@ -1,0 +1,68 @@
+Quest Titles + Description + Banner Link:
+
+T: Paladin's Phoenix
+D: In the ruins of a forgotten battlefield, the flame of a paladin’s phoenix still flickers — awaken it before it dies.
+B: https://i.ibb.co/VpMBzBQ1/quest-banner-3.jpg
+
+T: Ivory Tower's Silent Cry
+D: The great tower’s mages sealed something unspeakable on the 3rd floor. Now it screams through cracked marble walls.
+B: https://i.ibb.co/3mmQPVfw/quest-banner-5.jpg
+
+T: Gludio’s Arise
+D: Gludio’s peace is false. A traitor hides in plain sight. Uncover the truth before the city’s heart is lost forever.
+B: https://i.ibb.co/zw2J384/quest-banner-4.jpg
+
+T: Echoes of Eva’s Blessing
+D: A young Human Mystic claims to channel Eva’s grace. Is she a healer… or a vessel for something far more ancient?
+B: https://i.ibb.co/0RBWCWmy/quest-banner-1.png
+
+T: Valakas: Ember Rises
+D: The great fire dragon stirs once more in the heart of the volcano. Only the Kamael can read the signs of his return.
+B: https://i.ibb.co/mCF6yczG/quest-banner-2.jpg
+
+Item Names + Type + Icon URL:
+
+N: Vesper Sigil
+T: Armor
+I: https://i.ibb.co/tMFcmgsb/vesper-sigil.png
+
+N: Vesper Shield
+T: Armor
+I: https://i.ibb.co/v6y3DY3h/vesper-shield.png
+
+N: Leviathan Plate
+T: Armor
+I: https://i.ibb.co/vxRRGMz7/leviathan-armor.png
+
+N: Archangel's Sword
+T: Weapon
+I: https://i.ibb.co/chd18716/weapon-archangel-sword.png
+
+N: Forgotten Blade
+T: Weapon
+I: https://i.ibb.co/1x76Wtp/forgotten-blade.png
+
+N: Vesper Buster
+T: Weapon
+I: https://i.ibb.co/Tx3pLzV8/vesper-burster.png
+
+N: Goblin's Coin
+T: Other
+I: https://i.ibb.co/2Yd4TBv4/bm-goblin-coin.png
+
+N: Scroll of Escape
+T: Other
+I: https://i.ibb.co/xt7m3Lh9/scroll-of-escape.png
+
+N: Quick HP Potion
+T: Other
+I: https://i.ibb.co/CpH9kQZQ/quick-healing-potion.png
+
+Class Icons:
+Mystic Muse = mystic-muse-icon.png, Ghost Hunter = ghost-hunter-icon.png, Doombringer = doombringer-icon.png
+
+Calculate player level and progress till next level with formula:
+double playerXP = player.getXP();
+int level = (int)(playerXP / 10) + 1;
+double progressPercent = Math.max(1, (((playerXP % 10) / 10.0) * 100));
+
